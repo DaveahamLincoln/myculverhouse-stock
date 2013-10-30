@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  actionItemID: 
+  calendarText: MyText
+  calendarDate: 2013-10-30 16:55:17
+
+two:
+  actionItemID: 
+  calendarText: MyText
+  calendarDate: 2013-10-30 16:55:17

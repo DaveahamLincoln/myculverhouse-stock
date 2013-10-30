@@ -1,0 +1,31 @@
+<h1>Listing faculty_profiles</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Currentresearch</th>
+      <th>Eduction</th>
+      <th>Honors</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @faculty_profiles.each do |faculty_profile| %>
+      <tr>
+        <td><%= faculty_profile.currentResearch %></td>
+        <td><%= faculty_profile.eduction %></td>
+        <td><%= faculty_profile.honors %></td>
+        <td><%= link_to 'Show', faculty_profile %></td>
+        <td><%= link_to 'Edit', edit_faculty_profile_path(faculty_profile) %></td>
+        <td><%= link_to 'Destroy', faculty_profile, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Faculty profile', new_faculty_profile_path %>

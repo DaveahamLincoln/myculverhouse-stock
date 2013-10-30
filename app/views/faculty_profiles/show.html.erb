@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Currentresearch:</strong>
+  <%= @faculty_profile.currentResearch %>
+</p>
+
+<p>
+  <strong>Eduction:</strong>
+  <%= @faculty_profile.eduction %>
+</p>
+
+<p>
+  <strong>Honors:</strong>
+  <%= @faculty_profile.honors %>
+</p>
+
+<%= link_to 'Edit', edit_faculty_profile_path(@faculty_profile) %> |
+<%= link_to 'Back', faculty_profiles_path %>

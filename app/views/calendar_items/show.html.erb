@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Actionitemid:</strong>
+  <%= @calendar_item.actionItemID %>
+</p>
+
+<p>
+  <strong>Calendartext:</strong>
+  <%= @calendar_item.calendarText %>
+</p>
+
+<p>
+  <strong>Calendardate:</strong>
+  <%= @calendar_item.calendarDate %>
+</p>
+
+<%= link_to 'Edit', edit_calendar_item_path(@calendar_item) %> |
+<%= link_to 'Back', calendar_items_path %>
