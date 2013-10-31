@@ -1,0 +1,25 @@
+<%= form_for(@user_picture) do |f| %>
+  <% if @user_picture.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user_picture.errors.count, "error") %> prohibited this user_picture from being saved:</h2>
+
+      <ul>
+      <% @user_picture.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :userID %><br />
+    <%= f.number_field :userID %>
+  </div>
+  <div class="field">
+    <%= f.label :picturePath %><br />
+    <%= f.text_field :picturePath %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

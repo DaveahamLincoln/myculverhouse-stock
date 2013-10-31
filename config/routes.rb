@@ -1,4 +1,47 @@
 MyculverhouseStock::Application.routes.draw do
+
+  root to: 'index#index'
+
+  get "department_admin_actions/updateFacultyProfile"
+
+  get "department_admin_actions/updateUserPicture"
+
+  get "department_admin_actions/updatePublication"
+
+  get "department_admin_actions/addUser"
+
+  get "department_admin_actions/submitProfileForDeletion"
+
+  get "department_admin_actions/createFacultyUser"
+
+  get "college_admin_actions/updateFacultyProfile"
+
+  get "college_admin_actions/updateUserPicture"
+
+  get "college_admin_actions/updatePublication"
+
+  get "college_admin_actions/addUser"
+
+  get "college_admin_actions/submitProfileForDeletion"
+
+  get "college_admin_actions/createFacultyUser"
+
+  get "college_admin_actions/deleteFacultyUser"
+
+  get "college_admin_actions/createDepartmentAdmin"
+
+  get "college_admin_actions/deleteDepartmentAdmin"
+
+  get "college_admin_actions/editUser"
+
+  get "college_admin_actions/deleteFacultyProfile"
+
+  resources :publications
+
+  resources :user_pictures
+
+  resources :user_types
+
   resources :calendar_items
 
   resources :news_items

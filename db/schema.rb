@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131030215517) do
+ActiveRecord::Schema.define(:version => 20131031195307) do
 
   create_table "calendar_items", :force => true do |t|
     t.integer  "actionItemID"
@@ -21,8 +21,19 @@ ActiveRecord::Schema.define(:version => 20131030215517) do
     t.datetime "updated_at",   :null => false
   end
 
+  create_table "college_admins", :force => true do |t|
+    t.integer  "userID"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "communications_users", :force => true do |t|
     t.integer  "userID"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "department_admins", :force => true do |t|
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -51,11 +62,28 @@ ActiveRecord::Schema.define(:version => 20131030215517) do
     t.datetime "updated_at",   :null => false
   end
 
+  create_table "publications", :force => true do |t|
+    t.integer  "facultyUserID"
+    t.text     "publicationText"
+    t.string   "phoneNumber"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
   create_table "user_pictures", :force => true do |t|
     t.integer  "userID"
     t.string   "picturePath"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+  end
+
+  create_table "user_types", :force => true do |t|
+    t.integer  "userID"
+    t.boolean  "isSuperUser"
+    t.boolean  "isGenericUSer"
+    t.boolean  "isFacultyUser"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
   create_table "users", :force => true do |t|

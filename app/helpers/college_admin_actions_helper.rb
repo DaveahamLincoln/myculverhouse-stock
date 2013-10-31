@@ -1,0 +1,2 @@
+module CollegeAdminActionsHelper
+end

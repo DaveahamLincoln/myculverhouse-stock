@@ -1,0 +1,33 @@
+<%= form_for(@user_type) do |f| %>
+  <% if @user_type.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user_type.errors.count, "error") %> prohibited this user_type from being saved:</h2>
+
+      <ul>
+      <% @user_type.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :userID %><br />
+    <%= f.number_field :userID %>
+  </div>
+  <div class="field">
+    <%= f.label :isSuperUser %><br />
+    <%= f.check_box :isSuperUser %>
+  </div>
+  <div class="field">
+    <%= f.label :isGenericUSer %><br />
+    <%= f.check_box :isGenericUSer %>
+  </div>
+  <div class="field">
+    <%= f.label :isFacultyUser %><br />
+    <%= f.check_box :isFacultyUser %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
