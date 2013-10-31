@@ -1,4 +1,50 @@
 class UsersController < ApplicationController
+  
+  #Uncomment to access the /users/new page as an anonymous user
+  before_filter :verify_is_admin
+
+  def new
+    @user = User.new
+  end
+  
+  def create
+    #I have no idea what this business about strong parameters is.
+    #Adding the bang to permit makes user creation possible, otherwise you run into
+    #the following error on the server:
+    #
+    #Processing by UsersController#create as HTML
+    #    Parameters: {"utf8"=>"✓", "authenticity_token"=>"9iBY9NOqEXrupeWCwhsyjLH9PE7BggCFWhmtAWHHd4o=", 
+    # "user"=>{"email"=>"steve", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Create User"}
+    #Unpermitted parameters: utf8, authenticity_token, user, commit
+    #   (0.1ms)  BEGIN
+      #   (0.0ms)  ROLLBACK
+      #   Rendered users/new.html.erb within layouts/application (3.1ms)
+    # Completed 200 OK in 13ms (Views: 9.5ms | ActiveRecord: 0.1ms)
+
+    @user = User.new(params[:user].permit!)
+    if @user.save
+      redirect_to root_url, :notice => "User has been added successfully."
+    else
+      render "new"
+    end
+  end
+  
+  private
+
+  def verify_is_admin
+    if current_user.nil? 
+      redirect_to(root_url)
+    else
+      unless current_user.updatePerms
+      redirect_to(root_url)
+    end
+      
+  end
+end
+end
+
+
+=begin
   before_filter :set_user, only: [:show, :edit, :update, :destroy]
 
   # GET /users
@@ -56,3 +102,5 @@ class UsersController < ApplicationController
       params.require(:user).permit(:email, :password, :godBit, :firstName, :lastName)
     end
 end
+=end
+

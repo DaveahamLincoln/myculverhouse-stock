@@ -1,1 +1,5 @@
-index.html.erb
+<h1>myCulverhouse.ua.edu</h1>
+
+<%if current_user.blank? %>
+	| <%= link_to 'Login to the Tech Site.', '/login', :method => :new -%> |
+<%end%>

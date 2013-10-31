@@ -50,6 +50,10 @@ MyculverhouseStock::Application.routes.draw do
 
   resources :faculty_profiles
 
+  get "login" => 'login#new'
+  post "login" => 'login#create'
+  delete "logout" => 'login#destroy'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
