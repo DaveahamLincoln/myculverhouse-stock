@@ -1,5 +1,20 @@
 <h1>myCulverhouse.ua.edu</h1>
 
 <%if current_user.blank? %>
-	| <%= link_to 'Login to the Tech Site.', '/login', :method => :new -%> |
+	| <%= link_to 'Login to the Tech Site.','/login',:method => :new %> |
+<%else%>
+
+	<%#if UserTypes.find(current_user.id).isFacultyUser%>
+		| <%#= link_to 'Edit my Profile.','/faculty_profiles', :method => :get, :id => FacultyUsers.find(current_user.id).facultyPageID %> | <%#= link_to 'Edit my Publications.','/publications', :method => :get %> | <%#= link_to 'Submit a Calendar Item.','/calendar_items/new', :method => :get %> | <%#= link_to 'Submit a News Item.','/news_items/new', :method => :get %> | <%#= link_to 'Log Out.','/login', :method => :destroy %> |
+	<%#end%>
+
+	<%#if UserTypes.find(current_user.id).isCommunicationsUser%>
+		| <%#= link_to 'Approve Action Items.','/action_items/new', :method => :get %> | 
+	<%#end%>
+
+
+	<%if current_user.godBit%>
+		| <%= link_to 'Add User.','/users/new',:method => :get %> | <%= link_to 'Edit/Remove User.','/users', :method => :get %> |
+	<%end%>
+
 <%end%>

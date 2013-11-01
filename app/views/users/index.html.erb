@@ -4,10 +4,9 @@
   <thead>
     <tr>
       <th>Email</th>
-      <th>Password</th>
-      <th>Godbit</th>
       <th>Firstname</th>
       <th>Lastname</th>
+      <th>Godbit</th>
       <th></th>
       <th></th>
       <th></th>
@@ -18,12 +17,12 @@
     <% @users.each do |user| %>
       <tr>
         <td><%= user.email %></td>
-        <td><%= user.password %></td>
-        <td><%= user.godBit %></td>
         <td><%= user.firstName %></td>
         <td><%= user.lastName %></td>
+        <td><%= user.godBit %></td>
         <td><%= link_to 'Show', user %></td>
         <td><%= link_to 'Edit', edit_user_path(user) %></td>
+        <td><%= link_to 'Edit Permissions', {:controller => "user_types",:userID => user.id}%></td>
         <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>

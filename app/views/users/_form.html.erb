@@ -3,8 +3,6 @@ TODO:
 Refactor using simple_form?
 -->
 
-<h1 class="text-center">Add New User</h1>
-
 <%= form_for @user do |f| %>
   <% if @user.errors.any? %>
       <div class="span6 offset5">
@@ -33,11 +31,11 @@ Refactor using simple_form?
     <%= f.label "Email" %>
     <%= f.text_field :email %>
   </div>
-  
-  <div class="field">
-  <%= f.label "Phone Number" %>
-  <%= f.text_field :phone %>
-  </div>  
+
+  <div class = "field">
+    <%= f.label "godBit" %>
+    <%= f.check_box :godBit %>
+  </div>
 
   <div class="field">
     <%= f.label "Password" %>
@@ -46,7 +44,7 @@ Refactor using simple_form?
 
   <div class="field">
     <%= f.label "Reenter Password" %>
-    <%= f.password_field :password_confirmation %>
+    <%= f.password_field :password %>
   </div>
   <div class="actions"><%= f.submit %></div>
   </div>

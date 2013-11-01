@@ -1,10 +1,18 @@
 class UsersController < ApplicationController
   
-  #Uncomment to access the /users/new page as an anonymous user
-  before_filter :verify_is_admin
+  #Comment to access the /users/new page as an anonymous user
+  #before_filter :verify_is_admin
+
+  def index
+    @users = User.all
+  end
 
   def new
     @user = User.new
+  end
+
+  def edit
+    @user = User.find(params[:id])
   end
   
   def create
@@ -21,25 +29,38 @@ class UsersController < ApplicationController
       #   Rendered users/new.html.erb within layouts/application (3.1ms)
     # Completed 200 OK in 13ms (Views: 9.5ms | ActiveRecord: 0.1ms)
 
-    @user = User.new(params[:user].permit!)
+    @user = User.new(params[:user])
     if @user.save
+      @userType = UserType.new
+      @userType.update_attributes(:userID => @user.id)
       redirect_to root_url, :notice => "User has been added successfully."
     else
       render "new"
     end
   end
   
+  def destroy
+    @user = User.find(params[:id])
+    @user.destroy
+
+    respond_to do |format|
+      format.html { redirect_to users_url }
+      format.json { head :no_content }
+    end
+  end
+
   private
 
   def verify_is_admin
     if current_user.nil? 
       redirect_to(root_url)
     else
-      unless current_user.updatePerms
+      unless current_user.godBit
       redirect_to(root_url)
     end
       
   end
+
 end
 end
 
