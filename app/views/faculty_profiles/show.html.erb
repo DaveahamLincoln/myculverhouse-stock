@@ -1,13 +1,8 @@
-<p id="notice"><%= notice %></p>
+<h1><%=@faculty_name%></h1>
 
 <p>
-  <strong>Currentresearch:</strong>
-  <%= @faculty_profile.currentResearch %>
-</p>
-
-<p>
-  <strong>Eduction:</strong>
-  <%= @faculty_profile.eduction %>
+  <strong>Education:</strong>
+  <%= @faculty_profile.education %>
 </p>
 
 <p>
@@ -15,5 +10,19 @@
   <%= @faculty_profile.honors %>
 </p>
 
-<%= link_to 'Edit', edit_faculty_profile_path(@faculty_profile) %> |
-<%= link_to 'Back', faculty_profiles_path %>
+<p>
+  <strong>Current Research:</strong>
+  <%= @faculty_profile.currentResearch %>
+</p>
+
+<p>
+  <%= @faculty_profile.bodyText %>
+</p>
+
+<!-- publications'll go here -->
+
+<%if current_user.godBit or current_user.id == @faculty_profile.id %>
+	<%= link_to '| Edit |', edit_faculty_profile_path(@faculty_profile.id) %> 
+<%end%>
+
+<%= link_to '| Back |', faculty_profiles_path %>

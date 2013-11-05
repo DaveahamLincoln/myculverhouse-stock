@@ -14,6 +14,10 @@ class UsersController < ApplicationController
   def edit
     @user = User.find(params[:id])
   end
+
+  def edit_permissions
+    @user = User.find(params[:id])
+  end
   
   def create
     #I have no idea what this business about strong parameters is.
@@ -30,15 +34,23 @@ class UsersController < ApplicationController
     # Completed 200 OK in 13ms (Views: 9.5ms | ActiveRecord: 0.1ms)
 
     @user = User.new(params[:user])
-    if @user.save
-      @userType = UserType.new
-      @userType.update_attributes(:userID => @user.id)
-      redirect_to root_url, :notice => "User has been added successfully."
-    else
-      render "new"
+    respond_to do |format|
+      if @user.save
+        if @user.isFacultyUser
+          @userFacultyUser = FacultyUser.new
+          @userFacultyUser.update_attributes(:userID => @user.id, :facultyProfileID => @user.id, :userPictureID => @user.id)
+          @userFacultyProfile = FacultyProfile.new
+          @userFacultyProfile.update_attributes(:id => @user.id, :permalink => "#{@user.lastName}_#{@user.firstName}")
+          redirect_to root_url, :notice => "User has been added successfully."
+        else
+        redirect_to root_url, :notice => "User has been added successfully."
+        end
+      else
+        format.html { render action: 'new' }
+      end
     end
   end
-  
+
   def destroy
     @user = User.find(params[:id])
     @user.destroy

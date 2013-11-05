@@ -32,11 +32,6 @@ Refactor using simple_form?
     <%= f.text_field :email %>
   </div>
 
-  <div class = "field">
-    <%= f.label "godBit" %>
-    <%= f.check_box :godBit %>
-  </div>
-
   <div class="field">
     <%= f.label "Password" %>
     <%= f.password_field :password %>
@@ -46,7 +41,14 @@ Refactor using simple_form?
     <%= f.label "Reenter Password" %>
     <%= f.password_field :password %>
   </div>
+
+  <div class="field">
+    <%= f.label "Faculty User" %>
+    <%= f.check_box :isFacultyUser %>
+  </div>
+
   <div class="actions"><%= f.submit %></div>
   </div>
+  
 <% end %>
 

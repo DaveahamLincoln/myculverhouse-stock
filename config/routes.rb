@@ -39,9 +39,6 @@ MyculverhouseStock::Application.routes.draw do
   resources :publications
 
   resources :user_pictures
-
-  resources :user_types
-
   resources :calendar_items
 
   resources :news_items
@@ -53,6 +50,8 @@ MyculverhouseStock::Application.routes.draw do
   get "login" => 'login#new'
   post "login" => 'login#create'
   delete "logout" => 'login#destroy'
+
+  get "/faculty/:permalink", :controller => 'faculty_profiles', :action => :show
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

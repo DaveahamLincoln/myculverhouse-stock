@@ -3,9 +3,9 @@
 <table>
   <thead>
     <tr>
-      <th>Currentresearch</th>
-      <th>Eduction</th>
-      <th>Honors</th>
+      <th>User</th>
+      <th></th>
+      <th></th>
       <th></th>
       <th></th>
       <th></th>
@@ -15,17 +15,19 @@
   <tbody>
     <% @faculty_profiles.each do |faculty_profile| %>
       <tr>
-        <td><%= faculty_profile.currentResearch %></td>
-        <td><%= faculty_profile.eduction %></td>
-        <td><%= faculty_profile.honors %></td>
+        <td><%= User.find(faculty_profile.id).formal_name %></td>
+        <td></td>
+        <td></td>
         <td><%= link_to 'Show', faculty_profile %></td>
-        <td><%= link_to 'Edit', edit_faculty_profile_path(faculty_profile) %></td>
-        <td><%= link_to 'Destroy', faculty_profile, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if current_user.godBit or current_user.id == faculty_profile.id%>
+          <td><%= link_to 'Edit', edit_faculty_profile_path(faculty_profile) %></td>
+        <%end%>
+        <% if current_user.godBit %>
+          <td><%= link_to 'Destroy', faculty_profile, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <%end%>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
-
-<%= link_to 'New Faculty profile', new_faculty_profile_path %>

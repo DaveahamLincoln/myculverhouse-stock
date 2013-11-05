@@ -1,5 +1,5 @@
 class FacultyProfilesController < ApplicationController
-  before_filter :set_faculty_profile, only: [:show, :edit, :update, :destroy]
+  before_filter :set_faculty_profile, only: [:edit, :update, :destroy]
 
   # GET /faculty_profiles
   def index
@@ -8,6 +8,15 @@ class FacultyProfilesController < ApplicationController
 
   # GET /faculty_profiles/1
   def show
+    if params[:permalink]
+      @faculty_profile = FacultyProfile.where(permalink: (params[:permalink])).first
+      raise ActiveRecord::RecordNotFound, "Page not found" if @faculty_profile.nil?
+
+      @faculty_name = User.find(@faculty_profile.id).formal_name
+    else
+      @faculty_profile = FacultyProfile.find(params[:id])
+      @faculty_name = User.find(@faculty_profile.id).formal_name
+    end
   end
 
   # GET /faculty_profiles/new
@@ -17,6 +26,8 @@ class FacultyProfilesController < ApplicationController
 
   # GET /faculty_profiles/1/edit
   def edit
+    @faculty_profile = FacultyProfile.find(params[:id])
+    @faculty_name = User.find(@faculty_profile.id).formal_name
   end
 
   # POST /faculty_profiles
@@ -32,7 +43,7 @@ class FacultyProfilesController < ApplicationController
 
   # PATCH/PUT /faculty_profiles/1
   def update
-    if @faculty_profile.update(faculty_profile_params)
+    if @faculty_profile.update_attributes(faculty_profile_params)
       redirect_to @faculty_profile, notice: 'Faculty profile was successfully updated.'
     else
       render action: 'edit'
@@ -53,6 +64,6 @@ class FacultyProfilesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def faculty_profile_params
-      params.require(:faculty_profile).permit(:currentResearch, :eduction, :honors)
+      params.require(:faculty_profile).permit(:currentResearch, :education, :honors, :bodyText)
     end
 end

@@ -7,9 +7,10 @@
       <th>Firstname</th>
       <th>Lastname</th>
       <th>Godbit</th>
-      <th></th>
-      <th></th>
-      <th></th>
+      <th>Super User</th>
+      <th>Generic User</th>
+      <th>Faculty User</th>
+      <th>Communications User</th>
     </tr>
   </thead>
 
@@ -20,9 +21,13 @@
         <td><%= user.firstName %></td>
         <td><%= user.lastName %></td>
         <td><%= user.godBit %></td>
-        <td><%= link_to 'Show', user %></td>
+        
+        <td><%= user.isSuperUser%></td>
+        <td><%= user.isGenericUser%></td>
+        <td><%= user.isFacultyUser%></td>
+        <td><%= user.isCommunicationsUser%></td>
+
         <td><%= link_to 'Edit', edit_user_path(user) %></td>
-        <td><%= link_to 'Edit Permissions', {:controller => "user_types",:userID => user.id}%></td>
         <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>

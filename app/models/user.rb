@@ -1,10 +1,12 @@
 class User < ActiveRecord::Base
 	#Automatically checks to see if :password is present, so we don't need to validate it below.
 	has_secure_password
+
 	#Sets the required fields for creating a new User object.
 	#:phone
+	
 	validates_presence_of :firstName, :lastName, :email, :password, :on => :create
-	attr_accessible :email, :password, :godBit, :lastName, :firstName
+	attr_accessible :email, :password, :lastName, :firstName, :isGenericUser, :isFacultyUser
 
 	#def send_password_reset
 	#	generate_token(:password_reset_token)

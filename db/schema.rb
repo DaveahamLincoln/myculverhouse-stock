@@ -11,17 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131101202441) do
-
-  create_table "Users", :force => true do |t|
-    t.string   "email"
-    t.boolean  "godBit"
-    t.string   "firstName"
-    t.string   "lastName"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
-    t.string   "password_digest"
-  end
+ActiveRecord::Schema.define(:version => 20131105202414) do
 
   create_table "calendar_items", :force => true do |t|
     t.integer  "actionItemID"
@@ -50,18 +40,20 @@ ActiveRecord::Schema.define(:version => 20131101202441) do
 
   create_table "faculty_profiles", :force => true do |t|
     t.text     "currentResearch"
-    t.text     "eduction"
+    t.text     "education"
     t.text     "honors"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
+    t.string   "permalink"
+    t.text     "bodyText"
   end
 
   create_table "faculty_users", :force => true do |t|
     t.integer  "userID"
-    t.integer  "facultyPageID"
+    t.integer  "facultyProfileID"
     t.integer  "userPictureID"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
   end
 
   create_table "news_items", :force => true do |t|
@@ -87,13 +79,18 @@ ActiveRecord::Schema.define(:version => 20131101202441) do
     t.datetime "updated_at",  :null => false
   end
 
-  create_table "user_types", :force => true do |t|
-    t.integer  "userID"
+  create_table "users", :force => true do |t|
+    t.string   "email"
+    t.boolean  "godBit"
+    t.string   "firstName"
+    t.string   "lastName"
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
+    t.string   "password_digest"
     t.boolean  "isSuperUser"
-    t.boolean  "isGenericUSer"
+    t.boolean  "isGenericUser"
     t.boolean  "isFacultyUser"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.boolean  "isCommunicationsUser"
   end
 
 end
