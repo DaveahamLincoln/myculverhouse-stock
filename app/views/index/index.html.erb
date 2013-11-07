@@ -18,7 +18,7 @@
 
 
 	<%if current_user.isSuperUser or current_user.godBit%>
-		<%= link_to '| Add User |','/users/new',:method => :get %> <%= link_to '| Edit/Remove User |','/users', :method => :get %>
+		<%= link_to '| Add User |','/users/new',:method => :get %> <%= link_to '| Edit/Remove User |','/users', :method => :get %> <%= link_to '| Edit Profiles |','/faculty_profiles', :method => :get %> <%= link_to '| Edit Publications |','/publications', :method => :get %>
 	<%end%>
 
 <%end%>

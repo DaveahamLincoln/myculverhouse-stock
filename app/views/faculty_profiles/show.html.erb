@@ -21,8 +21,8 @@
 
 <!-- publications'll go here -->
 
-<%if current_user.godBit or current_user.id == @faculty_profile.id %>
-	<%= link_to '| Edit |', edit_faculty_profile_path(@faculty_profile.id) %> 
+<%if !current_user.blank?%>
+	<%if current_user.godBit or current_user.id == @faculty_profile.id %>
+		<%= link_to '| Edit |', edit_faculty_profile_path(@faculty_profile.id) %> 
+	<%end%>
 <%end%>
-
-<%= link_to '| Back |', faculty_profiles_path %>

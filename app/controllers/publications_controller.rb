@@ -1,8 +1,16 @@
 class PublicationsController < ApplicationController
+  before_filter :check_your_privilege
+
   # GET /publications
   # GET /publications.json
   def index
-    @publications = Publication.all
+    if current_user.isFacultyUser
+      @publications = Publication.where(:facultyUserID == (FacultyUser.where(:userID == current_user.id)))
+    elsif current_user.godBit
+      @publications = Publication.all
+    else
+      @publications = Publication.none
+    end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -31,6 +39,7 @@ class PublicationsController < ApplicationController
       format.json { render json: @publication }
     end
   end
+
 
   # GET /publications/1/edit
   def edit
@@ -80,4 +89,14 @@ class PublicationsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def check_your_privilege
+    if current_user.nil? 
+      redirect_to(root_url)
+    else
+      unless current_user.godBit or current_user.isSuperUser or current_user.isFacultyUser
+        redirect_to(root_url)
+      end
+    end
+
 end

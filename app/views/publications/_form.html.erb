@@ -11,17 +11,16 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :facultyUserID %><br />
-    <%= f.number_field :facultyUserID %>
-  </div>
+  <%if current_user.godBit or current_user.isSuperUser %>
+    <div class="field">
+      <%= f.label "Faculty Member:" %>
+      <%= f.collection_select(:facultyUserID, FacultyUser.all, :id, :formal_name, :include_blank => true) %>
+    </div>
+  <%end%>
+
   <div class="field">
     <%= f.label :publicationText %><br />
     <%= f.text_area :publicationText %>
-  </div>
-  <div class="field">
-    <%= f.label :phoneNumber %><br />
-    <%= f.text_field :phoneNumber %>
   </div>
   <div class="actions">
     <%= f.submit %>

@@ -1,5 +1,6 @@
 class CalendarItemsController < ApplicationController
   before_filter :set_calendar_item, only: [:show, :edit, :update, :destroy]
+  before_filter :check_your_privilege
 
   # GET /calendar_items
   def index
@@ -55,4 +56,15 @@ class CalendarItemsController < ApplicationController
     def calendar_item_params
       params.require(:calendar_item).permit(:actionItemID, :calendarText, :calendarDate)
     end
+
+    def check_your_privilege
+      if current_user.nil? 
+        redirect_to(root_url)
+      else
+        unless current_user.godBit or current_user.isSuperUser or current_user.isFaculty or current_user.isCommunicationsUser
+          redirect_to(root_url)
+        end
+      end
+    end
+
 end

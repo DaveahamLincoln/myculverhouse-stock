@@ -1,10 +1,9 @@
-<h1>Listing publications</h1>
+<h1>Listing Publications</h1>
 
 <table>
   <tr>
-    <th>Facultyuserid</th>
-    <th>Publicationtext</th>
-    <th>Phonenumber</th>
+    <th>Author</th>
+    <th>Publication</th>
     <th></th>
     <th></th>
     <th></th>
@@ -12,10 +11,9 @@
 
 <% @publications.each do |publication| %>
   <tr>
-    <td><%= publication.facultyUserID %></td>
+    <td><%= User.find(FacultyUser.find(publication.facultyUserID).userID).formal_name %></td>
     <td><%= publication.publicationText %></td>
-    <td><%= publication.phoneNumber %></td>
-    <td><%= link_to 'Show', publication %></td>
+    <td><%= link_to 'View', publication %></td>
     <td><%= link_to 'Edit', edit_publication_path(publication) %></td>
     <td><%= link_to 'Destroy', publication, method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>

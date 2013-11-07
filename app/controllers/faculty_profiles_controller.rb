@@ -1,5 +1,6 @@
 class FacultyProfilesController < ApplicationController
   before_filter :set_faculty_profile, only: [:edit, :update, :destroy]
+  before_filter :check_your_privilege
 
   # GET /faculty_profiles
   def index
@@ -66,4 +67,15 @@ class FacultyProfilesController < ApplicationController
     def faculty_profile_params
       params.require(:faculty_profile).permit(:currentResearch, :education, :honors, :bodyText)
     end
+    
+    def check_your_privilege
+      if current_user.nil? 
+        redirect_to(root_url)
+      else
+        unless current_user.godBit or current_user.isSuperUser or current_user.isFaculty
+          redirect_to(root_url)
+        end
+      end
+    end
+
 end

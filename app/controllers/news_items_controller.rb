@@ -1,5 +1,6 @@
 class NewsItemsController < ApplicationController
   before_filter :set_news_item, only: [:show, :edit, :update, :destroy]
+  before_filter :check_your_privilege
 
   # GET /news_items
   def index
@@ -54,5 +55,15 @@ class NewsItemsController < ApplicationController
     # Only allow a trusted parameter "white list" through.
     def news_item_params
       params.require(:news_item).permit(:actionItemID, :newsText, :newsDate)
+    end
+
+    def check_your_privilege
+      if current_user.nil? 
+        redirect_to(root_url)
+      else
+        unless current_user.godBit or current_user.isSuperUser or current_user.isFaculty or current_user.isCommunicationsUser
+          redirect_to(root_url)
+        end
+      end
     end
 end

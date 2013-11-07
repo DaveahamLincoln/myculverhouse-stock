@@ -1,3 +1,3 @@
 class Publication < ActiveRecord::Base
-  attr_accessible :facultyUserID, :phoneNumber, :publicationText
+  attr_accessible :facultyUserID, :publicationText
 end

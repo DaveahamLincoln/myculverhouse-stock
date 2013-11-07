@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131105202414) do
+ActiveRecord::Schema.define(:version => 20131107204227) do
 
   create_table "calendar_items", :force => true do |t|
     t.integer  "actionItemID"
@@ -67,7 +67,6 @@ ActiveRecord::Schema.define(:version => 20131105202414) do
   create_table "publications", :force => true do |t|
     t.integer  "facultyUserID"
     t.text     "publicationText"
-    t.string   "phoneNumber"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
   end
@@ -91,6 +90,7 @@ ActiveRecord::Schema.define(:version => 20131105202414) do
     t.boolean  "isGenericUser"
     t.boolean  "isFacultyUser"
     t.boolean  "isCommunicationsUser"
+    t.string   "phoneNumber"
   end
 
 end
