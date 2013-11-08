@@ -13,7 +13,7 @@
 
   <div class="field">
     <%= f.label :actionItemID %><br>
-    <%= f.text_field :actionItemID %>
+    <%= f.text_field :actionItemID, :value => @action_item.id, :readonly => true %>
   </div>
   <div class="field">
     <%= f.label :calendarText %><br>

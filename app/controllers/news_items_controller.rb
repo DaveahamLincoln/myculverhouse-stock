@@ -14,6 +14,8 @@ class NewsItemsController < ApplicationController
   # GET /news_items/new
   def new
     @news_item = NewsItem.new
+    @action_item = ActionItem.new
+    @action_item.update_attributes(:createdByID => current_user.id, :isApproved => false, :itemType => "news")
   end
 
   # GET /news_items/1/edit
@@ -28,7 +30,7 @@ class NewsItemsController < ApplicationController
       redirect_to @news_item, notice: 'News item was successfully created.'
     else
       render action: 'new'
-    end
+    end  
   end
 
   # PATCH/PUT /news_items/1
@@ -42,7 +44,10 @@ class NewsItemsController < ApplicationController
 
   # DELETE /news_items/1
   def destroy
+    @newsItemActionItem = ActionItem.where(id: @news_item.actionItemID).first
+    @newsItemActionItem.destroy
     @news_item.destroy
+
     redirect_to news_items_url, notice: 'News item was successfully destroyed.'
   end
 
@@ -61,7 +66,7 @@ class NewsItemsController < ApplicationController
       if current_user.nil? 
         redirect_to(root_url)
       else
-        unless current_user.godBit or current_user.isSuperUser or current_user.isFaculty or current_user.isCommunicationsUser
+        unless current_user.godBit or current_user.isSuperUser or current_user.isFacultyUser or current_user.isCommunicationsUser
           redirect_to(root_url)
         end
       end

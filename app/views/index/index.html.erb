@@ -13,7 +13,7 @@
 	<%end%>
 
 	<%if current_user.isCommunicationsUser or current_user.godBit%>
-		<%= link_to '| Approve Action Items |','/action_items/new', :method => :get %> 
+		<%= link_to '| Approve Action Items |','/action_items', :method => :get %> 
 	<%end%>
 
 

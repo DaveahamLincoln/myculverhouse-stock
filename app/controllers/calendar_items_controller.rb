@@ -14,6 +14,9 @@ class CalendarItemsController < ApplicationController
   # GET /calendar_items/new
   def new
     @calendar_item = CalendarItem.new
+    @action_item = ActionItem.new
+    @action_item.update_attributes(:createdByID => current_user.id, :isApproved => false, :itemType => "calendar")
+
   end
 
   # GET /calendar_items/1/edit
@@ -42,6 +45,8 @@ class CalendarItemsController < ApplicationController
 
   # DELETE /calendar_items/1
   def destroy
+    @calendarItemActionItem = ActionItem.where(id: @calendar_item.actionItemID).first
+    @calendarItemActionItem.destroy
     @calendar_item.destroy
     redirect_to calendar_items_url, notice: 'Calendar item was successfully destroyed.'
   end

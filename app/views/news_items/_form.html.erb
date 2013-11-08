@@ -11,18 +11,19 @@
     </div>
   <% end %>
 
+  <% @action_item %>
+
   <div class="field">
     <%= f.label :actionItemID %><br>
-    <%= f.text_field :actionItemID %>
+    <%= f.text_field :actionItemID, :value => @action_item.id, :readonly => true %>
   </div>
+
+
   <div class="field">
     <%= f.label :newsText %><br>
     <%= f.text_area :newsText %>
   </div>
-  <div class="field">
-    <%= f.label :newsDate %><br>
-    <%= f.text_field :newsDate %>
-  </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>

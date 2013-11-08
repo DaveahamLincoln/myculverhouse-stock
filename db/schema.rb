@@ -11,7 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131107204227) do
+ActiveRecord::Schema.define(:version => 20131108212009) do
+
+  create_table "action_items", :force => true do |t|
+    t.integer  "createdByID"
+    t.boolean  "isApproved"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.string   "itemType"
+  end
 
   create_table "calendar_items", :force => true do |t|
     t.integer  "actionItemID"
@@ -59,7 +67,6 @@ ActiveRecord::Schema.define(:version => 20131107204227) do
   create_table "news_items", :force => true do |t|
     t.integer  "actionItemID"
     t.text     "newsText"
-    t.date     "newsDate"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
   end

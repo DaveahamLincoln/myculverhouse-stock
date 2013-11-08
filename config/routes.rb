@@ -1,5 +1,8 @@
 MyculverhouseStock::Application.routes.draw do
 
+  resources :action_items
+
+
   root to: 'index#index'
 
   get "department_admin_actions/updateFacultyProfile"
