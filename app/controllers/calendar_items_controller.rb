@@ -1,10 +1,11 @@
 class CalendarItemsController < ApplicationController
-  before_filter :set_calendar_item, only: [:show, :edit, :update, :destroy]
-  before_filter :check_your_privilege
+  before_filter :set_calendar_item, only: [:show, :edit, :update, :new, :destroy]
+  before_filter :check_your_privilege, only: [:index, :new, :edit, :create, :update, :destroy]
 
   # GET /calendar_items
   def index
     @calendar_items = CalendarItem.all
+    @action_items = ActionItem.where(:itemType == "calendar")
   end
 
   # GET /calendar_items/1
@@ -14,9 +15,6 @@ class CalendarItemsController < ApplicationController
   # GET /calendar_items/new
   def new
     @calendar_item = CalendarItem.new
-    @action_item = ActionItem.new
-    @action_item.update_attributes(:createdByID => current_user.id, :isApproved => false, :itemType => "calendar")
-
   end
 
   # GET /calendar_items/1/edit
@@ -26,6 +24,9 @@ class CalendarItemsController < ApplicationController
   # POST /calendar_items
   def create
     @calendar_item = CalendarItem.new(calendar_item_params)
+    @action_item = ActionItem.new
+    @action_item.update_attributes(:createdByID => current_user.id, :isApproved => false, :itemType => "calendar")
+    @calendar_item.update_attributes(:actionItemID => @action_item.id)
 
     if @calendar_item.save
       redirect_to @calendar_item, notice: 'Calendar item was successfully created.'
@@ -59,14 +60,14 @@ class CalendarItemsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def calendar_item_params
-      params.require(:calendar_item).permit(:actionItemID, :calendarText, :calendarDate)
+      params.require(:calendar_item).permit(:actionItemID, :calendarText, :calendarDate, :title)
     end
 
     def check_your_privilege
       if current_user.nil? 
         redirect_to(root_url)
       else
-        unless current_user.godBit or current_user.isSuperUser or current_user.isFaculty or current_user.isCommunicationsUser
+        unless current_user.godBit or current_user.isSuperUser or current_user.isFacultyUser or current_user.isCommunicationsUser
           redirect_to(root_url)
         end
       end

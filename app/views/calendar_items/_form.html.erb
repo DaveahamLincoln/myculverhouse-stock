@@ -12,17 +12,20 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :actionItemID %><br>
-    <%= f.text_field :actionItemID, :value => @action_item.id, :readonly => true %>
-  </div>
+    <%= f.label "Title:" %><br>
+    <%= f.text_field :title %>
+  </div>  
+
   <div class="field">
     <%= f.label :calendarText %><br>
     <%= f.text_area :calendarText %>
   </div>
+
   <div class="field">
     <%= f.label :calendarDate %><br>
     <%= f.datetime_select :calendarDate %>
   </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>

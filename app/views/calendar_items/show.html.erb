@@ -1,8 +1,8 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Actionitemid:</strong>
-  <%= @calendar_item.actionItemID %>
+	<strong>Title:</strong>
+	<%= @calendar_item.title %>
 </p>
 
 <p>
@@ -15,5 +15,10 @@
   <%= @calendar_item.calendarDate %>
 </p>
 
-<%= link_to 'Edit', edit_calendar_item_path(@calendar_item) %> |
-<%= link_to 'Back', calendar_items_path %>
+<%unless current_user.blank? %>
+	<%if ActionItem.find(@calendar_item.actionItemID).createdByID == current_user.id or current_user.isSuperUser or current_user.isCommunicationsUser or current_user.godBit%>
+		<%= link_to '| Edit |', edit_calendar_item_path(@calendar_item) %> <%= link_to 'Back', calendar_items_path %>
+	<%else%>
+		<%= link_to 'Back', calendar_items_path %>
+	<%end%>
+<%end%>

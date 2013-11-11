@@ -1,0 +1,13 @@
+<ul>
+  <% @news_items.each do |news_item| %>
+    <% news_item.id %>
+    <% @action_items.each do |action_item| %>
+      <% if action_item.isApproved %>
+        <% if news_item.actionItemID == action_item.id %>
+          <li><%= link_to h(news_item.title), news_item %></li>
+        <%end%>
+      <%end%>
+    <%end%>
+  <%end%>
+</ul>
+

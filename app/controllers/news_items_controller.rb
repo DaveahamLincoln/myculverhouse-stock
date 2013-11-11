@@ -1,10 +1,11 @@
 class NewsItemsController < ApplicationController
   before_filter :set_news_item, only: [:show, :edit, :update, :destroy]
-  before_filter :check_your_privilege
+  before_filter :check_your_privilege, only: [:index, :new, :edit, :create, :update, :destroy]
 
   # GET /news_items
   def index
-    @news_items = NewsItem.all
+    @news_items = NewsItem.all  
+    @action_items = ActionItem.where(:itemType == "news")
   end
 
   # GET /news_items/1
@@ -14,8 +15,6 @@ class NewsItemsController < ApplicationController
   # GET /news_items/new
   def new
     @news_item = NewsItem.new
-    @action_item = ActionItem.new
-    @action_item.update_attributes(:createdByID => current_user.id, :isApproved => false, :itemType => "news")
   end
 
   # GET /news_items/1/edit
@@ -25,6 +24,9 @@ class NewsItemsController < ApplicationController
   # POST /news_items
   def create
     @news_item = NewsItem.new(news_item_params)
+    @action_item = ActionItem.new
+    @action_item.update_attributes(:createdByID => current_user.id, :isApproved => false, :itemType => "news")
+    @news_item.update_attributes(:actionItemID => @action_item.id)
 
     if @news_item.save
       redirect_to @news_item, notice: 'News item was successfully created.'
@@ -44,6 +46,7 @@ class NewsItemsController < ApplicationController
 
   # DELETE /news_items/1
   def destroy
+    @news_item = NewsItem.find(params[:id])
     @newsItemActionItem = ActionItem.where(id: @news_item.actionItemID).first
     @newsItemActionItem.destroy
     @news_item.destroy
@@ -59,7 +62,7 @@ class NewsItemsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def news_item_params
-      params.require(:news_item).permit(:actionItemID, :newsText, :newsDate)
+      params.require(:news_item).permit(:actionItemID, :newsText, :newsDate, :title)
     end
 
     def check_your_privilege

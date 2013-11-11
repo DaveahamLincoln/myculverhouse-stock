@@ -12,6 +12,7 @@ class ActionItemsController < ApplicationController
     end
   end
 
+=begin
   # GET /action_items/1
   # GET /action_items/1.json
   def show
@@ -22,7 +23,9 @@ class ActionItemsController < ApplicationController
       format.json { render json: @action_item }
     end
   end
+=end
 
+=begin
   # GET /action_items/new
   # GET /action_items/new.json
   def new
@@ -33,11 +36,14 @@ class ActionItemsController < ApplicationController
       format.json { render json: @action_item }
     end
   end
+=end
 
+=begin
   # GET /action_items/1/edit
   def edit
     @action_item = ActionItem.find(params[:id])
   end
+=end
 
   # POST /action_items
   # POST /action_items.json
@@ -78,7 +84,7 @@ class ActionItemsController < ApplicationController
     
     if @action_item.itemType == "news"
       @action_item_proper = NewsItem.where(actionItemID: @action_item.id).first
-    elsif @action_itemType == "calendar"
+    elsif @action_item.itemType == "calendar"
       @action_item_proper = CalendarItem.where(actionItemID: @action_item.id).first
     end
 
@@ -88,6 +94,21 @@ class ActionItemsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to action_items_url }
       format.json { head :no_content }
+    end
+  end
+
+  def approve
+    respond_to do |format|
+      @action_item=ActionItem.find(params[:id])
+      if @action_item.isApproved
+        @action_item.update_attributes(:isApproved => 0)
+        format.html { redirect_to :action => 'index', notice: 'Item has been unapproved successfully.' }
+        format.json { head :no_content }
+      else
+        @action_item.update_attributes(:isApproved => 1)
+        format.html { redirect_to :action => 'index', notice: 'Item has been approved successfully.' }
+        format.json { head :no_content }
+      end
     end
   end
 

@@ -42,3 +42,5 @@ gem 'bcrypt-ruby', '~> 3.0.0'
 gem 'simple_form'
 
 gem 'strong_parameters'
+
+gem 'watu_table_builder', :require => "table_builder"

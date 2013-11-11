@@ -72,7 +72,7 @@ class FacultyProfilesController < ApplicationController
       if current_user.nil? 
         redirect_to(root_url)
       else
-        unless current_user.godBit or current_user.isSuperUser or current_user.isFaculty
+        unless current_user.godBit or current_user.isSuperUser or current_user.isFacultyUser
           redirect_to(root_url)
         end
       end

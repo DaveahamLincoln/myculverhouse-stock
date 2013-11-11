@@ -106,6 +106,7 @@ GEM
     uglifier (2.3.0)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
+    watu_table_builder (0.3.0)
 
 PLATFORMS
   ruby
@@ -121,3 +122,4 @@ DEPENDENCIES
   sqlite3
   strong_parameters
   uglifier (>= 1.0.3)
+  watu_table_builder

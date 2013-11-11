@@ -11,13 +11,10 @@
     </div>
   <% end %>
 
-  <% @action_item %>
-
   <div class="field">
-    <%= f.label :actionItemID %><br>
-    <%= f.text_field :actionItemID, :value => @action_item.id, :readonly => true %>
-  </div>
-
+    <%= f.label "Title:" %><br>
+    <%= f.text_field :title %>
+  </div>  
 
   <div class="field">
     <%= f.label :newsText %><br>

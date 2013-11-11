@@ -56,6 +56,14 @@ MyculverhouseStock::Application.routes.draw do
 
   get "/faculty/:permalink", :controller => 'faculty_profiles', :action => :show
 
+  post "/action_items/:id" => "action_items#approve"
+
+  get "/calendar" => "master_calendar#index"
+  post "/calendar" => "master_calendar#index"
+
+  get "/news" => "news#index"
+  post "/news" => "news#index"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

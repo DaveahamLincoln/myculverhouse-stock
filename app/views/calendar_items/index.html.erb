@@ -13,19 +13,40 @@
   </thead>
 
   <tbody>
-    <% @calendar_items.each do |calendar_item| %>
-      <tr>
-        <td><%= calendar_item.actionItemID %></td>
-        <td><%= calendar_item.calendarText %></td>
-        <td><%= calendar_item.calendarDate %></td>
-        <td><%= link_to 'Show', calendar_item %></td>
-        <td><%= link_to 'Edit', edit_calendar_item_path(calendar_item) %></td>
-        <td><%= link_to 'Destroy', calendar_item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
+    
+    <%if current_user.godBit or current_user.isSuperUser%>
+      <% @calendar_items.each do |calendar_item| %>
+        <tr>
+          <td><%= calendar_item.actionItemID %></td>
+          <td><%= calendar_item.calendarText %></td>
+          <td><%= calendar_item.calendarDate %></td>
+          <td><%= link_to 'Show', calendar_item %></td>
+          <td><%= link_to 'Edit', edit_calendar_item_path(calendar_item) %></td>
+          <td><%= link_to 'Destroy', calendar_item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    <%else%>
+      <% @calendar_items.each do |calendar_item| %>
+        <% @action_items.each do |action_item| %>
+          <% if action_item.createdByID == current_user.id %>
+            <% if calendar_item.actionItemID == action_item.id %>
+              <tr>
+                <td><%= calendar_item.actionItemID %></td>
+                <td><%= calendar_item.calendarText %></td>
+                <td><%= calendar_item.calendarDate %></td>
+                <td><%= link_to 'Show', calendar_item %></td>
+                <td><%= link_to 'Edit', edit_calendar_item_path(calendar_item) %></td>
+                <td><%= link_to 'Destroy', calendar_item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+              </tr>
+            <%end%>
+          <%end%>
+        <%end%>
+      <%end%>
+    <%end%>
+
   </tbody>
 </table>
 
 <br>
 
-<%= link_to 'New Calendar item', new_calendar_item_path %>
+<%= link_to 'New calendar item', new_calendar_item_path %>

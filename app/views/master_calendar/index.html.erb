@@ -1,0 +1,13 @@
+<ul>
+  <% @calendar_items.each do |calendar_item| %>
+    <% calendar_item.id %>
+    <% @action_items.each do |action_item| %>
+      <% if action_item.isApproved %>
+        <% if calendar_item.actionItemID == action_item.id %>
+          <li><%= link_to h(calendar_item.title), calendar_item %></li>
+        <%end%>
+      <%end%>
+    <%end%>
+  <%end%>
+</ul>
+

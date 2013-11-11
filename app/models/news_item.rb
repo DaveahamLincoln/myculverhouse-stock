@@ -1,3 +1,3 @@
 class NewsItem < ActiveRecord::Base
-	attr_accessible :newsText, :actionItemID
+	attr_accessible :newsText, :actionItemID, :title
 end
