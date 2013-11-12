@@ -11,7 +11,7 @@
 
 <% @publications.each do |publication| %>
   <tr>
-    <td><%= User.find(FacultyUser.find(publication.facultyUserID).userID).formal_name %></td>
+    <td><%= User.find(@faculty_user.userID).formal_name %></td>
     <td><%= publication.publicationText %></td>
     <td><%= link_to 'View', publication %></td>
     <td><%= link_to 'Edit', edit_publication_path(publication) %></td>

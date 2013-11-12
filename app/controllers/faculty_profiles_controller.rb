@@ -14,6 +14,9 @@ class FacultyProfilesController < ApplicationController
       raise ActiveRecord::RecordNotFound, "Page not found" if @faculty_profile.nil?
 
       @faculty_name = User.find(@faculty_profile.id).formal_name
+      @faculty_user = FacultyUser.find_by_facultyProfileID(@faculty_profile.id)
+      @publications = Publication.where(:facultyUserID == @faculty_user.id)
+
     else
       @faculty_profile = FacultyProfile.find(params[:id])
       @faculty_name = User.find(@faculty_profile.id).formal_name

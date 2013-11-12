@@ -16,10 +16,19 @@
 </p>
 
 <p>
-  <%= @faculty_profile.bodyText %>
+  <b>Publications:</b>
 </p>
 
-<!-- publications'll go here -->
+<% @publications.each do |publication| %>
+  <p>
+    <%= publication.publicationText %>
+  </p>
+<%end%>
+
+<p>
+  <b>About:</b>
+  <%= @faculty_profile.bodyText %>
+</p>
 
 <%if !current_user.blank?%>
 	<%if current_user.godBit or current_user.id == @faculty_profile.id %>
