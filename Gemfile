@@ -37,6 +37,8 @@ gem 'jquery-rails'
 # To use debugger
 # gem 'debugger'
 
+gem 'passenger'
+
 gem 'bcrypt-ruby', '~> 3.0.0'
 
 gem 'simple_form'
@@ -44,3 +46,5 @@ gem 'simple_form'
 gem 'strong_parameters'
 
 gem 'watu_table_builder', :require => "table_builder"
+
+gem "seed_dump", "~> 0.5.3"
