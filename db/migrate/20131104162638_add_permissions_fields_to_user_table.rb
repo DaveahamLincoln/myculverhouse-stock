@@ -1,7 +1,7 @@
 class AddPermissionsFieldsToUserTable < ActiveRecord::Migration
   def change
-  	  	add_column :Users, :isSuperUser,:boolean
-  	  	add_column :Users, :isGenericUser,:boolean
-  	  	add_column :Users, :isFacultyUser,:boolean
+  	  	add_column :users, :isSuperUser,:boolean
+  	  	add_column :users, :isGenericUser,:boolean
+  	  	add_column :users, :isFacultyUser,:boolean
   end
 end
