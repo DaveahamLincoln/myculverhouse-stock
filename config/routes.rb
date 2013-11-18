@@ -39,6 +39,8 @@ MyculverhouseStock::Application.routes.draw do
 
   get "college_admin_actions/deleteFacultyProfile"
 
+  get "password_resets/new" 
+  
   resources :publications
 
   resources :user_pictures

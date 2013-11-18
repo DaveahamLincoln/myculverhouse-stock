@@ -8,12 +8,12 @@ class User < ActiveRecord::Base
 	validates_presence_of :firstName, :lastName, :email, :password, :on => :create
 	attr_accessible :email, :password, :lastName, :firstName, :isGenericUser, :isFacultyUser, :phoneNumber
 
-	#def send_password_reset
-	#	generate_token(:password_reset_token)
-	#	self.password_reset_sent_at = Time.zone.now
-	#	save!
-	#	UserMailer.password_reset(self).deliver
-	#end
+	def send_password_reset
+		generate_token(:password_reset_token)
+		self.password_reset_sent_at = Time.zone.now
+		save!
+		UserMailer.password_reset(self).deliver
+	end
 
 	def generate_token(column)
 		begin
