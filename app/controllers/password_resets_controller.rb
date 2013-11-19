@@ -1,4 +1,8 @@
 class PasswordResetsController < ApplicationController
+
+	def new
+	end
+
 	def create
   		user = User.find_by_email(params[:email])
   		user.send_password_reset if user
@@ -16,7 +20,7 @@ class PasswordResetsController < ApplicationController
 
       #Having to use the .permit! force so much worries me.  I don't really understand why there's so much protection against 
       #modifying attributes, but it might be something we need to look into solving more elegantly in the future.
-  		elsif @user.update_attributes(params.permit![:user])
+  		elsif @user.update_attributes(params[:user])
     		redirect_to root_url, :notice => "Password has been reset!"
   		else
     		render :edit

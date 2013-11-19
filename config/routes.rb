@@ -56,6 +56,13 @@ MyculverhouseStock::Application.routes.draw do
   post "login" => 'login#create'
   delete "logout" => 'login#destroy'
 
+  resources :password_resets do
+    post 'edit' => :update
+  end
+
+  get "/password_reset" => 'password_resets#new'
+  get "/password_resets/:id/edit" => 'password_resets#edit'
+
   get "/faculty/:permalink", :controller => 'faculty_profiles', :action => :show
 
   post "/action_items/:id" => "action_items#approve"

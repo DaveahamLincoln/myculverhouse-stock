@@ -1,0 +1,25 @@
+<%= form_for @user, :url => password_reset_path(params[:id]) do |f| %>
+  <% if @user.errors.any? %>
+      <div class="span6 offset5">
+        <div class="text-left alert alert-danger">Form is invalid
+          <ul>
+            <% for message in @user.errors.full_messages %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      </span>
+  <%end%>
+
+<div class="field">
+  <%= f.label "New password" %>
+  <%= f.password_field :password %>
+</div>
+
+<div class="field">
+  <%= f.label "Confirm new password" %>
+  <%= f.password_field :password_confirmation %>
+</div>
+
+<div class="actions"><%=f.submit "Update Password" %></div>
+<%end%>

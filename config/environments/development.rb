@@ -34,4 +34,7 @@ MyculverhouseStock::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
+
+  # Sets the mailer default url to localhost
+  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
 end
