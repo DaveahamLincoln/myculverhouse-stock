@@ -16,6 +16,10 @@
       <%= f.label "Faculty Member:" %>
       <%= f.collection_select(:facultyUserID, FacultyUser.all, :id, :formal_name, :include_blank => true) %>
     </div>
+  <%else%>
+    <div class="field">
+      <%= f.hidden_field :facultyUserID, :value=> @faculty_user.id,:readonly=>true%>
+    </div>
   <%end%>
 
   <div class="field">

@@ -34,6 +34,9 @@ class PublicationsController < ApplicationController
   # GET /publications/new.json
   def new
     @publication = Publication.new
+    if current_user.isFacultyUser
+      @faculty_user = FacultyUser.find_by_userID(current_user.id)
+    end
 
     respond_to do |format|
       format.html # new.html.erb

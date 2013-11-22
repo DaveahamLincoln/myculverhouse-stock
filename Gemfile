@@ -48,3 +48,7 @@ gem 'strong_parameters'
 #gem 'watu_table_builder', :require => "table_builder"
 
 gem "seed_dump", "~> 0.5.3"
+
+gem 'paperclip', "~>3.0"
+
+gem 'rmagick', '2.13.2'

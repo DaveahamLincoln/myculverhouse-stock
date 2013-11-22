@@ -1,5 +1,7 @@
 <h1><%=@faculty_name%></h1>
 
+<%=image_tag @faculty_user_user.avatar.url(:medium)%>
+
 <p>
   <strong>Education:</strong>
   <%= @faculty_profile.education %>
@@ -19,10 +21,14 @@
   <b>Publications:</b>
 </p>
 
-<% @publications.each do |publication| %>
-  <p>
-    <%= publication.publicationText %>
-  </p>
+<%if @publications%>
+  <% @publications.each do |publication| %>
+    <p>
+      <%= publication.publicationText %>
+    </p>
+  <%end%>
+<%else%>
+  None.
 <%end%>
 
 <p>
