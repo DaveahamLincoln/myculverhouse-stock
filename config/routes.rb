@@ -1,7 +1,13 @@
 MyculverhouseStock::Application.routes.draw do
 
-  resources :action_items
+  
+  
+  ComfortableMexicanSofa::Routing.admin(:path => '/cms-admin')
+  
+  # Make sure this routeset is defined last
+  ComfortableMexicanSofa::Routing.content(:path => '/', :sitemap => false)
 
+  resources :action_items
 
   root to: 'index#index'
 
@@ -72,6 +78,12 @@ MyculverhouseStock::Application.routes.draw do
 
   get "/news" => "news#index"
   post "/news" => "news#index"
+
+  ComfortableMexicanSofa::Routing.admin(:path => '/cms-admin')
+  
+  # Make sure this routeset is defined last
+  ComfortableMexicanSofa::Routing.content(:path => '/', :sitemap => false)
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

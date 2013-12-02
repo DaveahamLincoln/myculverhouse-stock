@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  label: 
+  identifier: 
+  hostname: 
+  path: 
+  locale: 
+  is_mirrored: false
+
+two:
+  label: 
+  identifier: 
+  hostname: 
+  path: 
+  locale: 
+  is_mirrored: false

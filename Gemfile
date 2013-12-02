@@ -5,7 +5,10 @@ gem 'rails', '3.2.13'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
+#not used, but is nice to have for running light db tests
 gem 'sqlite3'
+
+#main db interface
 gem 'mysql2'
 
 # Gems used only for assets and not required
@@ -22,8 +25,8 @@ end
 
 gem 'jquery-rails'
 
-# To use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.0.0'
+To use ActiveModel has_secure_password
+gem 'bcrypt-ruby', '~> 3.0.0'
 
 # To use Jbuilder templates for JSON
 # gem 'jbuilder'
@@ -37,18 +40,32 @@ gem 'jquery-rails'
 # To use debugger
 # gem 'debugger'
 
+#more robust rails server solution than webrick
 gem 'passenger'
 
-gem 'bcrypt-ruby', '~> 3.0.0'
-
+#better forms
 gem 'simple_form'
 
+#more options than mass-assignment and db-side assignment
 gem 'strong_parameters'
 
-#gem 'watu_table_builder', :require => "table_builder"
-
+#exports seeds from the current db state
 gem "seed_dump", "~> 0.5.3"
 
+#image attachment functionality
 gem 'paperclip', "~>3.0"
 
+#required for paperclip
 gem 'rmagick', '2.13.2'
+
+#cms module
+gem 'comfortable_mexican_sofa', '~> 1.8.2'
+
+#more flexible authentication system than auth from scratch
+gem 'devise'
+
+#authorization library
+gem 'cancan'
+
+#roles library
+gem 'rolify'

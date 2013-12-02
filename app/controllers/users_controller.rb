@@ -39,11 +39,17 @@ class UsersController < ApplicationController
         if @user.isFacultyUser
           @userFacultyUser = FacultyUser.new
           @userFacultyUser.update_attributes(:userID => @user.id, :facultyProfileID => @user.id)
-          @userFacultyProfile = FacultyProfile.new
-          @userFacultyProfile.update_attributes(:id => @user.id, :permalink => "#{@user.lastName}_#{@user.firstName}")
+          #@userFacultyProfile = FacultyProfile.new
+          #@userFacultyProfile.update_attributes(:id => @user.id, :permalink => "#{@user.lastName}_#{@user.firstName}")
+
+          @facultySite = Cms_Site.new do |u|
+            u.label = "#{@user.firstName} #{@user.lastName}"
+            u.path = "/faculty/#{@user.lastName}_#{@user.firstName}"
+          end
+
           redirect_to root_url, :notice => "User has been added successfully."
         else
-        redirect_to root_url, :notice => "User has been added successfully."
+          redirect_to root_url, :notice => "User has been added successfully."
         end
       else
         format.html { render action: 'new' }
