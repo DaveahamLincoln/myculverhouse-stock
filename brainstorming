@@ -1,0 +1,36 @@
+Connect all users
+Common platform
+Not facebook
+Not linkedin
+Not G+
+Not Twitter
+Not about superficial connections (no statuses) but about communication and network development
+
+So why not a listserv?
+
+Wiki (Perwikity,Gollum,Git-wiki)
++ listserv? (lamson)
+listserv bounces watchlist notifications
+async push notifications (faye)
+live chat (faye)
+templating
+messaging (mailboxer 0.10.x)
+
+listserv "nodes" for alumni reps + companies + faculty/staff
+"nodes" have homepages, almost like a guild type idea
+loosely organized, low-impact
+people get out what they put in
+
+orphaned pages time out after n months?
+
+page < node < home node < cluster < 'verse
+
+Hearth?
+Chase? - too aggressive
+Spark?
+Spur?
+Wend?
+
+TinType
+
+Basically, the idea here is that we've got a sort of wild-west with a lot of functionality just available for people to come up and claim.  we can really see where the usage trends are.  On the one hand, even though we're planning on making this as easy as possible by integrating it with myCulverhouse, it's still going to be at best a homebrew solution which is going to have trouble competing with the actual social networking sites out there.  So the point becomes not about finding the end all be all gem to do this for me but rather a combination of gems to get the job done in an adequate and eneteraining enough manner without breaking the bank.

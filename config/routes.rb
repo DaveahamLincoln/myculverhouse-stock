@@ -50,7 +50,8 @@ MyculverhouseStock::Application.routes.draw do
 
   resources :users
 
-  resources :faculty_profiles
+  #Managed CMS hook.
+  #resources :faculty_profiles
 
   get "login" => 'login#new'
   post "login" => 'login#create'
@@ -63,7 +64,8 @@ MyculverhouseStock::Application.routes.draw do
   get "/password_reset" => 'password_resets#new'
   get "/password_resets/:id/edit" => 'password_resets#edit'
 
-  get "/faculty/:permalink", :controller => 'faculty_profiles', :action => :show
+  #Managed CMS hook.  
+  #get "/faculty/:permalink", :controller => 'faculty_profiles', :action => :show
 
   post "/action_items/:id" => "action_items#approve"
 
@@ -72,6 +74,11 @@ MyculverhouseStock::Application.routes.draw do
 
   get "/news" => "news#index"
   post "/news" => "news#index"
+
+  ComfortableMexicanSofa::Routing.admin(:path => '/cms-admin')
+  
+  # Make sure this routeset is defined last
+  ComfortableMexicanSofa::Routing.content(:path => '/brake/', :sitemap => false)
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

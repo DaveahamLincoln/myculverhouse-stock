@@ -52,3 +52,5 @@ gem "seed_dump", "~> 0.5.3"
 gem 'paperclip', "~>3.0"
 
 gem 'rmagick', '2.13.2'
+
+gem 'comfortable_mexican_sofa', '~>1.8.0'

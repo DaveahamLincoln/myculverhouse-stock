@@ -14,7 +14,7 @@
   <%if current_user.godBit or current_user.isSuperUser %>
     <div class="field">
       <%= f.label "Faculty Member:" %>
-      <%= f.collection_select(:facultyUserID, FacultyUser.all, :id, :formal_name, :include_blank => true) %>
+      <%= f.collection_select(:facultyUserID, User.where(:isFacultyUser => true), :id, :formal_name, :include_blank => true) %>
     </div>
   <%else%>
     <div class="field">

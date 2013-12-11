@@ -5,9 +5,8 @@ class PublicationsController < ApplicationController
   # GET /publications.json
   def index
     if current_user.isFacultyUser
-      @faculty_user = FacultyUser.find_by_userID(current_user.id)
       @publications = Publication.where(:facultyUserID == @faculty_user.id)
-    elsif current_user.godBit
+    elsif current_user.godBit or current_user.isCommunicationsUser
       @publications = Publication.all
     else
       @publications = Publication.none
@@ -35,7 +34,7 @@ class PublicationsController < ApplicationController
   def new
     @publication = Publication.new
     if current_user.isFacultyUser
-      @faculty_user = FacultyUser.find_by_userID(current_user.id)
+      @faculty_user = User.find(current_user.id)
     end
 
     respond_to do |format|

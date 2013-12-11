@@ -18,6 +18,15 @@ class UsersController < ApplicationController
   def edit_permissions
     @user = User.find(params[:id])
   end
+
+  def show
+    @user = User.find(params[:id])
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @user }
+    end
+  end
   
   def create
     #I have no idea what this business about strong parameters is.
@@ -34,32 +43,43 @@ class UsersController < ApplicationController
     # Completed 200 OK in 13ms (Views: 9.5ms | ActiveRecord: 0.1ms)
 
     @user = User.new(params[:user])
+      
+      #if @user.save
+          #if @user.isFacultyUser
+          #@userFacultyUser = FacultyUser.new
+          #@userFacultyUser.update_attributes(:userID => @user.id, :facultyProfileID => @user.id)
+          
+          #If we ever decide to go back to a managed CMS, the magic happens here.
+
+          #Profile method
+          #@userFacultyProfile = FacultyProfile.new
+          #@userFacultyProfile.update_attributes(:id => @user.id, :permalink => "#{@user.lastName}_#{@user.firstName}")
+          
+          #CMS method
+          #ComfortableMexicanSofa::CmsAdmin::SitesController.crafty_create('/faculty/#{@user.lastName}_#{@user.firstName}','#{@user.firstName} #{@user.lastName}')
     respond_to do |format|
       if @user.save
-        if @user.isFacultyUser
-          @userFacultyUser = FacultyUser.new
-          @userFacultyUser.update_attributes(:userID => @user.id, :facultyProfileID => @user.id)
-          @userFacultyProfile = FacultyProfile.new
-          @userFacultyProfile.update_attributes(:id => @user.id, :permalink => "#{@user.lastName}_#{@user.firstName}")
-          redirect_to root_url, :notice => "User has been added successfully."
-        else
-        redirect_to root_url, :notice => "User has been added successfully."
-        end
+        format.html { redirect_to @user, notice: 'User was successfully created.' }
+        format.json { render json: @user, status: :created, location: @user }
       else
-        format.html { render action: 'new' }
+        format.html { render action: "new" }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
   end
 
   def destroy
     @user = User.find(params[:id])
-    if @user.isFacultyUser
-      @userFacultyUser = FacultyUser.where(userID: @user.id).first
-      @userFacultyProfile = FacultyProfile.find(@userFacultyUser.facultyProfileID)
+    
+    #Required for Managed CMS
+    #if @user.isFacultyUser
+      #@userFacultyUser = FacultyUser.where(userID: @user.id).first
+      #@userFacultyProfile = FacultyProfile.find(@userFacultyUser.facultyProfileID)
 
-      @userFacultyProfile.destroy
-      @userFacultyUser.destroy
-    end
+      #@userFacultyProfile.destroy
+      #@userFacultyUser.destroy
+    #end
+
     @user.destroy
 
     respond_to do |format|
