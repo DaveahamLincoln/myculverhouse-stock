@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131219193907) do
+ActiveRecord::Schema.define(:version => 20131219194600) do
 
   create_table "action_items", :force => true do |t|
     t.integer  "createdByID"
@@ -67,13 +67,6 @@ ActiveRecord::Schema.define(:version => 20131219193907) do
     t.text     "publicationText"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
-  end
-
-  create_table "user_pictures", :force => true do |t|
-    t.integer  "userID"
-    t.string   "picturePath"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
   end
 
   create_table "users", :force => true do |t|
