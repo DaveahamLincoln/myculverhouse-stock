@@ -16,6 +16,8 @@
     <td><%= User.find(action_item.createdByID).formal_name %></td>
     <td><%= action_item.itemType %></td>
     
+    <%#TODO! Fix this relation so that it returns unique titles for each record.%>
+
     <%if action_item.itemType == "news"%>
       <td><%= NewsItem.where(:actionItemID == action_item.id).first.newsText %>
     <%elsif action_item.itemType == "calendar"%>

@@ -19,10 +19,12 @@
   <b>Publications:</b>
 </p>
 
-<% @publications.each do |publication| %>
-  <p>
-    <%= publication.publicationText %>
-  </p>
+<%if @publications%>
+  <% @publications.each do |publication| %>
+    <p>
+      <%= publication.publicationText %>
+    </p>
+  <%end%>
 <%end%>
 
 <p>

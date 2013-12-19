@@ -1,5 +1,5 @@
 class CalendarItemsController < ApplicationController
-  before_filter :set_calendar_item, only: [:show, :edit, :update, :new, :destroy]
+  before_filter :set_calendar_item, only: [:show, :edit, :update, :destroy]
   before_filter :check_your_privilege, only: [:index, :new, :edit, :create, :update, :destroy]
 
   # GET /calendar_items
