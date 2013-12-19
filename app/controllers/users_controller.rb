@@ -41,9 +41,9 @@ class UsersController < ApplicationController
           @userFacultyUser.update_attributes(:userID => @user.id, :facultyProfileID => @user.id, :userPictureID => @user.id)
           @userFacultyProfile = FacultyProfile.new
           @userFacultyProfile.update_attributes(:id => @user.id, :permalink => "#{@user.lastName}_#{@user.firstName}")
-          redirect_to root_url, :notice => "User has been added successfully."
+          format.html { redirect_to @user, :notice => "User has been added successfully." }
         else
-        redirect_to root_url, :notice => "User has been added successfully."
+          format.html { redirect_to @user, :notice => "User has been added successfully." }
         end
       else
         format.html { render action: 'new' }
@@ -66,6 +66,10 @@ class UsersController < ApplicationController
       format.html { redirect_to users_url }
       format.json { head :no_content }
     end
+  end
+
+  def show
+    @user = User.find(params[:id])
   end
 
   private

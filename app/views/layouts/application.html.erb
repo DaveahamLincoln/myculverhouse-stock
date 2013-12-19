@@ -9,6 +9,10 @@
 
 <h1>myCulverhouse.ua.edu</h1>
 
+<table>
+<tr>
+<td>
+
 <%if current_user.blank? %>
 	<%= link_to '| Login to the Tech Site |','/login',:method => :new %> <%= link_to '| Master Calendar |','/calendar',:method => :index %> <%= link_to '| News |','/news',:method => :index %>
 <%else%>
@@ -40,6 +44,12 @@
 <p>
 <% unless current_user.blank? %>Welcome, <%=current_user.firstName%>. <%= link_to 'Logout', '/logout', :method => :delete -%>
 </p>
+
+</td>
+</tr>
+</table>
+
+<p id="notice"><%= notice %></p>
 
 <% end -%>  
 

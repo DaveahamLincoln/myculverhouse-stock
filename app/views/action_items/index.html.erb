@@ -1,9 +1,10 @@
-<h1>Listing action_items</h1>
+<h2>Listing Action Items</h2>
 
 <table>
   <tr>
     <th>Created By:</th>
     <th>Item Type:</th>
+    <th>Item Title:</th>
     <th>Item Text:</th>
     <th>Item Date:</th>
     <th>Approval Status:</th>
@@ -15,19 +16,19 @@
   <tr>
     <td><%= User.find(action_item.createdByID).formal_name %></td>
     <td><%= action_item.itemType %></td>
-    
-    <%#TODO! Fix this relation so that it returns unique titles for each record.%>
 
     <%if action_item.itemType == "news"%>
-      <td><%= NewsItem.where(:actionItemID == action_item.id).first.newsText %>
+      <td><%= NewsItem.find_by_actionItemID(action_item.id).title %></td>
+      <td><%= NewsItem.find_by_actionItemID(action_item.id).newsText %></td>
     <%elsif action_item.itemType == "calendar"%>
-      <td><%= CalendarItem.where(:actionItemID == action_item.id).first.calendarText %>
+      <td><%= CalendarItem.find_by_actionItemID(action_item.id).title %></td>
+      <td><%= CalendarItem.find_by_actionItemID(action_item.id).calendarText %></td>
     <%end%>
 
     <%if action_item.itemType == "news"%>
-      <td><%= NewsItem.where(:actionItemID == action_item.id).first.created_at %>
+      <td><%= NewsItem.where(:actionItemID == action_item.id).first.created_at %></td>
     <%elsif action_item.itemType == "calendar"%>
-      <td><%= CalendarItem.where(:actionItemID == action_item.id).first.calendarDate %>
+      <td><%= CalendarItem.where(:actionItemID == action_item.id).first.calendarDate %></td>
     <%end%>    
     
     <td><%= action_item.isApproved %></td>
