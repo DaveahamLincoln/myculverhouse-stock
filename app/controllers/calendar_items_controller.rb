@@ -1,5 +1,5 @@
 class CalendarItemsController < ApplicationController
-  before_filter :set_calendar_item, only: [:show, :edit, :update, :new, :destroy]
+  before_filter :set_calendar_item, only: [:show, :edit, :update, :destroy]
   before_filter :check_your_privilege, only: [:index, :new, :edit, :create, :update, :destroy]
 
   # GET /calendar_items
@@ -25,8 +25,8 @@ class CalendarItemsController < ApplicationController
   def create
     @calendar_item = CalendarItem.new(calendar_item_params)
     @action_item = ActionItem.new
-    @action_item.update_attributes(:createdByID => current_user.id, :isApproved => false, :itemType => "calendar")
-    @calendar_item.update_attributes(:actionItemID => @action_item.id)
+    @action_item.update_attributes(createdByID: current_user.id, isApproved: false, itemType: "calendar")
+    @calendar_item.update_attributes(actionItemID: @action_item.id)
 
     if @calendar_item.save
       redirect_to @calendar_item, notice: 'Calendar item was successfully created.'

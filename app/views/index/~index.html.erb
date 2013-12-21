@@ -1,0 +1,29 @@
+<h1>myCulverhouse.ua.edu</h1>
+
+<%if current_user.blank? %>
+	<%= link_to '| Login to the Tech Site |','/login',:method => :new %> <%= link_to '| Master Calendar |','/calendar',:method => :index %> <%= link_to '| News |','/news',:method => :index %>
+<%else%>
+
+	<%if current_user.isFacultyUser %>
+		<%= link_to '| Edit my Profile |',"/faculty/#{current_user.lastName}_#{current_user.firstName}"%> <%= link_to '| Edit my Publications |','/publications', :method => :get %> 
+	<%end%>
+
+	<%if current_user.isFacultyUser or current_user.godBit %>
+		<%= link_to '| Submit a Calendar Item |','/calendar_items/new', :method => :get %>  <%= link_to '| Submit a News Item |','/news_items/new', :method => :get %>
+	<%end%>
+
+	<%if current_user.isCommunicationsUser or current_user.godBit%>
+		<%= link_to '| Approve Action Items |','/action_items', :method => :get %> 
+	<%end%>
+
+
+	<%if current_user.isSuperUser or current_user.godBit%>
+		<%= link_to '| Add User |','/users/new',:method => :get %> <%= link_to '| Edit/Remove User |','/users', :method => :get %> <%= link_to '| Edit Profiles |','/faculty_profiles', :method => :get %> <%= link_to '| Edit Publications |','/publications', :method => :get %>
+	<%end%>
+
+
+	<%if current_user.isSuperUser or current_user.godBit or current_user.isFacultyUser or current_user.isCommunicationsUser or current_user.isGenericUser%>
+		<%= link_to '| Master Calendar |','/calendar',:method => :index %> <%= link_to '| News |','/news',:method => :index %>
+	<%end%>
+
+<%end%>
