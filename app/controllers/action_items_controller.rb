@@ -102,11 +102,11 @@ class ActionItemsController < ApplicationController
       @action_item=ActionItem.find(params[:id])
       if @action_item.isApproved
         @action_item.update_attributes(:isApproved => 0)
-        format.html { redirect_to :action => 'index', notice: 'Item has been unapproved successfully.' }
+        format.html { redirect_to action: 'index', notice: 'Item has been unapproved successfully.' }
         format.json { head :no_content }
       else
         @action_item.update_attributes(:isApproved => 1)
-        format.html { redirect_to :action => 'index', notice: 'Item has been approved successfully.' }
+        format.html { redirect_to action: 'index', notice: 'Item has been approved successfully.' }
         format.json { head :no_content }
       end
     end

@@ -38,12 +38,12 @@ class UsersController < ApplicationController
       if @user.save
         if @user.isFacultyUser
           @userFacultyUser = FacultyUser.new
-          @userFacultyUser.update_attributes(:userID => @user.id, :facultyProfileID => @user.id, :userPictureID => @user.id)
+          @userFacultyUser.update_attributes(userID: @user.id, facultyProfileID: @user.id, userPictureID: @user.id)
           @userFacultyProfile = FacultyProfile.new
-          @userFacultyProfile.update_attributes(:id => @user.id, :permalink => "#{@user.lastName}_#{@user.firstName}")
-          format.html { redirect_to @user, :notice => "User has been added successfully." }
+          @userFacultyProfile.update_attributes(id: @user.id, permalink: "#{@user.lastName}_#{@user.firstName}")
+          format.html { redirect_to @user, notice: "User has been added successfully." }
         else
-          format.html { redirect_to @user, :notice => "User has been added successfully." }
+          format.html { redirect_to @user, notice: "User has been added successfully." }
         end
       else
         format.html { render action: 'new' }

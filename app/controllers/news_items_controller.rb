@@ -25,8 +25,8 @@ class NewsItemsController < ApplicationController
   def create
     @news_item = NewsItem.new(news_item_params)
     @action_item = ActionItem.new
-    @action_item.update_attributes(:createdByID => current_user.id, :isApproved => false, :itemType => "news")
-    @news_item.update_attributes(:actionItemID => @action_item.id)
+    @action_item.update_attributes(createdByID: current_user.id, isApproved: false, itemType: "news")
+    @news_item.update_attributes(actionItemID: @action_item.id)
 
     if @news_item.save
       redirect_to @news_item, notice: 'News item was successfully created.'

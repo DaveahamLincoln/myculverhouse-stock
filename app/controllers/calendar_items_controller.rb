@@ -25,8 +25,8 @@ class CalendarItemsController < ApplicationController
   def create
     @calendar_item = CalendarItem.new(calendar_item_params)
     @action_item = ActionItem.new
-    @action_item.update_attributes(:createdByID => current_user.id, :isApproved => false, :itemType => "calendar")
-    @calendar_item.update_attributes(:actionItemID => @action_item.id)
+    @action_item.update_attributes(createdByID: current_user.id, isApproved: false, itemType: "calendar")
+    @calendar_item.update_attributes(actionItemID: @action_item.id)
 
     if @calendar_item.save
       redirect_to @calendar_item, notice: 'Calendar item was successfully created.'
