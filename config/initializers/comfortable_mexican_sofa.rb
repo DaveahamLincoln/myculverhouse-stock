@@ -6,7 +6,7 @@ ComfortableMexicanSofa.configure do |config|
   
   # Module responsible for authentication. You can replace it with your own.
   # It simply needs to have #authenticate method. See http_auth.rb for reference.
-  #   config.admin_auth = 'ComfortableMexicanSofa::HttpAuth'
+    config.admin_auth = 'CmsScratchAuth'
   
   # Module responsible for public authentication. Similar to the above. You also
   # will have access to @cms_site, @cms_layout, @cms_page so you can use them in
@@ -84,7 +84,15 @@ ComfortableMexicanSofa.configure do |config|
   # e.g. config.hostname_aliases = {'host.com' => 'host.inv', 'host_a.com' => ['host.lvh.me', 'host.dev']}
   # Default is nil (not used)
   #   config.hostname_aliases = nil
-  
+
+  module CmsScratchAuth
+    def authenticate
+      unless current_user.isSuperUser or current_user.godBit or current_user.isCommunicationsUser
+        redirect_to(:back)
+      end
+    end
+  end
+
 end
 
 # Default credentials for ComfortableMexicanSofa::HttpAuth

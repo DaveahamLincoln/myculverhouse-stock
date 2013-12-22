@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
   
+require'socket'
+
   #Comment to access the /users/new page as an anonymous user
   before_filter :check_your_privilege
 
@@ -33,14 +35,29 @@ class UsersController < ApplicationController
       #   Rendered users/new.html.erb within layouts/application (3.1ms)
     # Completed 200 OK in 13ms (Views: 9.5ms | ActiveRecord: 0.1ms)
 
+    s2 = Cms::Site.new(
+      :identifier => 'test',
+      :hostname => s1.hostname,
+      :path => s1.path
+    )
+
+
     @user = User.new(params[:user])
     respond_to do |format|
       if @user.save
         if @user.isFacultyUser
           @userFacultyUser = FacultyUser.new
           @userFacultyUser.update_attributes(userID: @user.id, facultyProfileID: @user.id, userPictureID: @user.id)
-          @userFacultyProfile = FacultyProfile.new
-          @userFacultyProfile.update_attributes(id: @user.id, permalink: "#{@user.lastName}_#{@user.firstName}")
+          
+          #@userFacultyProfile = FacultyProfile.new
+          #@userFacultyProfile.update_attributes(id: @user.id, permalink: "#{@user.lastName}_#{@user.firstName}")
+          
+          @userFacultySite = Cms::Site.new(
+            :identifier => '#{user.lastName}_#{user.firstName}',
+            :hostname => Socket.gethostname,
+            :path => '/faculty'
+            )
+
           format.html { redirect_to @user, notice: "User has been added successfully." }
         else
           format.html { redirect_to @user, notice: "User has been added successfully." }

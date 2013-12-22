@@ -1,7 +1,9 @@
 class User < ActiveRecord::Base
 	#Automatically checks to see if :password is present, so we don't need to validate it below.
 	has_secure_password
-	has_attached_file :avatar, :styles => { :medium =>"300x300>", :thumb => "100x100>", :default_url => "/images/:style/missing.png" }
+	
+	#For Paperclip
+	#has_attached_file :avatar, :styles => { :medium =>"300x300>", :thumb => "100x100>", :default_url => "/images/:style/missing.png" }
 
 	#Sets the required fields for creating a new User object.
 	#:phone
