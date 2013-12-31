@@ -35,13 +35,6 @@ require'socket'
       #   Rendered users/new.html.erb within layouts/application (3.1ms)
     # Completed 200 OK in 13ms (Views: 9.5ms | ActiveRecord: 0.1ms)
 
-    s2 = Cms::Site.new(
-      :identifier => 'test',
-      :hostname => s1.hostname,
-      :path => s1.path
-    )
-
-
     @user = User.new(params[:user])
     respond_to do |format|
       if @user.save
@@ -49,14 +42,39 @@ require'socket'
           @userFacultyUser = FacultyUser.new
           @userFacultyUser.update_attributes(userID: @user.id, facultyProfileID: @user.id, userPictureID: @user.id)
           
-          #@userFacultyProfile = FacultyProfile.new
-          #@userFacultyProfile.update_attributes(id: @user.id, permalink: "#{@user.lastName}_#{@user.firstName}")
+          #Alright, this works by creating a FacultyProfile object which can be manipulated through the FacultyProfiles Controller
+          #Provides micro-cms functionality for use as a stopgap if I can't get Comfy working alongside myCulverhouse
+          #
+          @userFacultyProfile = FacultyProfile.new
+          @userFacultyProfile.update_attributes(id: @user.id, permalink: "/faculty/#{@user.lastName}_#{@user.firstName}")
           
-          @userFacultySite = Cms::Site.new(
-            :identifier => '#{user.lastName}_#{user.firstName}',
-            :hostname => Socket.gethostname,
-            :path => '/faculty'
+          #According to Oleg at Comfy, I can use this to create a new Comfy-site for each faculty user.
+          #
+          @userFacultySite = Cms::Site.new
+          @userFacultySite.update_attributes(
+            #binds faculty sites to easy-to-remember mnemonics.
+            :identifier => "#{@user.lastName}_#{@user.firstName}",
+            #pulls the hostname for the parent site
+            :hostname => 'localhost:3000',
+            #sets the root path for the new ste to /faculty.  There is no actual /faculty route, but it provides an easy mnemonic
+            #GET "/faculty" should be mapped to a static page that links to all sites created in this manner.
+            #something like Cms::Site.all.each do |site|
+            #    if site.path == '/faculty'
+            #    '''show a link to the site'''
+            :path => "faculty/#{@user.lastName}_#{@user.firstName}"
             )
+          @userFacultySite.save!
+          @userFacultyUser.update_attributes(:cms_site_id => @userFacultySite.id)
+
+=begin
+          #might need this at a later date
+          @userFacultyPage = cms_sites(@userFacultySite.id)
+          @userFacultyPage.update_attributes(
+            :slug => 'profiile'
+            :layout => cms_layouts(:default)
+            )
+          @userFacultyPage.save!
+=end
 
           format.html { redirect_to @user, notice: "User has been added successfully." }
         else

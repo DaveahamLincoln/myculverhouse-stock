@@ -76,10 +76,10 @@ MyculverhouseStock::Application.routes.draw do
   get "/news" => "news#index"
   post "/news" => "news#index"
 
-  ComfortableMexicanSofa::Routing.admin(:path => '/shard/admin')
+  ComfortableMexicanSofa::Routing.admin(:path => '/cms_admin')
   
   # Make sure this routeset is defined last
-  ComfortableMexicanSofa::Routing.content(:path => '/shard/', :sitemap => false)
+  ComfortableMexicanSofa::Routing.content(:path => '/', :sitemap => false)
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

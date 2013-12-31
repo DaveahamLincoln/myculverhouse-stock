@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131219194600) do
+ActiveRecord::Schema.define(:version => 20131231034749) do
 
   create_table "action_items", :force => true do |t|
     t.integer  "createdByID"
@@ -151,6 +151,24 @@ ActiveRecord::Schema.define(:version => 20131219194600) do
     t.integer  "userID"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "faculty_profiles", :force => true do |t|
+    t.text     "currentResearch"
+    t.text     "eduction"
+    t.text     "honors"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+    t.string   "permalink"
+  end
+
+  create_table "faculty_users", :force => true do |t|
+    t.integer  "userID"
+    t.integer  "facultyProfileID"
+    t.integer  "userPictureID"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+    t.integer  "cms_site_id"
   end
 
   create_table "news_items", :force => true do |t|
