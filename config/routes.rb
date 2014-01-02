@@ -6,45 +6,12 @@ MyculverhouseStock::Application.routes.draw do
 
   root to: 'index#index'
 
-  get "department_admin_actions/updateFacultyProfile"
-
-  get "department_admin_actions/updateUserPicture"
-
-  get "department_admin_actions/updatePublication"
-
-  get "department_admin_actions/addUser"
-
-  get "department_admin_actions/submitProfileForDeletion"
-
-  get "department_admin_actions/createFacultyUser"
-
-  get "college_admin_actions/updateFacultyProfile"
-
-  get "college_admin_actions/updateUserPicture"
-
-  get "college_admin_actions/updatePublication"
-
-  get "college_admin_actions/addUser"
-
-  get "college_admin_actions/submitProfileForDeletion"
-
-  get "college_admin_actions/createFacultyUser"
-
-  get "college_admin_actions/deleteFacultyUser"
-
-  get "college_admin_actions/createDepartmentAdmin"
-
-  get "college_admin_actions/deleteDepartmentAdmin"
-
-  get "college_admin_actions/editUser"
-
-  get "college_admin_actions/deleteFacultyProfile"
-
   get "password_resets/new" 
   
   resources :publications
 
   resources :user_pictures
+
   resources :calendar_items
 
   resources :news_items
@@ -65,9 +32,6 @@ MyculverhouseStock::Application.routes.draw do
   get "/password_reset" => 'password_resets#new'
   get "/password_resets/:id/edit" => 'password_resets#edit'
 
-  #Managed CMS hook.  
-  #get "/faculty/:permalink", :controller => 'faculty_profiles', :action => :show
-
   post "/action_items/:id" => "action_items#approve"
 
   get "/calendar" => "master_calendar#index"
@@ -76,9 +40,14 @@ MyculverhouseStock::Application.routes.draw do
   get "/news" => "news#index"
   post "/news" => "news#index"
 
+  get "/faculty" => "faculty#index"
+  post "/faculty" => "faculty#index"
+
+  # Binds CMS admin path to /cms_admin
   ComfortableMexicanSofa::Routing.admin(:path => '/cms_admin')
   
   # Make sure this routeset is defined last
+  # Allows CMS content to propagate from '/'
   ComfortableMexicanSofa::Routing.content(:path => '/', :sitemap => false)
 
   # The priority is based upon order of creation:

@@ -16,11 +16,11 @@
 <td>
 
 <%if current_user.blank? %>
-	<%= link_to '| Login to the Tech Site |','/login', method: :new %> <%= link_to '| Master Calendar |','/calendar',method: :index %> <%= link_to '| News |','/news',method: :index %>
+	<%= link_to '| Login to the Tech Site |','/login', method: :new %> <%= link_to '| Master Calendar |','/calendar',method: :index %> <%= link_to '| News |','/news',method: :index %> <%= link_to '| Faculty Index |','/faculty',method: :index %>
 <%else%>
 
 	<%if current_user.isFacultyUser %>
-		<%= link_to '| Edit my Profile |',"/faculty/#{current_user.lastName}_#{current_user.firstName}"%> <%= link_to '| Edit my Publications |','/publications', method: :get %> 
+		<%= link_to '| Edit my Profile |',"/faculty/#{current_user.lastName}_#{current_user.firstName}"%> <%= link_to '| Edit my Publications |','/publications', method: :get %>  
 	<%end%>
 
 	<%if current_user.isFacultyUser or current_user.godBit %>
@@ -38,7 +38,7 @@
 
 
 	<%if current_user.isSuperUser or current_user.godBit or current_user.isFacultyUser or current_user.isCommunicationsUser or current_user.isGenericUser%>
-		<%= link_to '| Master Calendar |','/calendar',method: :index %> <%= link_to '| News |','/news',method: :index %>
+		<%= link_to '| Master Calendar |','/calendar',method: :index %> <%= link_to '| News |','/news',method: :index %> <%= link_to '| Faculty Index |','/faculty',method: :index %>
 	<%end%>
 
 <%end%>

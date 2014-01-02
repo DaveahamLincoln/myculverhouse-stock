@@ -86,9 +86,15 @@ ComfortableMexicanSofa.configure do |config|
   #   config.hostname_aliases = nil
 
   module CmsScratchAuth
+    #this isn't very good. at all. whatsoever.
     def authenticate
-      unless current_user.isSuperUser or current_user.godBit or current_user.isCommunicationsUser
-        redirect_to(:back)
+      if current_user.blank?
+        #change to correct route when deployed
+        redirect_to('http://0.0.0.0:3000/login')
+      else
+        unless current_user.isSuperUser or current_user.godBit or current_user.isCommunicationsUser
+          redirect_to(:root)
+        end
       end
     end
   end
@@ -97,8 +103,8 @@ end
 
 # Default credentials for ComfortableMexicanSofa::HttpAuth
 # YOU REALLY WANT TO CHANGE THIS BEFORE PUTTING YOUR SITE LIVE
-ComfortableMexicanSofa::HttpAuth.username = 'username'
-ComfortableMexicanSofa::HttpAuth.password = 'password'
+# ComfortableMexicanSofa::HttpAuth.username = 'username'
+# ComfortableMexicanSofa::HttpAuth.password = 'password'
 
 # If you need to inject some html in cms admin views you can define what partial
 # should be rendered into the following areas:

@@ -1,0 +1,25 @@
+<h2>Faculty Index</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Last Name</th>
+      <th>First Name</th>
+      <th>Email</th>
+      <th>Personal Site</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @faculty.each do |faculty| %>
+      <tr>
+        <td><%= faculty.lastName %></td>
+        <td><%= faculty.firstName %></td>
+        <td><%= faculty.email %></td>
+        <td><%= link_to("Personal Site",Cms::Site.find(FacultyUser.find_by_userID(faculty.id).cms_site_id).path) %></td>
+      </tr>
+      <%end%>
+  </tbody>
+</table>
+
+<br>
