@@ -49,8 +49,16 @@ gem 'strong_parameters'
 
 gem "seed_dump", "~> 0.5.3"
 
-gem 'paperclip', "~>3.0"
+#gem 'paperclip', "~>3.0"
 
 gem 'rmagick', '2.13.2'
 
+#Official Release
 gem 'comfortable_mexican_sofa', '~>1.8.0'
+
+#Forge
+#no idea why this doesn't work when the gem is at vendor/plugins/comfy
+#gem 'comfortable_mexican_sofa', '~>1.8.0', :path => "vendor/plugins/comfy"
+
+#Should allow me to extend Comfy's controllers without having to rewrite the gem.
+gem 'mixable_engines'

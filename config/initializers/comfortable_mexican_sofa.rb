@@ -94,6 +94,13 @@ ComfortableMexicanSofa.configure do |config|
       else
         unless current_user.isSuperUser or current_user.godBit or current_user.isCommunicationsUser or current_user.isFacultyUser
           redirect_to(:root)
+        #else 
+          #if current_user.isFacultyUser
+          #  @site_id = FacultyUser.find_by_userID(current_user.id).cms_site_id
+          #  redirect_to('http://0.0.0.0:3000/cms_admin/sites/#{@site_id}/edit')
+          #else 
+          #  redirect_to('http://0.0.0.0:3000/cms_admin/sites/')
+        #  end
         end
       end
     end
