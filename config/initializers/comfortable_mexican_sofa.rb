@@ -92,7 +92,7 @@ ComfortableMexicanSofa.configure do |config|
         #change to correct route when deployed
         redirect_to('http://0.0.0.0:3000/login')
       else
-        unless current_user.isSuperUser or current_user.godBit or current_user.isCommunicationsUser
+        unless current_user.isSuperUser or current_user.godBit or current_user.isCommunicationsUser or current_user.isFacultyUser
           redirect_to(:root)
         end
       end
