@@ -45,7 +45,7 @@ gem 'simple_form'
 
 gem 'strong_parameters'
 
-#gem 'watu_table_builder', :require => "table_builder"
+gem 'watu_table_builder', :require => "table_builder"
 
 gem "seed_dump", "~> 0.5.3"
 

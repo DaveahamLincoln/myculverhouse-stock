@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131231034749) do
+ActiveRecord::Schema.define(:version => 20140109180331) do
 
   create_table "action_items", :force => true do |t|
     t.integer  "createdByID"
@@ -155,7 +155,7 @@ ActiveRecord::Schema.define(:version => 20131231034749) do
 
   create_table "faculty_profiles", :force => true do |t|
     t.text     "currentResearch"
-    t.text     "eduction"
+    t.text     "education"
     t.text     "honors"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false

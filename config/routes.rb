@@ -1,8 +1,6 @@
 MyculverhouseStock::Application.routes.draw do
 
-
   resources :action_items
-
 
   root to: 'index#index'
 
@@ -18,7 +16,7 @@ MyculverhouseStock::Application.routes.draw do
 
   resources :users
 
-  #Managed CMS hook.
+  #Managed CMS hook.  Uncomment to reenable.
   #resources :faculty_profiles
 
   get "login" => 'login#new'

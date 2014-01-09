@@ -73,7 +73,7 @@ require'socket'
           #might need this at a later date
           @userFacultyPage = cms_sites(@userFacultySite.id)
           @userFacultyPage.update_attributes(
-            :slug => 'profiile'
+            :slug => 'profile'
             :layout => cms_layouts(:default)
             )
           @userFacultyPage.save!
