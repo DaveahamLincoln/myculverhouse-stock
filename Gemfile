@@ -62,3 +62,6 @@ gem 'comfortable_mexican_sofa', '~>1.8.0'
 
 #Should allow me to extend Comfy's controllers without having to rewrite the gem.
 gem 'mixable_engines'
+
+#Jekyll blog engine
+gem 'bloggy'
