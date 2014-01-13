@@ -6,7 +6,7 @@
     <% @action_items.each do |action_item| %>
       <% if action_item.isApproved %>
         <% if news_item.actionItemID == action_item.id %>
-          <li><%= link_to h(news_item.title), news_item %></li>
+          <%= link_to (news_item.title), news_item %>
         <%end%>
       <%end%>
     <%end%>
