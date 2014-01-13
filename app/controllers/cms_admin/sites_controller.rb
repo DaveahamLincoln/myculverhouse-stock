@@ -2,6 +2,7 @@ class CmsAdmin::SitesController < CmsAdmin::BaseController
   #mixable_engine extension for ComfortableMexicanSofa
 
   #Fires to prevent faculty users from accessing the /sites root
+  #May need to broaden the scope of this filter.
   before_filter :check_your_privilege, only: [:index]
 
   private
