@@ -3,7 +3,7 @@ class UsersController < ApplicationController
 require'socket'
 
   #Comment to access the /users/new page as an anonymous user
-  before_filter :check_your_privilege
+  before_filter :check_your_privilege 
 
   def index
     @users = User.all

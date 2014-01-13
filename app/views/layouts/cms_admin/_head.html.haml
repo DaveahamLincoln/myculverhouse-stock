@@ -1,0 +1,52 @@
+!!!
+%html
+  %head
+    %title MyculverhouseStock
+    = stylesheet_link_tag    "application", :media => "all"
+    = javascript_include_tag "application"
+    = csrf_meta_tags
+  %body
+    %h1 myCulverhouse.ua.edu
+    %p#notice= notice
+    %table
+      %tr
+        %td
+          - if current_user.blank?
+            = link_to '| Login to myCulverhouse |','/login', method: :new
+            = link_to '| Master Calendar |','/calendar',method: :index
+            = link_to '| News |','/news',method: :index
+            = link_to '| Faculty Index |','/faculty',method: :index
+          - else
+            - if current_user.isFacultyUser
+              - if FacultyUser.find_by_userID(current_user.id).cms_site_enabled
+                = link_to '| Edit my Site |',"/cms_admin"
+            - if current_user.isFacultyUser
+              = link_to '| Edit my Publications |','/publications', method: :get
+            - if current_user.isFacultyUser or current_user.godBit
+              = link_to '| Submit a Calendar Item |','/calendar_items/new', method: :get
+              = link_to '| Submit a News Item |','/news_items/new', method: :get
+            - if current_user.isCommunicationsUser or current_user.godBit
+              = link_to '| Approve Action Items |','/action_items', method: :get
+            - if current_user.isSuperUser or current_user.godBit
+              = link_to '| Add User |','/users/new',method: :get
+              = link_to '| Edit/Remove User |','/users', :method => :get
+              = link_to '| Edit Sites |','/cms_admin/sites', method: :get
+              = link_to '| Edit Publications |','/publications', :method => :get
+              = link_to '| Edit Centers |', '/centers', :method => :get
+              = link_to '| Edit Departments |', '/departments', :method => :get
+              = link_to '| Edit Programs |', '/programs', :method => :get
+            - if current_user.isSuperUser or current_user.godBit or current_user.isFacultyUser or current_user.isCommunicationsUser or current_user.isGenericUser
+              = link_to '| Master Calendar |','/calendar',method: :index
+              = link_to '| News |','/news',method: :index
+              = link_to '| Faculty Index |','/faculty',method: :index
+          %p
+            - unless current_user.blank?
+              Welcome, #{current_user.firstName}. #{link_to 'Logout', '/logout', method: :delete}
+
+  = stylesheet_link_tag 'comfortable_mexican_sofa/application'
+  = stylesheet_link_tag 'comfortable_mexican_sofa/admin/application'
+  = javascript_include_tag 'comfortable_mexican_sofa/application'
+  = javascript_include_tag 'comfortable_mexican_sofa/admin/application'
+%html
+  = yield :head
+  = cms_hook :html_head

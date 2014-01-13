@@ -1,0 +1,48 @@
+<h1>Centers Index</h1>
+
+<%if current_user.blank? or current_user.isFacultyUser or current_user.isCommunicationsUser%>
+
+  <table>
+    <tr>
+      <th>Name</th>
+      <th></th>
+    </tr>
+
+  <% @centers.each do |center| %>
+    <tr>
+      <td><%= center.name %></td>
+      <td><%= link_to("Homepage",Cms::Site.find(center.cms_site_id).path)%></td>
+    </tr>
+  <% end %>
+  </table>
+
+  <br />
+
+<%else%>
+
+  <%if current_user.godBit or current_user.isSuperUser%>
+    <table>
+      <tr>
+        <th>Name</th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+
+    <% @centers.each do |center| %>
+      <tr>
+        <td><%= center.name %></td>
+        <td></td>
+        <td><%= link_to("Homepage",Cms::Site.find(center.cms_site_id).path)%></td>
+        <td><%= link_to 'Destroy', center, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+    </table>
+
+    <br />
+
+    <%= link_to 'New Center', new_center_path %>
+
+  <%end%>
+
+<%end%>

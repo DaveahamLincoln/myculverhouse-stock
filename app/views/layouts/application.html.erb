@@ -16,7 +16,7 @@
 <td>
 
 <%if current_user.blank? %>
-	<%= link_to '| Login to the Tech Site |','/login', method: :new %> <%= link_to '| Master Calendar |','/calendar',method: :index %> <%= link_to '| News |','/news',method: :index %> <%= link_to '| Faculty Index |','/faculty',method: :index %>
+	<%= link_to '| Login to myCulverhouse |','/login', method: :new %> <%= link_to '| Master Calendar |','/calendar',method: :index %> <%= link_to '| News |','/news',method: :index %> <%= link_to '| Faculty Index |','/faculty',method: :index %>
 <%else%>
 	
 	<%if current_user.isFacultyUser %>
@@ -39,7 +39,7 @@
 
 
 	<%if current_user.isSuperUser or current_user.godBit%>
-		<%= link_to '| Add User |','/users/new',method: :get %> <%= link_to '| Edit/Remove User |','/users', :method => :get %> <%= link_to '| Edit Sites |','/cms_admin/sites', method: :get %> <%= link_to '| Edit Publications |','/publications', :method => :get %>
+		<%= link_to '| Add User |','/users/new',method: :get %> <%= link_to '| Edit/Remove User |','/users', :method => :get %> <%= link_to '| Edit Sites |','/cms_admin/sites', method: :get %> <%= link_to '| Edit Publications |','/publications', :method => :get %> <%=link_to '| Edit Centers |', '/centers', :method => :get %> <%=link_to '| Edit Departments |', '/departments', :method => :get %> <%=link_to '| Edit Programs |', '/programs', :method => :get %>
 	<%end%>
 
 
@@ -52,17 +52,16 @@
 <p>
 <% unless current_user.blank? %>Welcome, <%=current_user.firstName%>. <%= link_to 'Logout', '/logout', method: :delete -%>
 </p>
+<% end -%>  
 
 </td>
 </tr>
 </table>
 
-<% end -%>  
-
 <body>
-
-<%= yield %>
 
 </body>
 
 </html>
+
+<%= yield %>

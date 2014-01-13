@@ -58,5 +58,12 @@ module MyculverhouseStock
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+
+    #Forces generators to generate erb instead of haml.  I think mixable-engines overrode this and I'm just getting it back.  Because haml sucks.
+    config.generators do |g|
+        g.orm             :active_record
+        g.template_engine :erb
+        g.test_framework  :test_unit, fixture: true 
+    end
   end
 end

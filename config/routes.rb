@@ -1,11 +1,22 @@
 MyculverhouseStock::Application.routes.draw do
 
-  resources :action_items
-
   root to: 'index#index'
 
+  get "login" => 'login#new'
+  post "login" => 'login#create'
+  delete "logout" => 'login#destroy'
+
   get "password_resets/new" 
-  
+  get "/password_reset" => 'password_resets#new'
+  get "/password_resets/:id/edit" => 'password_resets#edit'
+
+  resources :password_resets do
+    post 'edit' => :update
+  end
+    resources :departments
+  resources :action_items
+  post "/action_items/:id" => "action_items#approve"
+
   resources :publications
 
   resources :user_pictures
@@ -16,21 +27,14 @@ MyculverhouseStock::Application.routes.draw do
 
   resources :users
 
+  resources :programs
+
+  resources :departments
+
+  resources :centers, :except => [:show,:edit]
+
   #Managed CMS hook.  Uncomment to reenable.
   #resources :faculty_profiles
-
-  get "login" => 'login#new'
-  post "login" => 'login#create'
-  delete "logout" => 'login#destroy'
-
-  resources :password_resets do
-    post 'edit' => :update
-  end
-
-  get "/password_reset" => 'password_resets#new'
-  get "/password_resets/:id/edit" => 'password_resets#edit'
-
-  post "/action_items/:id" => "action_items#approve"
 
   get "/calendar" => "master_calendar#index"
   post "/calendar" => "master_calendar#index"
