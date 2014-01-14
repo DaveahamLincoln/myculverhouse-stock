@@ -41,9 +41,17 @@ MyculverhouseStock::Application.routes.draw do
 
   get "/news" => "news#index"
   post "/news" => "news#index"
+  get "/news/:id" => "news#mark_as_blogged"
 
   get "/faculty" => "faculty#index"
   post "/faculty" => "faculty#index"
+
+  # This line mounts Monologue's routes at the root of your application.
+  # This means, any requests to URLs such as /my-post, will go to Monologue::PostsController.
+  # If you would like to change where this engine is mounted, simply change the :at option to something different.
+  #
+  # We ask that you don't use the :as option here, as Monologue relies on it being the default of "monologue"
+  mount Monologue::Engine, at: '/blog' # or whatever path, be it "/blog" or "/monologue"
 
   # Binds CMS admin path to /cms_admin
   ComfortableMexicanSofa::Routing.admin(:path => '/cms_admin')

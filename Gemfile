@@ -60,8 +60,37 @@ gem 'comfortable_mexican_sofa', '~>1.8.0'
 #no idea why this doesn't work when the gem is at vendor/plugins/comfy
 #gem 'comfortable_mexican_sofa', '~>1.8.0', :path => "vendor/plugins/comfy"
 
-#Should allow me to extend Comfy's controllers without having to rewrite the gem.
+#Allows you to extend engines by writing plugins and placing them in the app tree, rather than having to shatter and rebuild the gem.
+#Example- I want to add a method to the sites_controller of comfortable-mexican-sofa, which is located at
+#/comfortable-mexican-sofa
+#    /app
+#        /controllers
+#            /cms_admin
+#                /sites_controller.rb
+#
+#I create a /cms admin folder under the_app_I_want_to_extend/app/controllers, and put a sites_controller.rb file inside.
+#E.g.
+#
+#/myculverhouse_stock
+#    /app
+#        /controllers
+#            /cms_admin
+#                /sites_controller.rb
+#
+#Then I copy the class declaration, in this case 
+#
+#class CmsAdmin::SitesController < CmsAdmin::BaseController
+#
+#into the new file.  Then I add whatever it is I want to add, like so:
+#
+#class CmsAdmin::SitesController < CmsAdmin::BaseController
+#    def foo
+#        return bar
+#    end
+#end
+#
+#Now I can call Cms::Site.foo
 gem 'mixable_engines'
 
-#Jekyll blog engine
-gem 'bloggy'
+#Mountable blog engine.
+gem 'monologue'

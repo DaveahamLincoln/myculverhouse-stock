@@ -1,15 +1,27 @@
 <h2>News</h2>
 
-<ul>
-  <% @news_items.each do |news_item| %>
-    <% news_item.id %>
-    <% @action_items.each do |action_item| %>
-      <% if action_item.isApproved %>
-        <% if news_item.actionItemID == action_item.id %>
-          <%= link_to (news_item.title), news_item %>
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @news_items.each do |news_item| %>
+      <%if !news_item.blogged %>
+        <% @action_items.each do |action_item| %>
+          <% if action_item.isApproved %>
+            <% if news_item.actionItemID == action_item.id %>
+              <tr>
+                <td><%= link_to (news_item.title), news_item %></td>
+                <td><%= link_to 'Mark as blogged', {controller: :news, action: :mark_as_blogged, id: news_item.id}, confirm: "Are you sure you want to mark this item as blogged?" %></td>
+              </tr>
+            <%end%>
+          <%end%>
         <%end%>
       <%end%>
     <%end%>
-  <%end%>
-</ul>
-
+  </tbody>
+</table>
