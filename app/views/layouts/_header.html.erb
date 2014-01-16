@@ -34,13 +34,13 @@
 		<%= link_to '| Submit a Calendar Item |','/calendar_items/new', method: :get %>  <%= link_to '| Submit a News Item |','/news_items/new', method: :get %>
 	<%end%>
 
-	<%if current_user.isCommunicationsUser or current_user.godBit%>
-		<%= link_to '| Approve Action Items |','/action_items', method: :get %> 
+	<%if current_user.isCommunicationsUser%>
+		<%= link_to '| Approve Action Items |','/action_items', method: :get %> <%= link_to '| Blog Admin |','/blog/monologue', method: :get %> 
 	<%end%>
 
 
 	<%if current_user.isSuperUser or current_user.godBit%>
-		<%= link_to '| Add User |','/users/new',method: :get %> <%= link_to '| Edit/Remove User |','/users', :method => :get %> <%= link_to '| Edit Sites |','/cms_admin/sites', method: :get %> <%= link_to '| Edit Publications |','/publications', :method => :get %> <%=link_to '| Edit Centers |', '/centers', :method => :get %> <%=link_to '| Edit Departments |', '/departments', :method => :get %> <%=link_to '| Edit Programs |', '/programs', :method => :get %>
+		<%= link_to '| Add User |','/users/new',method: :get %> <%= link_to '| Edit/Remove User |','/users', :method => :get %> <%= link_to '| Edit Sites |','/cms_admin/sites', method: :get %> <%= link_to '| Edit Publications |','/publications', :method => :get %> <%=link_to '| Edit Centers |', '/centers', :method => :get %> <%=link_to '| Edit Departments |', '/departments', :method => :get %> <%=link_to '| Edit Programs |', '/programs', :method => :get %> <%= link_to '| Blog Admin |','/blog/monologue', method: :get %> <%= link_to '| Approve Action Items |','/action_items', method: :get %>
 	<%end%>
 
 

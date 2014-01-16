@@ -58,7 +58,7 @@ require'socket'
             #pulls the hostname for the parent site
             hostname: 'localhost:3000',
 
-            #sets the root path for the new ste to /faculty.  There is no actual /faculty route handled by Comfy, but it provides an easy mnemonic
+            #sets the root path for the new site to /faculty.  There is no actual /faculty route handled by Comfy, but it provides an easy mnemonic
             #GET "/faculty" should be mapped to a static page that links to all sites created in this manner.
             #something like Cms::Site.all.each do |site|
             #    if site.path == '/faculty'
@@ -68,9 +68,20 @@ require'socket'
             )
           @userFacultySite.save!
           @userFacultyUser.update_attributes(cms_site_id: @userFacultySite.id)
+          format.html { redirect_to @user, notice: "User has been added successfully." }
+
+        elsif @user.isSuperUser or @user.isCommunicationsUser
+          #Kicker to add admins and comm users to the Monologue user group.
+          Monologue::User.create(
+            name: @user.formal_name,
+            email: @user.email,
+            password: @user.password,
+            password_confirmation: @user.password_confirmation
+            )
 
 =begin
           #might need this at a later date
+          #it's a self-managed cms, not an engine cms.
           @userFacultyPage = cms_sites(@userFacultySite.id)
           @userFacultyPage.update_attributes(
             :slug => 'profile'
