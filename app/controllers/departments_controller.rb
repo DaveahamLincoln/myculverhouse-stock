@@ -65,18 +65,18 @@ class DepartmentsController < ApplicationController
           @ident = @ident.gsub(/\s/,'_')
           @departmentSite.update_attributes(
             #binds Department sites to easy-to-remember mnemonics.
-            identifier: "#{@ident}",
+            identifier: "#{@ident.downcase}",
 
             #pulls the hostname for the parent site
-            hostname: 'localhost:3000',
+            hostname: '0.0.0.0:3000',
 
             #sets the root path for the new site to /Departments.  There is no actual /Departments route handled by Comfy, but it provides an easy mnemonic
             #GET "/departments" should be mapped to a static page that links to all sites created in this manner.
-            path: "departments/#{@ident}"
+            path: "departments/#{@ident.downcase}"
             )
           @departmentSite.save!
           @department.update_attributes(cms_site_id: @departmentSite.id)
-          format.html { redirect_to @department, notice: 'Department was successfully created.' }
+          format.html { redirect_to "/departments", notice: 'Department was successfully created.' }
           format.json { render json: @department, status: :created, location: @department }
       else
         format.html { render action: "new" }
@@ -108,8 +108,8 @@ class DepartmentsController < ApplicationController
     @departmentSite = Cms::Site.find(@department.id)
     #Uncomment to activate linked deletion functionality.  Per Freddie, we want to force users to go into the CMS and delete sites manually,
     #rather than binding the destroy to the control panel destroy action, but I figured I'd include this in case this changed.
-    #@Department.destroy
-    #@DepartmentSite.destroy
+    @department.destroy
+    #@departmentSite.destroy
 
     respond_to do |format|
       format.html { redirect_to departments_url }

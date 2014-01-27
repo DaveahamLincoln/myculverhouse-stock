@@ -65,18 +65,18 @@ class CentersController < ApplicationController
           @ident = @ident.gsub(/\s/,'_')
           @centerSite.update_attributes(
             #binds center sites to easy-to-remember mnemonics.
-            identifier: "#{@ident}",
+            identifier: "#{@ident.downcase}",
 
             #pulls the hostname for the parent site
-            hostname: 'localhost:3000',
+            hostname: '0.0.0.0:3000',
 
             #sets the root path for the new site to /centers.  There is no actual /centers route handled by Comfy, but it provides an easy mnemonic
             #GET "/centers" should be mapped to a static page that links to all sites created in this manner.
-            path: "centers/#{@ident}"
+            path: "centers/#{@ident.downcase}"
             )
           @centerSite.save!
           @center.update_attributes(cms_site_id: @centerSite.id)
-          format.html { redirect_to @center, notice: 'Center was successfully created.' }
+          format.html { redirect_to '/centers', notice: 'Center was successfully created.' }
           format.json { render json: @center, status: :created, location: @center }
       else
         format.html { render action: "new" }
@@ -108,7 +108,7 @@ class CentersController < ApplicationController
     @centerSite = Cms::Site.find(@center.id)
     #Uncomment to activate linked deletion functionality.  Per Freddie, we want to force users to go into the CMS and delete sites manually,
     #rather than binding the destroy to the control panel destroy action, but I figured I'd include this in case this changed.
-    #@center.destroy
+    @center.destroy
     #@centerSite.destroy
 
     respond_to do |format|

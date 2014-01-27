@@ -53,10 +53,10 @@ require'socket'
           @userFacultySite = Cms::Site.new
           @userFacultySite.update_attributes(
             #binds faculty sites to easy-to-remember mnemonics.
-            identifier: "#{@user.lastName}_#{@user.firstName}",
+            identifier: "#{@user.lastName.downcase}_#{@user.firstName.downcase}",
 
             #pulls the hostname for the parent site
-            hostname: 'localhost:3000',
+            hostname: '0.0.0.0:3000',
 
             #sets the root path for the new site to /faculty.  There is no actual /faculty route handled by Comfy, but it provides an easy mnemonic
             #GET "/faculty" should be mapped to a static page that links to all sites created in this manner.
@@ -64,7 +64,7 @@ require'socket'
             #    if site.path == '/faculty'
             #    '''show a link to the site'''
 
-            path: "faculty/#{@user.lastName}_#{@user.firstName}"
+            path: "faculty/#{@user.lastName.downcase}_#{@user.firstName.downcase}"
             )
           @userFacultySite.save!
           @userFacultyUser.update_attributes(cms_site_id: @userFacultySite.id)

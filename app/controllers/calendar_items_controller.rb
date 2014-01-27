@@ -37,7 +37,7 @@ class CalendarItemsController < ApplicationController
 
   # PATCH/PUT /calendar_items/1
   def update
-    if @calendar_item.update(calendar_item_params)
+    if @calendar_item.update_attributes(calendar_item_params)
       redirect_to @calendar_item, notice: 'Calendar item was successfully updated.'
     else
       render action: 'edit'

@@ -65,18 +65,18 @@ class ProgramsController < ApplicationController
           @ident = @ident.gsub(/\s/,'_')
           @programSite.update_attributes(
             #binds program sites to easy-to-remember mnemonics.
-            identifier: "#{@ident}",
+            identifier: "#{@ident.downcase}",
 
             #pulls the hostname for the parent site
-            hostname: 'localhost:3000',
+            hostname: '0.0.0.0:3000',
 
             #sets the root path for the new site to /programs.  There is no actual /programs route handled by Comfy, but it provides an easy mnemonic
             #GET "/programs" should be mapped to a static page that links to all sites created in this manner.
-            path: "programs/#{@ident}"
+            path: "programs/#{@ident.downcase}"
             )
           @programSite.save!
           @program.update_attributes(cms_site_id: @programSite.id)
-          format.html { redirect_to @program, notice: 'program was successfully created.' }
+          format.html { redirect_to '/programs', notice: 'program was successfully created.' }
           format.json { render json: @program, status: :created, location: @program }
       else
         format.html { render action: "new" }
@@ -108,7 +108,7 @@ class ProgramsController < ApplicationController
     @programSite = Cms::Site.find(@program.id)
     #Uncomment to activate linked deletion functionality.  Per Freddie, we want to force users to go into the CMS and delete sites manually,
     #rather than binding the destroy to the control panel destroy action, but I figured I'd include this in case this changed.
-    #@program.destroy
+    @program.destroy
     #@programSite.destroy
 
     respond_to do |format|

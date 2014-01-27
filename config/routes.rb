@@ -13,7 +13,10 @@ MyculverhouseStock::Application.routes.draw do
   resources :password_resets do
     post 'edit' => :update
   end
-    resources :departments
+
+  #CONSTANT VIGILANCE!  ROUTES LOAD IN ORDER.  I had a 'resources :departments' entry here, which was overriding the 
+  #:except direction below.  Took me two hours to fix.  Pay attention to the order.
+
   resources :action_items
   post "/action_items/:id" => "action_items#approve"
 
@@ -27,9 +30,9 @@ MyculverhouseStock::Application.routes.draw do
 
   resources :users
 
-  resources :programs
+  resources :programs, :except => [:show,:edit]
 
-  resources :departments
+  resources :departments, :except => [:show,:edit]
 
   resources :centers, :except => [:show,:edit]
 
