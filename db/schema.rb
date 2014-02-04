@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140114204047) do
+ActiveRecord::Schema.define(:version => 20140204204630) do
 
   create_table "action_items", :force => true do |t|
     t.integer  "createdByID"
@@ -263,6 +263,12 @@ ActiveRecord::Schema.define(:version => 20140114204047) do
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
+    t.boolean  "isSupervisorUser"
+    t.boolean  "isTechUser"
+    t.boolean  "isClientUser"
+    t.integer  "departmentID"
+    t.integer  "locationID"
+    t.integer  "taskPoints"
   end
 
 end
