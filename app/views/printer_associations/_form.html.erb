@@ -1,0 +1,23 @@
+<%= form_for(@printer_association) do |f| %>
+  <% if @printer_association.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@printer_association.errors.count, "error") %> prohibited this printer_association from being saved:</h2>
+
+      <ul>
+      <% @printer_association.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="field">
+    <%= f.label :printerID %><br />
+    <%= f.collection_select(:printerID, Printer.all, :id, :digest, include_blank: true) %>
+  </div>
+  <div class="field">
+    <%= f.hidden_field :equipmentID, value: @equipmentID%>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

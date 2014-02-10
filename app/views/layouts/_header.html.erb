@@ -1,3 +1,5 @@
+<!--THIS *MUST* BE REFACTORED.  IT IS SO BAD.  LIKE OMG.-->
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,7 +42,7 @@
 
 
 	<%if current_user.isSuperUser or current_user.godBit%>
-		<%= link_to '| Add User |','/users/new',method: :get %> <%= link_to '| Edit/Remove User |','/users', :method => :get %> <%= link_to '| Edit Sites |','/cms_admin/sites', method: :get %> <%= link_to '| Edit Publications |','/publications', :method => :get %> <%=link_to '| Edit Centers |', '/centers', :method => :get %> <%=link_to '| Edit Departments |', '/departments', :method => :get %> <%=link_to '| Edit Programs |', '/programs', :method => :get %> <%= link_to '| Blog Admin |','/blog/monologue', method: :get %> <%= link_to '| Approve Action Items |','/action_items', method: :get %> <%= link_to 'Equipment','/equipment/', method: :get %>
+		<%= link_to '| Add User |','/users/new',method: :get %> <%= link_to '| Edit/Remove User |','/users', :method => :get %> <%= link_to '| Edit Sites |','/cms_admin/sites', method: :get %> <%= link_to '| Edit Publications |','/publications', :method => :get %> <%=link_to '| Edit Centers |', '/centers', :method => :get %> <%=link_to '| Edit Departments |', '/departments', :method => :get %> <%=link_to '| Edit Programs |', '/programs', :method => :get %> <%= link_to '| Blog Admin |','/blog/monologue', method: :get %> <%= link_to '| Approve Action Items |','/action_items', method: :get %>
 	<%end%>
 
 
@@ -48,8 +50,8 @@
 		<%= link_to '| Master Calendar |','/calendar',method: :index %> <%= link_to '| News Queue |','/news',method: :index %> <%= link_to '| Faculty Index |','/faculty',method: :index %> <%= link_to '| Blog |','/blog'%>
 	<%end%>
 
-	<%if current_user.isTechUser %>
-		<%= link_to 'Equipment','/equipment/', method: :get %>
+	<%if current_user.isSuperUser or current_user.godBit or current_user.isTechUser%>
+		<%= link_to 'Equipment','/equipment/', method: :get %> <%= link_to '| Locations |', method: :get %>
 	<%end%>
 
 <%end%>

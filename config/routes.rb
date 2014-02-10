@@ -20,6 +20,8 @@ MyculverhouseStock::Application.routes.draw do
   resources :action_items
   post "/action_items/:id" => "action_items#approve"
 
+  resources :locations
+
   resources :publications
 
   resources :user_pictures
@@ -52,6 +54,12 @@ MyculverhouseStock::Application.routes.draw do
   post "/faculty" => "faculty#index"
 
   resources :equipment
+
+  post '/program_associations/:equipmentID', to: "program_associations#new"
+  resources :program_associations, :only => [:index, :create, :update, :destroy, :show]
+
+  post '/printer_associations/:equipmentID', to: "printer_associations#new"
+  resources :printer_associations, :only => [:index, :create, :update, :destroy, :show]
 
   # This line mounts Monologue's routes at the root of your application.
   # This means, any requests to URLs such as /my-post, will go to Monologue::PostsController.

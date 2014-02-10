@@ -1,4 +1,14 @@
 class Equipment < ActiveRecord::Base
+  #Single Table Inheritance Types
+  # => Computer
+  # => Printer
+  # => Other
+  #
+  #To add a new type, rails g a model, eg. "Foo"
+  #Edit foo.rb to inherit from Equipment,
+  #   class Foo < Equipment
+  #Add the type to preload_sti_models.rb in the initializers folder
+
 	belongs_to :department
 	belongs_to :location
 	has_many :tickets

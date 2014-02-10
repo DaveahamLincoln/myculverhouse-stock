@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140210154023) do
+ActiveRecord::Schema.define(:version => 20140210154026) do
 
   create_table "action_items", :force => true do |t|
     t.integer  "createdByID"
@@ -180,6 +180,8 @@ ActiveRecord::Schema.define(:version => 20140210154023) do
     t.string   "description"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
+    t.string   "ip"
+    t.string   "type"
   end
 
   create_table "faculty_profiles", :force => true do |t|
@@ -199,6 +201,13 @@ ActiveRecord::Schema.define(:version => 20140210154023) do
     t.datetime "updated_at",                          :null => false
     t.integer  "cms_site_id"
     t.boolean  "cms_site_enabled", :default => false
+  end
+
+  create_table "locations", :force => true do |t|
+    t.string   "name"
+    t.string   "notes"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "monologue_posts", :force => true do |t|
@@ -243,6 +252,20 @@ ActiveRecord::Schema.define(:version => 20140210154023) do
     t.datetime "updated_at",                      :null => false
     t.string   "title"
     t.boolean  "blogged",      :default => false
+  end
+
+  create_table "printer_associations", :force => true do |t|
+    t.integer  "equipmentID"
+    t.integer  "printerID"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "program_associations", :force => true do |t|
+    t.integer  "equipmentID"
+    t.integer  "programID"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "programs", :force => true do |t|

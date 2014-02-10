@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Equipmentid:</b>
+  <%= Equipment.find(@program_association.equipmentID).digest %>
+</p>
+
+<p>
+  <b>programid:</b>
+  <%= Program.find(@program_association.programID).digest %>
+</p>
+
+
+<%= link_to 'Back', program_associations_path %>

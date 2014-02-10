@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Equipmentid:</b>
+  <%= Equipment.find(@printer_association.equipmentID).digest %>
+</p>
+
+<p>
+  <b>Printerid:</b>
+  <%= Printer.find(@printer_association.printerID).digest %>
+</p>
+
+
+<%= link_to 'Back', printer_associations_path %>

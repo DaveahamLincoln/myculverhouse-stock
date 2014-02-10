@@ -1,0 +1,23 @@
+<%= form_for(@program_association) do |f| %>
+  <% if @program_association.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@program_association.errors.count, "error") %> prohibited this program_association from being saved:</h2>
+
+      <ul>
+      <% @program_association.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="field">
+    <%= f.label :programID %><br />
+    <%= f.collection_select(:programID, Program.all, :id, :digest, include_blank: true) %>
+  </div>
+  <div class="field">
+    <%= f.hidden_field :equipmentID, value: @equipmentID%>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
