@@ -51,7 +51,7 @@
 	<%end%>
 
 	<%if current_user.isSuperUser or current_user.godBit or current_user.isTechUser%>
-		<%= link_to 'Equipment','/equipment/', method: :get %> <%= link_to '| Locations |', method: :get %>
+		<%= link_to '| Equipment |','/equipment/', method: :get %> <%= link_to '| Locations |', method: :get %>
 	<%end%>
 
 <%end%>
