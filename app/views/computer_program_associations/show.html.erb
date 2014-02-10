@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Equipmentid:</b>
+  <%= Equipment.find(@computer_program_association.equipmentID).digest %>
+</p>
+
+<p>
+  <b>programid:</b>
+  <%= ComputerProgram.find(@computer_program_association.computerProgramID).digest %>
+</p>
+
+
+<%= link_to 'Back', '/equipment/#{@computer_program_association.id}' %>

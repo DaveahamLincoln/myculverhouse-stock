@@ -1,0 +1,73 @@
+<%= form_for(@program) do |f| %>
+  <% if @program.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@program.errors.count, "error") %> prohibited this program from being saved:</h2>
+
+      <ul>
+      <% @program.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br />
+    <%= f.text_field :description %>
+  </div>
+  <div class="field">
+    <%= f.label :publisher %><br />
+    <%= f.text_field :publisher %>
+  </div>
+  <div class="field">
+    <%= f.label :vendor %><br />
+    <%= f.text_field :vendor %>
+  </div>
+  <div class="field">
+    <%= f.label :serial %><br />
+    <%= f.text_field :serial %>
+  </div>
+  <div class="field">
+    <%= f.label :license %><br />
+    <%= f.text_field :license %>
+  </div>
+  <div class="field">
+    <%= f.label :licenseCount %><br />
+    <%= f.number_field :licenseCount %>
+  </div>
+  <div class="field">
+    <%= f.label :expDate %><br />
+    <%= f.datetime_select :expDate %>
+  </div>
+  <div class="field">
+    <%= f.label :uaAccountNo %><br />
+    <%= f.text_field :uaAccountNo %>
+  </div>
+  <div class="field">
+    <%= f.label :installNotes %><br />
+    <%= f.text_field :installNotes %>
+  </div>
+  <div class="field">
+    <%= f.label :testingNotes %><br />
+    <%= f.text_field :testingNotes %>
+  </div>
+  <div class="field">
+    <%= f.label :accountNotes %><br />
+    <%= f.text_field :accountNotes %>
+  </div>
+  <div class="field">
+    <%= f.label :userID %><br />
+    <%= f.number_field :userID %>
+  </div>
+  <div class="field">
+    <%= f.label :status %><br />
+    <%= f.number_field :status %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

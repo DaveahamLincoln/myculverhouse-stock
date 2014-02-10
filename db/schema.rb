@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140210154026) do
+ActiveRecord::Schema.define(:version => 20140210195354) do
 
   create_table "action_items", :force => true do |t|
     t.integer  "createdByID"
@@ -160,6 +160,32 @@ ActiveRecord::Schema.define(:version => 20140210154026) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "computer_program_associations", :force => true do |t|
+    t.integer  "equipmentID"
+    t.integer  "computerProgramID"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+  end
+
+  create_table "computer_programs", :force => true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.string   "publisher"
+    t.string   "vendor"
+    t.string   "serial"
+    t.string   "license"
+    t.integer  "licenseCount"
+    t.datetime "expDate"
+    t.string   "uaAccountNo"
+    t.string   "installNotes"
+    t.string   "testingNotes"
+    t.string   "accountNotes"
+    t.integer  "userID"
+    t.integer  "status"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
   create_table "departments", :force => true do |t|
     t.string   "name"
     t.integer  "cms_site_id"
@@ -257,13 +283,6 @@ ActiveRecord::Schema.define(:version => 20140210154026) do
   create_table "printer_associations", :force => true do |t|
     t.integer  "equipmentID"
     t.integer  "printerID"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-  end
-
-  create_table "program_associations", :force => true do |t|
-    t.integer  "equipmentID"
-    t.integer  "programID"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end

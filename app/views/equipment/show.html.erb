@@ -46,17 +46,18 @@
         </tr>
       </thead>
       <tbody>
-        <% ProgramAssociation.all.each do |program| %>
+        <% ComputerProgramAssociation.all.each do |program| %>
           <% if program.equipmentID==@equipment.id then %>
-            <tr class="spriteButton" onclick="document.location='<%=program_path(Program.find(program.programID).id)%>'" style="cursor:pointer">
-              <td><%=Program.find(program.programID).name%></td>
-              <td><%=Program.find(program.programID).description%></td>
-              <td><%=Program.find(program.programID).serial%></td>
-              <td><%=Program.find(program.programID).license%></td>
+            <tr class="spriteButton" onclick="document.location='<%=computer_program_path(ComputerProgram.find(program.computerProgramID).id)%>'" style="cursor:pointer">
+              <td><%=ComputerProgram.find(program.computerProgramID).name%></td>
+              <td><%=ComputerProgram.find(program.computerProgramID).description%></td>
+              <td><%=ComputerProgram.find(program.computerProgramID).serial%></td>
+              <td><%=ComputerProgram.find(program.computerProgramID).license%></td>
             </tr>
           <%end%>
         <%end%>
-        <tr><%= link_to 'Add A Program', program_association_path(@equipment.id), method: :post %></tr>
+        <td><%= link_to 'Add A Program', computer_program_association_path(@equipment.id), method: :post %></td>    
+        <td><%= link_to 'Uninstall A Program !!!NEED TO IMPLEMENT!!!', "#", method: :post %></td>
       </tbody>
     </table>
 
@@ -83,7 +84,8 @@
             </tr>
           <%end%>
         <%end%>
-        <tr><%= link_to 'Add A Printer', printer_association_path(@equipment.id), method: :post %></tr>
+        <td><%= link_to 'Add A Printer', printer_association_path(@equipment.id), method: :post %></td>
+            <td><%= link_to 'Uninstall A Printer !!!NEED TO IMPLEMENT!!!', "#", method: :post %></td>
       </tbody>
     </table>
 

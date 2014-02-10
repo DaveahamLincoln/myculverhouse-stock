@@ -1,0 +1,75 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @program.name %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @program.description %>
+</p>
+
+<p>
+  <b>Publisher:</b>
+  <%= @program.publisher %>
+</p>
+
+<p>
+  <b>Vendor:</b>
+  <%= @program.vendor %>
+</p>
+
+<p>
+  <b>Serial:</b>
+  <%= @program.serial %>
+</p>
+
+<p>
+  <b>License:</b>
+  <%= @program.license %>
+</p>
+
+<p>
+  <b>Licensecount:</b>
+  <%= @program.licenseCount %>
+</p>
+
+<p>
+  <b>Expdate:</b>
+  <%= @program.expDate %>
+</p>
+
+<p>
+  <b>Uaaccountno:</b>
+  <%= @program.uaAccountNo %>
+</p>
+
+<p>
+  <b>Installnotes:</b>
+  <%= @program.installNotes %>
+</p>
+
+<p>
+  <b>Testingnotes:</b>
+  <%= @program.testingNotes %>
+</p>
+
+<p>
+  <b>Accountnotes:</b>
+  <%= @program.accountNotes %>
+</p>
+
+<p>
+  <b>Userid:</b>
+  <%= @program.userID %>
+</p>
+
+<p>
+  <b>Status:</b>
+  <%= @program.status %>
+</p>
+
+
+<%= link_to 'Edit', edit_computer_program_path(@program) %> |
+<%= link_to 'Back', computer_programs_path %>
