@@ -1,0 +1,57 @@
+<%= form_for(@equipment) do |f| %>
+  <% if @equipment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@equipment.errors.count, "error") %> prohibited this equipment from being saved:</h2>
+
+      <ul>
+      <% @equipment.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :serial %><br />
+    <%= f.text_field :serial %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Status*" %>
+    <%= f.text_field :status 
+        f.select :status, [['Normal',1],['Inactive',2],['Awaiting Service',3],['Surplus',4],['On Order',5]]
+    %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Location" %>
+    <%= f.collection_select(:locationID, Location.all, :id, :name, :include_blank => false) %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Department" %>
+    <%= f.collection_select(:departmentID, Department.all, :id, :name, :include_blank => false) %>
+  </div>
+
+  <div class="field">
+    <%= f.label :description %><br />
+    <%= f.text_field :description %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Type" %>
+    <%= f.text_field :type 
+        f.select :type, Equipment.select_options
+        %>
+  </div>
+
+  <div class="field">
+    <%= f.label "IP Address"%>
+    <%= f.text_field :ip %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+
+<% end %>

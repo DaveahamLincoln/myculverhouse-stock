@@ -56,11 +56,14 @@ gem 'rmagick', '2.13.2'
 #Official Release
 gem 'comfortable_mexican_sofa', '~>1.8.0'
 
+#QR Code generator
+gem 'rqrcode'
+
 #Forge
 #no idea why this doesn't work when the gem is at vendor/plugins/comfy
 #gem 'comfortable_mexican_sofa', '~>1.8.0', :path => "vendor/plugins/comfy"
 
-#Allows you to extend engines by writing plugins and placing them in the app tree, rather than having to shatter and rebuild the gem.
+#mixable_engines allows you to extend engines by writing plugins and placing them in the app tree, rather than having to shatter and rebuild the gem.
 #Example- I want to add a method to the sites_controller of comfortable-mexican-sofa, which is located at
 #/comfortable-mexican-sofa
 #    /app

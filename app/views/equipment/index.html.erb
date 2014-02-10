@@ -1,0 +1,34 @@
+<h1>Listing equipment</h1>
+
+<table border=1>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Serial Number</th>
+      <th>Status</th>
+      <th>Location</th>
+      <th>Department</th>
+    </tr>
+  </thead>
+
+  <tbody>
+
+
+<% @equipment.each do |equipment| %>
+    <tr>
+      <tr class="spriteButton" onclick="document.location='<%=equipment_path(equipment.id)%>'" style="cursor:pointer">
+      <td><%=equipment.type%></td>
+      <td><%=equipment.description%></td>
+      <td><%=equipment.serial%></td>
+      <td><%=equipment.status%></td>
+      <td><%=equipment.locationID%></td>
+      <td><%=equipment.departmentID%></td>
+    </tr>
+  </tbody>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Equipment', new_equipment_path %>

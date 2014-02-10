@@ -51,6 +51,8 @@ MyculverhouseStock::Application.routes.draw do
   get "/faculty" => "faculty#index"
   post "/faculty" => "faculty#index"
 
+  resources :equipment
+
   # This line mounts Monologue's routes at the root of your application.
   # This means, any requests to URLs such as /my-post, will go to Monologue::PostsController.
   # If you would like to change where this engine is mounted, simply change the :at option to something different.
