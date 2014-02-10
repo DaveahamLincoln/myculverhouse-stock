@@ -1,10 +1,10 @@
 class DepartmentsController < ApplicationController
 
-  #Comment to access the /Departments/new page as an anonymous user
-  before_filter :check_your_privilege, only: [:new, :create, :update, :destroy]
+  #Comment to access the /departments/new page as an anonymous user
+  before_filter :check_your_privilege, only: [:new, :create, :update, :destroy, :edit]
 
-  # GET /Departments
-  # GET /Departments.json
+  # GET /departments
+  # GET /departments.json
   def index
     @departments = Department.all
     @departments = @departments.sort_by &:name
@@ -15,25 +15,24 @@ class DepartmentsController < ApplicationController
     end
   end
 
-=begin
-  This is disabled, because of the way I have the mnemonic routing set up.
-  Essentially, if you leave it in, it catches the /Departments/foo call and tries to route it to the show action of 
-  a Department with id 'foo'
+  #This is odd because of the way I have the mnemonic routing set up.
+  #    Essentially, if you leave this alone, it catches the /Departments/foo call and tries to route it to the show action of 
+  #    a Department with id 'foo.'  Now it catches the call differently, so GET /departments/foo will go to the CMS page for foo
+  #    and GET /departments/shard/:id will route to the department record for foo.
 
-  # GET /Departments/1
-  # GET /Departments/1.json
+  # GET /departments/shard/1
+  # GET /departments/shard/1.json
   def show
-    @Department = Department.find(params[:id])
+    @department = Department.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @Department }
     end
   end
-=end
 
-  # GET /Departments/new
-  # GET /Departments/new.json
+  # GET /departments/new
+  # GET /departments/new.json
   def new
     @department = Department.new
 
@@ -43,17 +42,16 @@ class DepartmentsController < ApplicationController
     end
   end
 
-=begin
-  This is disabled because Departments are immutable- to change one you must delete it, delete its CMS site, and then create it afresh. 
-
-  # GET /Departments/1/edit
+  # GET /departments/shard/1/edit
+  #Note: Changing the name of a department will not change their site slug, this has to be done manually right now,
+  #    I'm not sure if there's a way to avoid having to do this.
   def edit
-    @Department = Department.find(params[:id])
+    @department = Department.find(params[:id])
   end
-=end
 
-  # POST /Departments
-  # POST /Departments.json
+
+  # POST /departments
+  # POST /departments.json
   def create
     @department = Department.new(department_params)
 
@@ -85,8 +83,8 @@ class DepartmentsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /Departments/1
-  # PATCH/PUT /Departments/1.json
+  # PATCH/PUT /departments/1
+  # PATCH/PUT /departments/1.json
   def update
     @department = Department.find(params[:id])
 
@@ -101,10 +99,11 @@ class DepartmentsController < ApplicationController
     end
   end
 
-  # DELETE /Departments/1
-  # DELETE /Departments/1.json
+  # DELETE /departments/1
+  # DELETE /departments/1.json
   def destroy
     @department = Department.find(params[:id])
+    #Bad logic below.
     @departmentSite = Cms::Site.find(@department.id)
     #Uncomment to activate linked deletion functionality.  Per Freddie, we want to force users to go into the CMS and delete sites manually,
     #rather than binding the destroy to the control panel destroy action, but I figured I'd include this in case this changed.
@@ -133,6 +132,6 @@ class DepartmentsController < ApplicationController
     # params.require(:person).permit(:name, :age)
     # Also, you can specialize this method with per-user checking of permissible attributes.
     def department_params
-      params.require(:department).permit(:cms_site_id, :name)
+      params.require(:department).permit(:cms_site_id, :poBox, :building, :fax, :office, :phone, :name)
     end
 end

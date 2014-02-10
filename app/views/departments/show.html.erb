@@ -1,0 +1,35 @@
+<p>
+  <strong>Name:</strong>
+  <%= @department.name %>
+</p>
+
+<p>
+  <strong>Phone:</strong>
+  <%= @department.phone %>
+</p>
+
+<p>
+  <strong>Fax:</strong>
+  <%= @department.fax %>
+</p>
+
+<p>
+  <strong>Building:</strong>
+  <%= @department.building %>
+</p>
+
+<p>
+  <strong>Office:</strong>
+  <%= @department.office %>
+</p>
+
+<p>
+  <strong>PO Box:</strong>
+  <%= @department.poBox %>
+</p>
+
+<% if current_user.isSuperUser or current_user.godBit %>
+  <%= link_to 'Edit', "/departments/shard/#{@department.id}/edit" %> |
+<%end%>
+
+<%= link_to 'Back', departments_path %>

@@ -27,6 +27,8 @@
         <th></th>
         <th></th>
         <th></th>
+        <th></th>
+        <th></th>
       </tr>
 
     <% @departments.each do |department| %>
@@ -34,14 +36,20 @@
         <td><%= department.name %></td>
         <td></td>
         <td><%= link_to("Homepage",Cms::Site.find(department.cms_site_id).path)%></td>
-        <td><%= link_to 'Destroy', department, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <%if current_user.godBit or current_user.isSuperUser%>
+          <td><%= link_to("Show","/departments/shard/#{department.id}")%></td>
+          <td><%= link_to("Edit","/departments/shard/#{department.id}/edit")%></td>
+          <td><%= link_to 'Destroy', department, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <%end%>
       </tr>
     <% end %>
     </table>
 
     <br />
 
-    <%= link_to 'New department', new_department_path %>
+    <%if current_user.godBit or current_user.isSuperUser%>
+      <%= link_to 'New department', new_department_path %>
+    <%end%>
 
   <%end%>
 

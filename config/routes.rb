@@ -33,6 +33,8 @@ MyculverhouseStock::Application.routes.draw do
   resources :programs, :except => [:show,:edit]
 
   resources :departments, :except => [:show,:edit]
+  get "/departments/shard/:id" => "departments#show"
+  get "/departments/shard/:id/edit" => "departments#edit"
 
   resources :centers, :except => [:show,:edit]
 
