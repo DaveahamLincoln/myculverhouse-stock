@@ -80,4 +80,9 @@ class ComputerProgramAssociationsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  #POST /computer_program_associations/uninstall/1
+  def uninstall
+    @equipment = Equipment.find(params[:equipmentID])
+  end
 end

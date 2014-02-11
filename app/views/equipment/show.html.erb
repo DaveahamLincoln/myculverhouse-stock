@@ -57,7 +57,7 @@
           <%end%>
         <%end%>
         <td><%= link_to 'Add A Program', computer_program_association_path(@equipment.id), method: :post %></td>    
-        <td><%= link_to 'Uninstall A Program !!!NEED TO IMPLEMENT!!!', "#", method: :post %></td>
+        <td><%= link_to 'Uninstall A Program', "/computer_program_associations/uninstall/#{@equipment.id}", method: :post %></td>
       </tbody>
     </table>
 
@@ -85,7 +85,7 @@
           <%end%>
         <%end%>
         <td><%= link_to 'Add A Printer', printer_association_path(@equipment.id), method: :post %></td>
-            <td><%= link_to 'Uninstall A Printer !!!NEED TO IMPLEMENT!!!', "#", method: :post %></td>
+            <td><%= link_to 'Uninstall A Printer', "/printer_associations/uninstall/#{@equipment.id}", method: :post %></td>
       </tbody>
     </table>
 

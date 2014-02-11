@@ -1,0 +1,46 @@
+<style type="text/css">
+ table.qrtable {
+    border-width: 0;
+    border-style: none;
+    border-color: #0000ff;
+    border-collapse: collapse;
+  }
+
+  td.qrtd_black {
+   border-width: 0;
+   border-style: none;
+   border-color: #0000ff;
+   border-collapse: collapse;
+   padding: 0;
+   margin: 0;
+   width: 5px;
+   height: 5px;
+   background-color: #000;
+  }
+
+  td.qrtd_white {
+   border-width: 0;
+   border-style: none;
+   border-color: #0000ff;
+   border-collapse: collapse;
+   padding: 0;
+   margin: 0;
+   width: 6px;
+   height: 6px;
+   background-color: #fff;
+  }
+</style>
+
+<table class="qrtable">
+ <% @qr.modules.each_index do |x| -%>
+   <tr>
+   <% @qr.modules.each_index do |y| -%>
+    <% if @qr.dark?(x,y) -%>
+    <td class="qrtd_black"/>
+    <% else -%>
+    <td class="qrtd_white"/>
+    <% end -%>
+   <% end -%>
+   </tr>
+ <% end -%>
+</table>

@@ -1,15 +1,112 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Name:</b>
-  <%= @location.name %>
-</p>
+<h1>Displaying Record for <%=@location.name%></h1>
 
-<p>
-  <b>Notes:</b>
-  <%= @location.notes %>
-</p>
+<p id="notice"><%= notice %></p>
 
+<%=render :partial => "qr_code"%>
+
+<table border=1>
+  <thead>
+    <tr>
+      <h5>Location Information</h5>
+    </tr>
+    <tr>
+      <th>Name</th>
+      <th>Notes</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td><%=@location.name%></td>
+      <td><%=@location.notes%></td>
+    </tr>
+  </tbody>
+</table>
+
+<%if @computers.count > 0 %>
+	<table border=1>
+	  <thead>
+	    <tr>
+	      <h5>Installed Computers</h5>
+	    </tr>
+	    <tr>
+	      <th>Description</th>
+	      <th>Serial Number</th>
+	      <th>Status</th>
+	      <th>Department</th>
+	    </tr>
+	  </thead>
+	
+	<% @computers.each do |computer| %>
+	  <tbody>
+	     <tr class="spriteButton" onclick="document.location='<%=equipment_path(Equipment.find(computer.id))%>'" style="cursor:pointer">
+	      <td><%=computer.description%></td>
+	      <td><%=computer.serial%></td>
+	      <td><%=computer.statusAlias%></td>
+	      <td><%=Department.find(computer.departmentID).name%></td>
+	    </tr>
+	  </tbody>
+	<%end%>
+	</table>
+<%end%>
+
+<%if @printers.count > 0 %>
+	<table border=1>
+	  <thead>
+	    <tr>
+	      <h5>Installed Printers</h5>
+	    </tr>
+	    <tr>
+	      <th>Description</th>
+	      <th>Serial Number</th>
+	      <th>Status</th>
+	      <th>IP Address</th>
+	      <th>Department</th>
+	    </tr>
+	  </thead>
+	
+	<% @printers.each do |printer| %>
+	  <tbody>
+	     <tr class="spriteButton" onclick="document.location='<%=equipment_path(Equipment.find(printer.id))%>'" style="cursor:pointer">
+	      <td><%=printer.description%></td>
+	      <td><%=printer.serial%></td>
+	      <td><%=printer.statusAlias%></td>
+	      <td><%=printer.ip%></td>
+	      <td><%=Department.find(printer.departmentID).name%></td>
+	    </tr>
+	  </tbody>
+	<%end%>
+	</table>
+<%end%>
+
+<%if @others.count > 0 %>
+	<table border=1>
+	  <thead>
+	    <tr>
+	      <h5>Other Installed Equipment</h5>
+	    </tr>
+	    <tr>
+	      <th>Description</th>
+	      <th>Serial Number</th>
+	      <th>Status</th>
+	      <th>Department</th>
+	    </tr>
+	  </thead>
+	
+	<% @others.each do |other| %>
+	  <tbody>
+	     <tr class="spriteButton" onclick="document.location='<%=equipment_path(Equipment.find(other.id))%>'" style="cursor:pointer">
+	      <td><%=other.description%></td>
+	      <td><%=other.serial%></td>
+	      <td><%=other.statusAlias%></td>
+	      <td><%=Department.find(other.departmentID).name%></td>
+	    </tr>
+	  </tbody>
+	<%end%>
+	</table>
+<%end%>
 
 <%= link_to 'Edit', edit_location_path(@location) %> |
 <%= link_to 'Back', locations_path %>

@@ -2,7 +2,7 @@ class Computer < Equipment
 	has_many :printer_associations
 
 	def digest
-		"#{self.description} - #{self.serial}"
+		"#{self.description} - SN#{self.serial}"
 	end
 end
 

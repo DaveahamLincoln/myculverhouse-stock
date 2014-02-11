@@ -11,8 +11,8 @@
 
 <% @printer_associations.each do |printer_association| %>
   <tr>
-    <td><%= printer_association.equipmentID %></td>
-    <td><%= printer_association.printerID %></td>
+    <td><%= Equipment.find(printer_association.equipmentID).digest %></td>
+    <td><%= Equipment.find(printer_association.printerID).digest %></td>
     <td><%= link_to 'Show', printer_association %></td>
     <td><%= link_to 'Destroy', printer_association, method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>

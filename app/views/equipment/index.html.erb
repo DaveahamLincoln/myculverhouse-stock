@@ -21,9 +21,9 @@
       <td><%=equipment.type%></td>
       <td><%=equipment.description%></td>
       <td><%=equipment.serial%></td>
-      <td><%=equipment.status%></td>
-      <td><%=equipment.locationID%></td>
-      <td><%=equipment.departmentID%></td>
+      <td><%=equipment.statusAlias%></td>
+      <td><%=Location.find(equipment.locationID).name%></td>
+      <td><%=Department.find(equipment.departmentID).name%></td>
     </tr>
   </tbody>
 <% end %>

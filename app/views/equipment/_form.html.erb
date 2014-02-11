@@ -12,6 +12,11 @@
   <% end %>
 
   <div class="field">
+    <%= f.label :description %><br />
+    <%= f.text_field :description %>
+  </div>
+
+  <div class="field">
     <%= f.label :serial %><br />
     <%= f.text_field :serial %>
   </div>
@@ -31,11 +36,6 @@
   <div class="field">
     <%= f.label "Department" %>
     <%= f.collection_select(:departmentID, Department.all, :id, :name, :include_blank => false) %>
-  </div>
-
-  <div class="field">
-    <%= f.label :description %><br />
-    <%= f.text_field :description %>
   </div>
 
   <div class="field">

@@ -1,0 +1,28 @@
+<h1>Listing Printer Associations for Inventory Item #<%=@equipment.id%></h1>
+
+<table border=1>
+  <thead>
+    <tr>
+      <h5>Connected Printers</h5>
+    </tr>
+    <tr>
+      <th>Description</th>
+      <th>IP Address</th>
+      <th>Location</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% PrinterAssociation.all.each do |printer| %>
+      <% if printer.equipmentID==@equipment.id then %>
+        <tr>
+          <td><%=Printer.find(printer.printerID).description%></td>
+          <td><%=Printer.find(printer.printerID).ip%></td>
+          <td><%=Location.find(Printer.find(printer.printerID).locationID).name%></td>
+          <td><%= link_to 'Destroy', "/printer_associations/#{printer.id}", method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <%end%>
+    <%end%>
+  </tbody>
+</table>

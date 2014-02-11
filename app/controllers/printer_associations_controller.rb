@@ -82,4 +82,9 @@ class PrinterAssociationsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  #POST /printer_associations/uninstall/1
+  def uninstall
+    @equipment = Equipment.find(params[:equipmentID])
+  end
 end

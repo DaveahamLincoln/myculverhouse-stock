@@ -14,7 +14,10 @@ class LocationsController < ApplicationController
   # GET /locations/1.json
   def show
     @location = Location.find(params[:id])
-
+    @qr = RQRCode::QRCode.new("http://0.0.0.0:3000/locations/#{@location.id}")
+    @computers = Computer.where(locationID: @location.id)
+    @printers = Printer.where(locationID: @location.id)
+    @others = Other.where(locationID: @location.id)
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @location }
