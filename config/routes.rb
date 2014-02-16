@@ -53,17 +53,21 @@ MyculverhouseStock::Application.routes.draw do
   get "/faculty" => "faculty#index"
   post "/faculty" => "faculty#index"
 
-  resources :equipment
+  #DISABLED FOR PATCH 1.0.2b
+  #resources :equipment
 
-  post '/computer_program_associations/:equipmentID', to: "computer_program_associations#new"
-  post '/computer_program_associations/uninstall/:equipmentID', to: "computer_program_associations#uninstall"
-  resources :computer_program_associations, :only => [:index, :create, :update, :destroy, :show]
+  #DISABLED FOR PATCH 1.0.2b
+  #post '/computer_program_associations/:equipmentID', to: "computer_program_associations#new"
+  #post '/computer_program_associations/uninstall/:equipmentID', to: "computer_program_associations#uninstall"
+  #resources :computer_program_associations, :only => [:index, :create, :update, :destroy, :show]
 
-  post '/printer_associations/:equipmentID', to: "printer_associations#new"
-  post '/printer_associations/uninstall/:equipmentID', to: "printer_associations#uninstall"
-  resources :printer_associations, :only => [:index, :create, :update, :destroy, :show]
+  #DISABLED FOR PATCH 1.0.2b
+  #post '/printer_associations/:equipmentID', to: "printer_associations#new"
+  #post '/printer_associations/uninstall/:equipmentID', to: "printer_associations#uninstall"
+  #resources :printer_associations, :only => [:index, :create, :update, :destroy, :show]
 
-  resources :computer_programs
+  #DISABLED FOR PATCH 1.0.2b
+  #resources :computer_programs
 
   # This line mounts Monologue's routes at the root of your application.
   # This means, any requests to URLs such as /my-post, will go to Monologue::PostsController.

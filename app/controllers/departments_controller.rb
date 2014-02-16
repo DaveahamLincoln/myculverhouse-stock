@@ -66,7 +66,7 @@ class DepartmentsController < ApplicationController
             identifier: "#{@ident.downcase}",
 
             #pulls the hostname for the parent site
-            hostname: '0.0.0.0:3000',
+            hostname: 'rubywebdev.cba.ua.edu:3000',
 
             #sets the root path for the new site to /Departments.  There is no actual /Departments route handled by Comfy, but it provides an easy mnemonic
             #GET "/departments" should be mapped to a static page that links to all sites created in this manner.
