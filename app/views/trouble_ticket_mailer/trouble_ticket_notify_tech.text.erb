@@ -1,0 +1,19 @@
+TroubleTicketMailer#trouble_ticket_notify_tech
+
+Dear <%= @tech.firstName %>,
+
+You have been assigned a new trouble ticket.
+
+--------------------------------------------
+
+Trouble Ticket #<%= @ticket.id %>
+Urgency: <%= @ticket.urgency %>
+
+Issue: 
+<%= @ticket.problemDescription %>
+
+--------------------------------------------
+
+Please either log into the ticketing system or click the URL below to accept this ticket.
+
+<%= "0.0.0.0:3000/trouble_tickets/#{@ticket.id}" %>

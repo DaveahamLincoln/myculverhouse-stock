@@ -1,0 +1,19 @@
+TroubleTicketMailer#trouble_ticket_notify_admin_of_orphan
+
+A trouble ticket has been orphaned.
+
+--------------------------------------------
+
+Trouble Ticket #<%= @ticket.id %>
+Urgency: <%= @ticket.urgency %>
+Time Created: <%= @ticket.created_at %>
+Assigned Tech: <%= @tech.formal_name %>
+
+Issue: 
+<%= @ticket.problemDescription %>
+
+--------------------------------------------
+
+Please either log into the ticketing system or click the URL below to review this ticket.
+
+<%= "0.0.0.0:3000/trouble_tickets/#{@ticket.id}" %>

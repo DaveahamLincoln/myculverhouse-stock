@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140210195354) do
+ActiveRecord::Schema.define(:version => 20140213190154) do
 
   create_table "action_items", :force => true do |t|
     t.integer  "createdByID"
@@ -299,6 +299,28 @@ ActiveRecord::Schema.define(:version => 20140210195354) do
     t.text     "publicationText"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
+  end
+
+  create_table "trouble_tickets", :force => true do |t|
+    t.integer  "locationID"
+    t.integer  "equipmentID"
+    t.integer  "programID"
+    t.string   "problemDescription"
+    t.integer  "status"
+    t.datetime "dateScheduled"
+    t.integer  "clientID"
+    t.integer  "requestedBy"
+    t.integer  "receivingTech"
+    t.integer  "assignedTech"
+    t.boolean  "assignedTechConfirmed"
+    t.integer  "supervisorID"
+    t.datetime "dateClosed"
+    t.string   "techNotes"
+    t.integer  "urgency"
+    t.string   "resolution"
+    t.datetime "created_at",            :null => false
+    t.datetime "updated_at",            :null => false
+    t.integer  "closingTech"
   end
 
   create_table "users", :force => true do |t|

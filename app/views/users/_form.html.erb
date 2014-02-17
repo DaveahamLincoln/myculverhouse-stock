@@ -1,9 +1,4 @@
-<!--
-TODO:
-Refactor using simple_form?
--->
-
-<%= form_for @user do |f| %>
+<%= simple_form_for @user do |f| %>
   <% if @user.errors.any? %>
       <div class="span6 offset5">
         <div class="text-left alert alert-danger">Form is invalid
@@ -37,6 +32,19 @@ Refactor using simple_form?
     <%= f.text_field :phoneNumber %>
   </div>    
 
+  <div class="span3"><%= f.label "Location" %>
+    <%= #f.collection_select syntax:
+    #f.collection_select(:paramYouWantToAssign,Collection.all,:thingYouWantToAssignToParam,:thingYouWantFormToDisplay,:options)
+    f.collection_select(:locationID, Location.all, :id, :name, :include_blank => true) %>
+  </div>
+
+
+  <div class="span3"><%= f.label "Department" %>
+    <%= #f.collection_select syntax:
+    #f.collection_select(:paramYouWantToAssign,Collection.all,:thingYouWantToAssignToParam,:thingYouWantFormToDisplay,:options)
+    f.collection_select(:locationID, Department.all, :id, :name, :include_blank => true) %>
+  </div>
+
   <div class="field">
     <%= f.label "Password" %>
     <%= f.password_field :password %>
@@ -62,6 +70,23 @@ Refactor using simple_form?
     <%= f.label "Communications User" %>
     <%= f.check_box :isCommunicationsUser %>
   </div>
+
+  <div class="field">
+    <%= f.label "Supervisor User" %>
+    <%= f.check_box :isSupervisorUser %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Tech User" %>
+    <%= f.check_box :isTechUser %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Client User" %>
+    <%= f.check_box :isClientUser %>
+  </div>
+
+
 
 <%# Reenable if we reenable Paperclip support
   div class="field">

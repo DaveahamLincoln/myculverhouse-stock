@@ -1,0 +1,17 @@
+TroubleTicketMailer#trouble_ticket_notify_admin_of_create
+
+An urgent trouble ticket has been created.
+
+--------------------------------------------
+
+Trouble Ticket #<%= @ticket.id %>
+Urgency: <%= @ticket.urgency %>
+
+Issue: 
+<%= @ticket.problemDescription %>
+
+--------------------------------------------
+
+Please either log into the ticketing system or click the URL below to review this ticket.
+
+<%= "0.0.0.0:3000/trouble_tickets/#{@ticket.id}" %>

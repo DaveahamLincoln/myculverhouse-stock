@@ -9,7 +9,10 @@ class User < ActiveRecord::Base
 	#:phone
 	
 	validates_presence_of :firstName, :lastName, :email, :password, :password_confirmation, :on => :create
-	attr_accessible :email, :password, :password_confirmation, :lastName, :firstName, :isGenericUser, :isFacultyUser, :isSuperUser, :isCommunicationsUser, :phoneNumber, :avatar
+	attr_accessible :email, :password, :password_confirmation, :lastName, :firstName, 
+      :isGenericUser, :isFacultyUser, :isSuperUser, :isCommunicationsUser, :phoneNumber,:isSupervisorUser,
+      :isTechUser,:isClientUser,:departmentID,:locationID
+	#:avatar
 
 	def send_password_reset
 		generate_token(:password_reset_token)

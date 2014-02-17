@@ -1,0 +1,37 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  locationID: 1
+  equipmentID: 
+  programID: 
+  problemDescription: MyString
+  status: 1
+  dateScheduled: 2014-02-13 12:43:11
+  clientID: 1
+  requestedBy: 1
+  receivingTech: 1
+  assignedTech: 1
+  assignedTechConfirmed: false
+  supervisorID: 1
+  dateClosed: 2014-02-13 12:43:11
+  techNotes: MyString
+  urgency: 1
+  resolution: MyString
+
+two:
+  locationID: 1
+  equipmentID: 
+  programID: 
+  problemDescription: MyString
+  status: 1
+  dateScheduled: 2014-02-13 12:43:11
+  clientID: 1
+  requestedBy: 1
+  receivingTech: 1
+  assignedTech: 1
+  assignedTechConfirmed: false
+  supervisorID: 1
+  dateClosed: 2014-02-13 12:43:11
+  techNotes: MyString
+  urgency: 1
+  resolution: MyString

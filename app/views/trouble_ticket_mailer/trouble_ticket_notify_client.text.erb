@@ -1,0 +1,15 @@
+TroubleTicketMailer#trouble_ticket_notify_client
+
+<%= "Dear #{@client.firstName} #{@client.lastName}," %>
+
+Your support request has been received and entered into our system.
+
+--------------------------------------------
+
+Trouble Ticket #<%= @ticket.id %>
+Urgency: <%= @ticket.urgency %>
+
+Issue: 
+<%= @ticket.problemDescription %>
+
+--------------------------------------------

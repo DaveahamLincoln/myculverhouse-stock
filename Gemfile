@@ -18,6 +18,11 @@ group :assets do
   gem 'therubyracer', :platforms => :ruby
 
   gem 'uglifier', '>= 1.0.3'
+
+  gem 'compass-rails'
+
+  #Foundation CSS Layout
+  gem 'zurb-foundation'
 end
 
 gem 'jquery-rails'
@@ -59,8 +64,7 @@ gem 'comfortable_mexican_sofa', '~>1.8.0'
 #QR Code generator
 gem 'rqrcode'
 
-#Foundation CSS Layout
-gem 'foundation-rails'
+gem 'rufus-scheduler'
 
 #Forge
 #no idea why this doesn't work when the gem is at vendor/plugins/comfy

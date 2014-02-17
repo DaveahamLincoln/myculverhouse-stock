@@ -1,0 +1,120 @@
+<h1>Ticket #<%= @trouble_ticket.id %>
+
+<% if current_user.id == @trouble_ticket.assignedTech %>
+  <%if not @trouble_ticket.assignedTechConfirmed %>
+    <%= button_to 'Accept Ticket', action: "accept_ticket"  %>
+  <%end%>
+<%end%>
+
+
+</h1>
+
+<p id="notice"><%= notice %></p>
+
+<p> 
+  <strong>Location:</strong>
+  <%= Location.find(@trouble_ticket.locationID).name %>
+</p>
+
+<p>
+  <strong>Program?</strong>
+  <%if @trouble_ticket.programID %>
+    <%=ComputerProgram.find(@trouble_ticket.programID).digest %>
+  <%end%>
+</p>
+
+<p>
+  <strong>Equipment?</strong>
+  <%if @trouble_ticket.equipmentID %>
+  <%= Equipment.find(@trouble_ticket.equipmentID).digest %>
+  <%end%>
+</p>
+
+<p>
+  <strong>Problem Description:</strong>
+  <%= @trouble_ticket.problemDescription %>
+</p>
+
+<p>
+  <strong>Resolution:</strong>
+  <%= @trouble_ticket.resolution %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%if @trouble_ticket.status==0 then %>
+    Closed
+  <% elsif @trouble_ticket.status==1 then %>
+    Open
+  <% elsif @trouble_ticket.status==2 then %>
+    Deployed
+  <% elsif @trouble_ticket.status==3 then %>
+    Awaiting Hardware
+  <% elsif @trouble_ticket.status==4 then %>
+    Awaiting Client
+  <% elsif @trouble_ticket.status==5 then %>
+    Outsourced
+  <% elsif @trouble_ticket.status==6 then %>
+    On Hold
+  <% else %>
+    Other
+  <%end%>
+</p>
+
+<p>
+  <strong>Client:</strong>
+  <%= User.find(@trouble_ticket.clientID).formal_name %>
+</p>
+
+<p>
+  <strong>Receiving Tech:</strong>
+  <%= User.find(@trouble_ticket.receivingTech).formal_name %>
+</p>
+
+<p>
+  <strong>Closing Tech:</strong>
+  <% if @trouble_ticket.closingTech %>
+  <%= User.find(@trouble_ticket.closingTech).formal_name %>
+  <%end%>
+</p>
+
+<p>
+  <strong>Assigned Tech:</strong>
+  <%= User.find(@trouble_ticket.assignedTech).formal_name %>
+</p>
+
+<p>
+  <strong>Assigned Tech Confirmed?</strong>
+  <%= @trouble_ticket.assignedTechConfirmed %>
+</p>
+
+
+<p>
+  <strong>Supervisor:</strong>
+  <%if @trouble_ticket.supervisorID %>
+  <%= User.find(@trouble_ticket.supervisorID).formal_name %>
+  <%end%>
+</p>
+
+<p>
+  <strong>Date Closed:</strong>
+  <%= @trouble_ticket.dateClosed %>
+</p>
+
+<p>
+  <strong>Urgency:</strong>
+  <%= @trouble_ticket.urgency %>
+</p>
+
+<p>
+  <strong>Date Scheduled:</strong>
+  <%= @trouble_ticket.dateScheduled %>
+</p>
+
+| <%= link_to 'Edit', edit_trouble_ticket_path(@trouble_ticket) %> |
+<%# Might be this one instead of the one below:
+link_to "text_to_show_in_url, action_controller_path(:gender => "male", :param2=> "something_else") 
+%>
+<%= link_to 'Back', trouble_tickets_path %> |
+<%= link_to 'Close', @trouble_ticket, :confirm => 'Are you sure?', :method => "close" %> | 
+<%= link_to 'Delete', @trouble_ticket, :confirm => 'Are you sure?', :method => :delete %> |

@@ -1,0 +1,31 @@
+<h1>Closed Tickets</h1>
+
+<table class="table table-bordered">
+	<th>Ticket ID</th>
+	<th>Date Closed</th>
+	<th>Status</th>
+	<th>Closing Technician</th>
+	<th>Client</th>
+	<th>Resolution</th>
+
+
+<!--Should omit open tickets-->
+	<% TroubleTicket.all.each do |ticket| %>
+
+	<!--Best practice seems to dictate that this conditional logic be handled by a helper.  I'm not sure how to use helpers, so I'm going to do this for the time being.-->
+		<% if ticket.status==1 then %>
+			<%next%>	<!--Skips open tickets-->
+		<% else %>
+			<tr bgcolor="#00FFFF" class="spriteButton" onclick="document.location='<%=trouble_ticket_path(ticket.id)%>'" style="cursor:pointer">
+		<%end%>
+				<td><%= ticket.id %></a></td>
+				<td><%= ticket.dateClosed ? ticket.dateClosed.in_time_zone("Central Time (US & Canada)") : "--/--/----" %></td> 
+				<td>Closed</td>
+				<td><%=User.find(ticket.closingTechID).formal_name %></td>
+				<td><%= User.find(ticket.clientID).formal_name %></td>
+				<td><%= ticket.resolution %></td>
+			</tr>
+	<%end%>
+</table>
+
+| <%= link_to trouble_ticket_path(:new) do %>New Ticket<%end%> | <%= link_to "Open Tickets", :controller => "trouble_tickets", :action => "index"%> |

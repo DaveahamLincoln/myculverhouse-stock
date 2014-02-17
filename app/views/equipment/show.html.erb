@@ -25,8 +25,8 @@
       <td><%=@equipment.description%></td>
       <td><%=@equipment.serial%></td>
       <td><%=@equipment.statusAlias%></td>
-      <td><%=Location.find(@equipment.locationID).name%></td>
-      <td><%=Department.find(@equipment.departmentID).name%></td>
+      <td><%=link_to Location.find(@equipment.locationID).name, "/locations/#{@equipment.locationID}"%></td>
+      <td><%=link_to Department.find(@equipment.departmentID).name, "/departments/shard/#{@equipment.departmentID}"%></td>
     </tr>
   </tbody>
 </table>
