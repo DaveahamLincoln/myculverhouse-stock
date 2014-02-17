@@ -19,10 +19,10 @@ group :assets do
 
   gem 'uglifier', '>= 1.0.3'
 
-  gem 'compass-rails'
+  #gem 'compass-rails'
 
   #Foundation CSS Layout
-  gem 'zurb-foundation'
+  #gem 'zurb-foundation'
 end
 
 gem 'jquery-rails'

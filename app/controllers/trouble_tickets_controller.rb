@@ -23,6 +23,16 @@ class TroubleTicketsController < ApplicationController
     end
   end
 
+=begin
+  def add_to_equipment
+    @trouble_ticket = TroubleTicket.new
+
+    respond_to do |format|
+      format.html # new.html.erb
+      format.json { render json: @trouble_ticket }
+  end
+=end
+
   # GET /trouble_tickets/new
   # GET /trouble_tickets/new.json
   def new

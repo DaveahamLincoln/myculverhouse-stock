@@ -33,7 +33,6 @@ GEM
     arel (3.0.3)
     bcrypt-ruby (3.0.1)
     builder (3.0.4)
-    chunky_png (1.3.0)
     ckeditor (4.0.8)
       mime-types
       orm_adapter
@@ -59,18 +58,11 @@ GEM
       paperclip (>= 3.4.0)
       rails (~> 3.1)
       sass-rails (>= 3.1.0)
-    compass (0.12.2)
-      chunky_png (~> 1.2)
-      fssm (>= 0.2.7)
-      sass (~> 3.1)
-    compass-rails (1.1.3)
-      compass (>= 0.12.2)
     daemon_controller (1.1.8)
     erubis (2.7.0)
     execjs (2.0.2)
     formatted_form (2.1.2)
       rails (>= 3.1)
-    fssm (0.2.10)
     haml (4.0.5)
       tilt
     haml-rails (0.4)
@@ -183,8 +175,6 @@ GEM
       execjs (>= 0.3.0)
       json (>= 1.8.0)
     watu_table_builder (0.3.0)
-    zurb-foundation (4.3.2)
-      sass (>= 3.2.0)
 
 PLATFORMS
   ruby
@@ -193,7 +183,6 @@ DEPENDENCIES
   bcrypt-ruby (~> 3.0.0)
   coffee-rails (~> 3.2.1)
   comfortable_mexican_sofa (~> 1.8.0)
-  compass-rails
   jquery-rails
   mixable_engines
   monologue
@@ -211,4 +200,3 @@ DEPENDENCIES
   therubyracer
   uglifier (>= 1.0.3)
   watu_table_builder
-  zurb-foundation

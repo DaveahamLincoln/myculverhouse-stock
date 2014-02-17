@@ -66,6 +66,7 @@ MyculverhouseStock::Application.routes.draw do
   resources :computer_programs
 
   post '/trouble_tickets/:id', to: "trouble_tickets#close"
+  #post '/trouble_tickets/new/:id', to: "trouble_tickets#add_to_equipment"
   get "trouble_tickets/closed_tickets" => "trouble_tickets#closed_tickets"
   
   resources :trouble_tickets do
@@ -145,3 +146,4 @@ MyculverhouseStock::Application.routes.draw do
   # Note: This route will make all actions in every controller accessible via GET requests.
   # match ':controller(/:action(/:id))(.:format)'
 end
+

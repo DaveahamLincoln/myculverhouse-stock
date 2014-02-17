@@ -20,10 +20,10 @@ class EquipmentController < ApplicationController
     @equipment = Equipment.find(params[:id])
     #!TODO Alter predeploy
     @qr = RQRCode::QRCode.new("http://0.0.0.0:3000/equipment/#{@equipment.id}")
-    #@tickets = Ticket.where(:equipmentID == @equipment.id)
+    @tickets = TroubleTicket.where(equipmentID: @equipment.id)
 
     #Disables the ticket display until tickets are working.
-    @tickets = Equipment.none
+    #@tickets = Equipment.none
 
     respond_to do |format|
       format.html # show.html.erb

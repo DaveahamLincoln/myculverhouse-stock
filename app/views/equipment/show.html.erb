@@ -111,17 +111,17 @@
     <tbody>
     <% @tickets.each do |t| %>
       <% if t.status==0 then %>
-        <tr bgcolor="#C0C0C0" class="spriteButton" onclick="document.location='<%=ticket_path(t.id)%>'" style="cursor:pointer">
+        <tr bgcolor="#C0C0C0" class="spriteButton" onclick="document.location='<%=trouble_ticket_path(t.id)%>'" style="cursor:pointer">
       <% elsif t.urgency.between?(1,2) then %>
-        <tr bgcolor="#00FF00" class="spriteButton" onclick="document.location='<%=ticket_path(t.id)%>'" style="cursor:pointer">
+        <tr bgcolor="#00FF00" class="spriteButton" onclick="document.location='<%=trouble_ticket_path(t.id)%>'" style="cursor:pointer">
       <% elsif t.urgency.between?(3,4) then %>
-        <tr bgcolor="#FFFF00" class="spriteButton" onclick="document.location='<%=ticket_path(t.id)%>'" style="cursor:pointer">
+        <tr bgcolor="#FFFF00" class="spriteButton" onclick="document.location='<%=trouble_ticket_path(t.id)%>'" style="cursor:pointer">
       <% elsif t.urgency == 5 then%>
-        <tr bgcolor="#FF0000" class="spriteButton" onclick="document.location='<%=ticket_path(t.id)%>'" style="cursor:pointer">
+        <tr bgcolor="#FF0000" class="spriteButton" onclick="document.location='<%=trouble_ticket_path(t.id)%>'" style="cursor:pointer">
       <% elsif t.urgency==0 then%>
-        <tr bgcolor="#6D6D70" class="spriteButton" onclick="document.location='<%=ticket_path(t.id)%>'" style="cursor:pointer">
+        <tr bgcolor="#6D6D70" class="spriteButton" onclick="document.location='<%=trouble_ticket_path(t.id)%>'" style="cursor:pointer">
       <% else %>
-        <tr class="spriteButton" onclick="document.location='<%=ticket_path(t.id)%>'" style="cursor:pointer">
+        <tr class="spriteButton" onclick="document.location='<%=trouble_ticket_path(t.id)%>'" style="cursor:pointer">
       <%end%>
       
           <td><%=t.id%></td>
@@ -135,7 +135,7 @@
    
     <%end%>
 
-        <tr><%= link_to 'Add A Ticket', "/tickets/new/#{@equipment.id}", method: :post %></tr>
+        <tr><%#= link_to 'Add A Ticket', "/trouble_tickets/new/#{@equipment.id}", method: :post %></tr>
       </tbody>
     </table>
 <%end%>
