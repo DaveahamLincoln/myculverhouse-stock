@@ -95,7 +95,7 @@
   <table border=1>
     <thead>
       <tr>
-        <h5>Ticket History</h5>
+        <h5>Open Tickets</h5>
       </tr>
       <tr>
         <th>Ticket ID</th>
@@ -104,14 +104,13 @@
         <th>Technician</th>
         <th>Client</th>
         <th>Problem</th>
-        <th>Resolution</th>
       </tr>
     </thead>
 
     <tbody>
     <% @tickets.each do |t| %>
       <% if t.status==0 then %>
-        <tr bgcolor="#C0C0C0" class="spriteButton" onclick="document.location='<%=trouble_ticket_path(t.id)%>'" style="cursor:pointer">
+        <%next%>
       <% elsif t.urgency.between?(1,2) then %>
         <tr bgcolor="#00FF00" class="spriteButton" onclick="document.location='<%=trouble_ticket_path(t.id)%>'" style="cursor:pointer">
       <% elsif t.urgency.between?(3,4) then %>
@@ -123,18 +122,67 @@
       <% else %>
         <tr class="spriteButton" onclick="document.location='<%=trouble_ticket_path(t.id)%>'" style="cursor:pointer">
       <%end%>
-      
-          <td><%=t.id%></td>
-          <td><%=t.created_at%></td>
-          <td><%=t.status%></td>
-          <td><%=t.assignedTech%></td>
-          <td><%=t.clientID%></td>
-          <td><%=t.problemDescription%></td>
-          <td><%=t.resolution%></td>
-        </tr>
-   
-    <%end%>
+        <td><%= t.id %></a></td>
+        <td><%= t.created_at.in_time_zone("Central Time (US & Canada)") %></td>
+        
+        <!--BEGIN TICKET STATUS FORMATTING BLOCK-->
+        <!--!TODO-REFACTOR TO MODEL LEVEL-->
+        <% if t.status==1 then %>
+            <td>Open</td>
+        <% elsif t.status==2 then %>
+            <td>Deployed</td>
+        <% elsif t.status==3 then %>
+            <td>Awaiting Hardware</td>
+        <% elsif t.status==4 then %>
+            <td>Awaiting Client</td>
+        <% elsif t.status==5 then %>
+            <td>Outsourced</td>
+        <% elsif t.status==6 then %>
+            <td>On Hold</td>
+        <% else %>
+            <%next%>
+        <%end%>
+        <!--END TICKET STATUS FORMATTING BLOCK-->
 
+        <td><%= User.find(t.assignedTech).formal_name %></td>
+        <td><%= User.find(t.clientID).formal_name %></td> 
+        <td><%= t.problemDescription %></td>
+      </tr>   
+    <%end%>
+        <tr><%#= link_to 'Add A Ticket', "/trouble_tickets/new/#{@equipment.id}", method: :post %></tr>
+    </tbody>
+  </table>
+
+  <table border=1>
+    <thead>
+      <tr>
+        <h5>Ticket History</h5>
+      </tr>
+      <tr>
+        <th>Ticket ID</th>
+        <th>Date Created</th>
+        <th>Technician</th>
+        <th>Client</th>
+        <th>Problem</th>
+        <th>Resolution</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @tickets.each do |t| %>
+        <% if t.status==0 then %>
+          <tr bgcolor="#C0C0C0" class="spriteButton" onclick="document.location='<%=trouble_ticket_path(t.id)%>'" style="cursor:pointer">
+        <%else%>
+          <%next%>
+        <%end%>
+            <td><%= t.id %></a></td>
+            <td><%= t.created_at.in_time_zone("Central Time (US & Canada)") %></td>
+            <td><%= User.find(t.assignedTech).formal_name %></td>
+            <td><%= User.find(t.clientID).formal_name %></td> 
+            <td><%= t.problemDescription %></td>
+            <td><%= t.resolution %></td>
+          </tr>   
+      <%end%>
         <tr><%#= link_to 'Add A Ticket', "/trouble_tickets/new/#{@equipment.id}", method: :post %></tr>
       </tbody>
     </table>

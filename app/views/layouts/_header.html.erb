@@ -50,8 +50,8 @@
 		<%= link_to '| Master Calendar |','/calendar',method: :index %> <%= link_to '| News Queue |','/news',method: :index %> <%= link_to '| Faculty Index |','/faculty',method: :index %> <%= link_to '| Blog |','/blog'%>
 	<%end%>
 
-	<%if current_user.isSuperUser or current_user.godBit or current_user.isTechUser%>
-		<%= link_to '| Equipment |','/equipment/', method: :get %> <%= link_to '| Locations |', '/locations/', method: :get %> <%= link_to '| Computer Programs |','/computer_programs/', method: :get %>
+	<%if current_user.isSuperUser or current_user.godBit or current_user.isTechUser or current_user.isSupervisorUser%>
+		<%= link_to '| Equipment |','/equipment/', method: :get %> <%= link_to '| Locations |', '/locations/', method: :get %> <%= link_to '| Computer Programs |','/computer_programs/', method: :get %> <%= link_to '| Trouble Tickets |','/trouble_tickets/', method: :get %> 
 	<%end%>
 
 <%end%>

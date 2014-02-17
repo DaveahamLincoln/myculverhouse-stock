@@ -1,6 +1,6 @@
 <h1>Closed Tickets</h1>
 
-<table class="table table-bordered">
+<table border=1>
 	<th>Ticket ID</th>
 	<th>Date Closed</th>
 	<th>Status</th>
@@ -21,7 +21,7 @@
 				<td><%= ticket.id %></a></td>
 				<td><%= ticket.dateClosed ? ticket.dateClosed.in_time_zone("Central Time (US & Canada)") : "--/--/----" %></td> 
 				<td>Closed</td>
-				<td><%=User.find(ticket.closingTechID).formal_name %></td>
+				<td><%=User.find(ticket.closingTech).formal_name %></td>
 				<td><%= User.find(ticket.clientID).formal_name %></td>
 				<td><%= ticket.resolution %></td>
 			</tr>

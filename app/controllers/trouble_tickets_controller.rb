@@ -63,14 +63,10 @@ class TroubleTicketsController < ApplicationController
           elsif @trouble_ticket.resolution.empty?
             format.html { redirect_to @trouble_ticket, notice: 'Please enter a resolution for this ticket.' }
             format.json { head :no_content }
-          elsif @trouble_ticket.resolutionDescription.empty?
-            format.html { redirect_to @trouble_ticket, notice: 'Please enter a resolution description for this ticket.' }
-            format.json { head :no_content }
-          #end
           else
-            @trouble_ticket.update(:dateClosed => Time.now())
-            @trouble_ticket.update(:closingTechID => current_user.id)
-            @trouble_ticket.update(:status => 0)
+            @trouble_ticket.update_attributes(:dateClosed => Time.now())
+            @trouble_ticket.update_attributes(:closingTech => current_user.id)
+            @trouble_ticket.update_attributes(:status => 0)
             format.html { redirect_to @trouble_ticket, notice: 'Trouble ticket has been closed successfully.' }
             format.json { head :no_content }
             @trouble_ticket.send_trouble_ticket_close_burst
@@ -146,7 +142,7 @@ class TroubleTicketsController < ApplicationController
     # params.require(:person).permit(:name, :age)
     # Also, you can specialize this method with per-user checking of permissible attributes.
     def trouble_ticket_params
-      params.require(:trouble_ticket).permit(:assignedTech, :assignedTechConfirmed, :clientID, :dateClosed, :dateScheduled, :equipmentID, :locationID, :problemDescription, :programID, :receivingTech, :requestedBy, :resolution, :status, :supervisorID, :techNotes, :urgency)
+      params.require(:trouble_ticket).permit(:assignedTech, :assignedTechConfirmed, :clientID, :dateClosed, :dateScheduled, :equipmentID, :locationID, :problemDescription, :programID, :receivingTech, :requestedBy, :resolution, :status, :supervisorID, :techNotes, :urgency, :closingTech)
     end
 
     def set_trouble_ticket

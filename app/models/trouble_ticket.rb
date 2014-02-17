@@ -1,7 +1,7 @@
 class TroubleTicket < ActiveRecord::Base
   attr_accessible :assignedTech, :assignedTechConfirmed, :clientID, :dateClosed, :dateScheduled, 
   :equipmentID, :locationID, :problemDescription, :programID, :receivingTech, :requestedBy, :resolution, 
-  :status, :supervisorID, :techNotes, :urgency
+  :status, :supervisorID, :techNotes, :urgency, :closingTech
 
   def send_trouble_ticket_create_burst
     #Uses the TroubleTicketMailer in app/mailers to send mail to the assigned tech and the client.
@@ -30,6 +30,14 @@ class TroubleTicket < ActiveRecord::Base
         end
       end
     end
+  end
+
+  def send_trouble_ticket_close_burst
+    #Mailer sends the client a notification that their ticket has been closed which includes a link to a google form with an exit survey.
+    TroubleTicketMailer.trouble_ticket_notify_client_of_close(self).deliver
+    #Fires the unsubscribe_from_thread method.
+    #unsubscribe_from_thread(self)
+    #close_thread(self)
   end
 
 end
