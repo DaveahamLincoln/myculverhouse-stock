@@ -1,0 +1,23 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Ticketid:</b>
+  <%= @job.ticketID %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @job.description %>
+</p>
+
+<p>
+  <b>Completed:</b>
+  <%= @job.completed %>
+</p>
+
+<p>
+  <b>Completedbyid:</b>
+  <%= @job.completedByID %>
+</p>
+
+<%= link_to 'Back', jobs_path %>

@@ -111,7 +111,62 @@
   <%= @trouble_ticket.dateScheduled %>
 </p>
 
-| <%= link_to 'Edit', edit_trouble_ticket_path(@trouble_ticket) %> |
+<%if @jobs.count !=0%>
+  <table border=1>
+    <thead>
+      <tr>
+        <h5>Open Jobs</h5>
+      </tr>
+      <tr>
+        <th>Description</th>
+        <th>Created at:</th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @jobs.each do |t| %>
+        <% if !t.completed then %>
+          <tr>
+            <td><%= t.description %></a></td>
+            <td><%= t.created_at.in_time_zone("Central Time (US & Canada)") %></td>
+            <td><%= link_to "Complete", "/jobs/#{@trouble_ticket.id}/complete/#{t.id}", :confirm => 'Are you sure?', method: :post%>
+          </tr>   
+        <%end%>
+      <%end%>
+      </tbody>
+    </table>
+
+  <table border=1>
+    <thead>
+      <tr>
+        <h5>Closed Jobs</h5>
+      </tr>
+      <tr>
+        <th>Description</th>
+        <th>Updated at:</th>
+        <th>Completed by:</th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @jobs.each do |t| %>
+        <% if t.completed then %>
+          <tr>
+            <td><%= t.description %></a></td>
+            <td><%= t.created_at.in_time_zone("Central Time (US & Canada)") %></td>
+            <td><%= User.find(t.completedByID).formal_name %></td>
+            <td><%= link_to "Reopen", "/jobs/#{@trouble_ticket.id}/reopen/#{t.id}", :confirm => 'Are you sure?', method: :post %>
+          </tr>   
+        <%end%>
+      <%end%>
+        </tbody>
+    </table>
+<%end%>
+<div><p></p></div>
+
+| <%= link_to 'Edit', edit_trouble_ticket_path(@trouble_ticket) %> | <%= link_to 'Add A Job', job_path(@trouble_ticket.id,), method: :post %> |
 <%# Might be this one instead of the one below:
 link_to "text_to_show_in_url, action_controller_path(:gender => "male", :param2=> "something_else") 
 %>

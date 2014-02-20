@@ -16,6 +16,7 @@ class TroubleTicketsController < ApplicationController
   # GET /trouble_tickets/1.json
   def show
     @trouble_ticket = TroubleTicket.find(params[:id])
+    @jobs = Job.where(ticketID: @trouble_ticket.id)
 
     respond_to do |format|
       format.html # show.html.erb
@@ -43,6 +44,43 @@ class TroubleTicketsController < ApplicationController
       format.json { render json: @trouble_ticket }
     end
   end
+
+=begin
+
+class Job < ActiveRecord::Base
+  belongs_to :trouble_ticket
+  attr_accessible :completed, :completedByID, :description, :ticketID
+  validates_presence_of :description
+end
+
+  #GET /trouble_tickets/1/new_job
+  def new_job
+    @job = Job.new
+  end
+  
+  def create_new_job
+    @job = Job.new(job_params)
+    @job.update_attributes(:ticketID => params([:ticket_id]))
+
+    respond_to do |format|
+      if @job.save
+        format.html { redirect_to @trouble_ticket, notice: 'Job was successfully added.' }
+      else
+        format.html { render action: "new_job" }
+        format.json { render json: @job.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def complete_job
+    @job = Job.find(params[:id])
+
+  end
+
+  get 'trouble_tickets/:id/new_job' to: "trouble_tickets#new_job"
+  post 'trouble_tickets/:id/complete_job' to: "trouble_tickets#complete_job"
+
+=end
 
   # GET /trouble_tickets/1/edit
   def edit
@@ -80,6 +118,9 @@ class TroubleTicketsController < ApplicationController
   end
 
   def closed_tickets
+  end
+
+  def supervisor_tickets
   end
 
   # POST /trouble_tickets
@@ -143,6 +184,10 @@ class TroubleTicketsController < ApplicationController
     # Also, you can specialize this method with per-user checking of permissible attributes.
     def trouble_ticket_params
       params.require(:trouble_ticket).permit(:assignedTech, :assignedTechConfirmed, :clientID, :dateClosed, :dateScheduled, :equipmentID, :locationID, :problemDescription, :programID, :receivingTech, :requestedBy, :resolution, :status, :supervisorID, :techNotes, :urgency, :closingTech)
+    end
+
+    def job_params
+      params.require(:job).permit(:completed, :completedByID, :description, :ticketID)
     end
 
     def set_trouble_ticket

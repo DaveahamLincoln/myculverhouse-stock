@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140213190154) do
+ActiveRecord::Schema.define(:version => 20140220193858) do
 
   create_table "action_items", :force => true do |t|
     t.integer  "createdByID"
@@ -227,6 +227,15 @@ ActiveRecord::Schema.define(:version => 20140213190154) do
     t.datetime "updated_at",                          :null => false
     t.integer  "cms_site_id"
     t.boolean  "cms_site_enabled", :default => false
+  end
+
+  create_table "jobs", :force => true do |t|
+    t.integer  "ticketID"
+    t.string   "description"
+    t.boolean  "completed",     :default => false
+    t.integer  "completedByID"
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
   end
 
   create_table "locations", :force => true do |t|

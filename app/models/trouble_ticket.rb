@@ -40,4 +40,20 @@ class TroubleTicket < ActiveRecord::Base
     #close_thread(self)
   end
 
+  def status_alias
+    if self.status==1 then
+      "Open"
+    elsif self.status==2 then
+      "Deployed"
+    elsif self.status==3 then
+      "Awaiting Hardware"
+    elsif self.status==4 then
+      "Awaiting Client"
+    elsif self.status==5 then
+      "Outsourced"
+    elsif self.status==6 then
+      "On Hold"
+    end
+  end
+
 end

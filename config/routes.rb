@@ -66,14 +66,21 @@ MyculverhouseStock::Application.routes.draw do
   resources :computer_programs
 
   post '/trouble_tickets/:id', to: "trouble_tickets#close"
+  #!TODO figure out a way to do this
   #post '/trouble_tickets/new/:id', to: "trouble_tickets#add_to_equipment"
   get "trouble_tickets/closed_tickets" => "trouble_tickets#closed_tickets"
+  get "trouble_tickets/supervisor_tickets" => "trouble_tickets#supervisor_tickets"
   
   resources :trouble_tickets do
     member do
       post 'accept_ticket' => :accept_ticket
     end
   end
+
+  post '/jobs/:ticketID', to: "jobs#new"
+  post '/jobs/:ticketID/complete/:id', to: "jobs#complete"
+  post '/jobs/:ticketID/reopen/:id', to: "jobs#reopen"
+  resources :jobs, :only => [:index, :create, :update, :destroy, :show]
 
   # This line mounts Monologue's routes at the root of your application.
   # This means, any requests to URLs such as /my-post, will go to Monologue::PostsController.

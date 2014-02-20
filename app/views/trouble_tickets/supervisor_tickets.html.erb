@@ -1,0 +1,41 @@
+<h1>Supervisor Tickets</h1>
+
+<table border=1>
+	<th>Ticket ID</th>
+	<th>Date Created</th>
+	<th>Status</th>
+	<th>Technician</th>
+	<th>Client</th>
+	<th>Problem</th>
+
+<!--Should omit open tickets-->
+	<% TroubleTicket.all.each do |ticket| %>
+	<!--Best practice seems to dictate that this conditional logic be handled by a helper.  I'm not sure how to use helpers, so I'm going to do this for the time being.-->
+		<%if User.find(ticket.assignedTech).isSupervisorUser%>
+			<% if ticket.status==0 then %>
+	            <%next%>    <!--Skips closed tickets-->
+	        <% elsif ticket.urgency.between?(1,2) then %>
+	            <tr bgcolor="#00FF00" class="spriteButton" onclick="document.location='<%=trouble_ticket_path(ticket.id)%>'" style="cursor:pointer">
+	        <% elsif ticket.urgency.between?(3,4) then %>
+	            <tr bgcolor="#FFFF00" class="spriteButton" onclick="document.location='<%=trouble_ticket_path(ticket.id)%>'" style="cursor:pointer">
+	        <% elsif ticket.urgency == 5 then%>
+	            <tr bgcolor="#FF0000" class="spriteButton" onclick="document.location='<%=trouble_ticket_path(ticket.id)%>'" style="cursor:pointer">
+	        <% elsif ticket.urgency==0 then%>
+	            <tr bgcolor="#6D6D70" class="spriteButton" onclick="document.location='<%=trouble_ticket_path(ticket.id)%>'" style="cursor:pointer">
+	        <% else %>
+	            <tr class="spriteButton" onclick="document.location='<%=trouble_ticket_path(ticket.id)%>'" style="cursor:pointer">
+	        <%end%>
+	                
+	                <td><%= ticket.id %></a></td>
+	                <td><%= ticket.created_at.in_time_zone("Central Time (US & Canada)") %></td>
+	                <td><%= ticket.status_alias%></td>
+	                <td><%= User.find(ticket.assignedTech).formal_name %></td>
+	                <td><%= User.find(ticket.clientID).formal_name %></td> 
+	                <td><%= ticket.problemDescription %></td>
+		<%end%>
+	<%end%>
+</table>
+<div><p></p></div>
+
+
+| <%= link_to trouble_ticket_path(:new) do %>New Ticket<%end%> | <%= link_to "Open Tickets", :controller => "trouble_tickets", :action => "index"%> | <%= link_to "Closed Tickets", :controller => "trouble_tickets", :action => "closed_tickets"%> |
