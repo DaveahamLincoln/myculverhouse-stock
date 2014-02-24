@@ -1,7 +1,5 @@
 <h1>Editing <%=@user.formal_name%></h1>
 
-<%=image_tag @user.avatar.url(:medium)%>
-
 <%if current_user.godBit or current_user.isSuperUser%>
 	<%= render 'form' %>
 <%end%>
