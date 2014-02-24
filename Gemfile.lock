@@ -66,6 +66,9 @@ GEM
       paperclip (>= 3.4.0)
       rails (~> 3.1)
       sass-rails (>= 3.1.0)
+    commontator (4.2.2)
+      jquery-rails
+      rails (>= 3.1)
     daemon_controller (1.1.8)
     erubis (2.7.0)
     execjs (2.0.2)
@@ -191,6 +194,7 @@ DEPENDENCIES
   bcrypt-ruby (~> 3.0.0)
   coffee-rails (~> 3.2.1)
   comfortable_mexican_sofa (~> 1.8.0)
+  commontator (~> 4.2.0)
   jquery-rails
   mixable_engines
   monologue

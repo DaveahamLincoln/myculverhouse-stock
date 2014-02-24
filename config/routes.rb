@@ -65,6 +65,7 @@ MyculverhouseStock::Application.routes.draw do
 
   resources :computer_programs
 
+  post '/trouble_tickets/:comment', to: "trouble_tickets#comment"
   post '/trouble_tickets/:id', to: "trouble_tickets#close"
   #!TODO figure out a way to do this
   #post '/trouble_tickets/new/:id', to: "trouble_tickets#add_to_equipment"
@@ -88,6 +89,8 @@ MyculverhouseStock::Application.routes.draw do
   #
   # We ask that you don't use the :as option here, as Monologue relies on it being the default of "monologue"
   mount Monologue::Engine, at: '/blog' # or whatever path, be it "/blog" or "/monologue"
+
+  mount Commontator::Engine => '/commontator'
 
   # Binds CMS admin path to /cms_admin
   ComfortableMexicanSofa::Routing.admin(:path => '/cms_admin')

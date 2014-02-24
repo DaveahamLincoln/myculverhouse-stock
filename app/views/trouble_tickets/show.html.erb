@@ -173,3 +173,7 @@ link_to "text_to_show_in_url, action_controller_path(:gender => "male", :param2=
 <%= link_to 'Back', trouble_tickets_path %> |
 <%= link_to 'Close', @trouble_ticket, :confirm => 'Are you sure?', :method => "close" %> | 
 <%= link_to 'Delete', @trouble_ticket, :confirm => 'Are you sure?', :method => :delete %> |
+
+<div><p></p></div>
+
+<%= commontator_thread(@trouble_ticket) %>

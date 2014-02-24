@@ -3,6 +3,8 @@ class TroubleTicket < ActiveRecord::Base
   :equipmentID, :locationID, :problemDescription, :programID, :receivingTech, :requestedBy, :resolution, 
   :status, :supervisorID, :techNotes, :urgency, :closingTech
 
+  acts_as_commontable
+
   def send_trouble_ticket_create_burst
     #Uses the TroubleTicketMailer in app/mailers to send mail to the assigned tech and the client.
 	TroubleTicketMailer.trouble_ticket_notify_tech(self).deliver
