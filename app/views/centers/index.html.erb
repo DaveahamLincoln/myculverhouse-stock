@@ -34,7 +34,7 @@
         <td><%= center.name %></td>
         <td></td>
         <td><%= link_to("Homepage",Cms::Site.find(center.cms_site_id).path)%></td>
-        <td><%= link_to 'Destroy', center, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to('Destroy', center, method: :delete, data: { confirm: 'Are you sure?' })%></td>
       </tr>
     <% end %>
     </table>

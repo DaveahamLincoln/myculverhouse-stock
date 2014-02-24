@@ -1,3 +1,11 @@
+GIT
+  remote: git://github.com/laserlemon/vestal_versions
+  revision: beccc5744ec030664f003d61ffb617edefd7885b
+  specs:
+    vestal_versions (2.0.0)
+      activerecord (>= 3, < 5)
+      activesupport (>= 3, < 5)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -199,4 +207,5 @@ DEPENDENCIES
   strong_parameters
   therubyracer
   uglifier (>= 1.0.3)
+  vestal_versions!
   watu_table_builder

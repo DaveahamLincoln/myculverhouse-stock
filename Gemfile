@@ -66,6 +66,8 @@ gem 'rqrcode'
 
 gem 'rufus-scheduler'
 
+gem 'vestal_versions', :git => 'git://github.com/laserlemon/vestal_versions'
+
 #Forge
 #no idea why this doesn't work when the gem is at vendor/plugins/comfy
 #gem 'comfortable_mexican_sofa', '~>1.8.0', :path => "vendor/plugins/comfy"
