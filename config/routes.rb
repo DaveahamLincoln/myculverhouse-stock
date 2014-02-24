@@ -1,5 +1,7 @@
 MyculverhouseStock::Application.routes.draw do
 
+  opinio_model
+
   root to: 'index#index'
 
   get "login" => 'login#new'
@@ -74,6 +76,7 @@ MyculverhouseStock::Application.routes.draw do
   resources :trouble_tickets do
     member do
       post 'accept_ticket' => :accept_ticket
+      opinio
     end
   end
 

@@ -164,6 +164,12 @@
         </tbody>
     </table>
 <%end%>
+
+<div>
+  <strong>Comments:</strong>
+  <%= comments_for @trouble_ticket %>
+</div>
+
 <div><p></p></div>
 
 | <%= link_to 'Edit', edit_trouble_ticket_path(@trouble_ticket) %> | <%= link_to 'Add A Job', job_path(@trouble_ticket.id,), method: :post %> |
