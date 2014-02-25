@@ -1,20 +1,10 @@
 <h1>Listing programs</h1>
 
-<table>
+<table border=1>
   <tr>
     <th>Name</th>
     <th>Description</th>
-    <th>Publisher</th>
-    <th>Vendor</th>
-    <th>Serial</th>
-    <th>License</th>
-    <th>Licensecount</th>
-    <th>Expdate</th>
-    <th>Uaaccountno</th>
-    <th>Installnotes</th>
-    <th>Testingnotes</th>
-    <th>Accountnotes</th>
-    <th>Userid</th>
+    <th>Expiration Date</th>
     <th>Status</th>
     <th></th>
     <th></th>
@@ -25,17 +15,7 @@
   <tr>
     <td><%= program.name %></td>
     <td><%= program.description %></td>
-    <td><%= program.publisher %></td>
-    <td><%= program.vendor %></td>
-    <td><%= program.serial %></td>
-    <td><%= program.license %></td>
-    <td><%= program.licenseCount %></td>
     <td><%= program.expDate %></td>
-    <td><%= program.uaAccountNo %></td>
-    <td><%= program.installNotes %></td>
-    <td><%= program.testingNotes %></td>
-    <td><%= program.accountNotes %></td>
-    <td><%= program.userID %></td>
     <td><%= program.status %></td>
     <td><%= link_to 'Show', program %></td>
     <td><%= link_to 'Edit', edit_computer_program_path(program) %></td>
