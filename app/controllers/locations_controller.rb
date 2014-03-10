@@ -24,6 +24,20 @@ class LocationsController < ApplicationController
     end
   end
 
+  def label
+    #Takes the user to a page where the label can be printed easily.
+
+    @location = Location.find(params[:id])
+    #!TODO Alter predeploy
+
+    #Stock rqrcode QR implementation
+    @qr = RQRCode::QRCode.new("http://0.0.0.0:3000/locations/#{@location.id}")
+
+    render :layout => false
+
+  end
+
+
   # GET /locations/new
   # GET /locations/new.json
   def new

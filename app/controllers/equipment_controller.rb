@@ -1,8 +1,5 @@
 class EquipmentController < ApplicationController
 
-  #QR Code generator
-  require 'rqrcode'
-
   # GET /equipment
   # GET /equipment.json
   def index
@@ -19,6 +16,8 @@ class EquipmentController < ApplicationController
   def show
     @equipment = Equipment.find(params[:id])
     #!TODO Alter predeploy
+
+    #Stock rqrcode QR implementation
     @qr = RQRCode::QRCode.new("http://0.0.0.0:3000/equipment/#{@equipment.id}")
     @tickets = TroubleTicket.where(equipmentID: @equipment.id)
 
@@ -28,8 +27,24 @@ class EquipmentController < ApplicationController
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @equipment }
+      #rqrcode-rails3 QR implementation
+      #format.gif {render (qrcode: "http://0.0.0.0:3000/equipment/#{@equipment.id}", offset: 5, unit: 11 }
     end
   end
+
+  def label
+    #Takes the user to a page where the label can be printed easily.
+
+    @equipment = Equipment.find(params[:id])
+    #!TODO Alter predeploy
+
+    #Stock rqrcode QR implementation
+    @qr = RQRCode::QRCode.new("http://0.0.0.0:3000/equipment/#{@equipment.id}")
+
+    render :layout => false
+
+  end
+
 
   # GET /equipment/new
   # GET /equipment/new.json

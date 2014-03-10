@@ -1,0 +1,45 @@
+<h1>Listing lab_tickets</h1>
+
+<table>
+  <tr>
+    <th>Locationid</th>
+    <th>Programid</th>
+    <th>Problemdescription</th>
+    <th>Status</th>
+    <th>Datescheduled</th>
+    <th>Clientid</th>
+    <th>Requestedby</th>
+    <th>Receivingtech</th>
+    <th>Supervisorid</th>
+    <th>Technotes</th>
+    <th>Urgency</th>
+    <th>Resolution</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @lab_tickets.each do |lab_ticket| %>
+  <tr>
+    <td><%= lab_ticket.locationID %></td>
+    <td><%= lab_ticket.programID %></td>
+    <td><%= lab_ticket.problemDescription %></td>
+    <td><%= lab_ticket.status %></td>
+    <td><%= lab_ticket.dateScheduled %></td>
+    <td><%= lab_ticket.clientID %></td>
+    <td><%= lab_ticket.requestedBy %></td>
+    <td><%= lab_ticket.receivingTech %></td>
+    <td><%= lab_ticket.supervisorID %></td>
+    <td><%= lab_ticket.techNotes %></td>
+    <td><%= lab_ticket.urgency %></td>
+    <td><%= lab_ticket.resolution %></td>
+    <td><%= link_to 'Show', lab_ticket %></td>
+    <td><%= link_to 'Edit', edit_lab_ticket_path(lab_ticket) %></td>
+    <td><%= link_to 'Destroy', lab_ticket, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Lab ticket', new_lab_ticket_path %>

@@ -6,6 +6,8 @@
 
 <%=render :partial => "qr_code"%>
 
+<%= link_to 'Print Code', "/locations/labels/#{@location.id}"%>
+
 <table border=1>
   <thead>
     <tr>

@@ -64,11 +64,19 @@ gem 'comfortable_mexican_sofa', '~>1.8.0'
 #QR Code generator
 gem 'rqrcode'
 
+#rqf rqrcode-rails3
+#gem 'mini_magick'
+
 gem 'rufus-scheduler'
 
 gem 'vestal_versions', :git => 'git://github.com/laserlemon/vestal_versions'
 
+#Simple commenting engine.
 gem 'opinio'
+
+gem 'simple-navigation'
+
+gem 'jquery-ui-rails'
 
 #Forge
 #no idea why this doesn't work when the gem is at vendor/plugins/comfy
@@ -108,4 +116,5 @@ gem 'mixable_engines'
 
 #Mountable blog engine.
 gem 'monologue'
+
 gem "kaminari"

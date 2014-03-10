@@ -1,5 +1,8 @@
 MyculverhouseStock::Application.routes.draw do
 
+  resources :lab_tickets
+
+
   opinio_model
 
   root to: 'index#index'
@@ -23,6 +26,7 @@ MyculverhouseStock::Application.routes.draw do
   post "/action_items/:id" => "action_items#approve"
 
   resources :locations
+  get '/locations/labels/:id', to: "locations#label"
 
   resources :publications
 
@@ -56,6 +60,7 @@ MyculverhouseStock::Application.routes.draw do
   post "/faculty" => "faculty#index"
 
   resources :equipment
+  get '/equipment/labels/:id', to: "equipment#label"
 
   post '/computer_program_associations/:equipmentID', to: "computer_program_associations#new"
   post '/computer_program_associations/uninstall/:equipmentID', to: "computer_program_associations#uninstall"

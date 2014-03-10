@@ -1,0 +1,85 @@
+<head>
+   <link href="application.css" media="screen" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Locationid:</b>
+  <%= @lab_ticket.locationID %>
+</p>
+
+<p>
+  <b>Programid:</b>
+  <%= @lab_ticket.programID %>
+</p>
+
+<p>
+  <b>Problemdescription:</b>
+  <%= @lab_ticket.problemDescription %>
+</p>
+
+<p>
+  <b>Status:</b>
+  <%= @lab_ticket.status %>
+</p>
+
+<p>
+  <b>Datescheduled:</b>
+  <%= @lab_ticket.dateScheduled %>
+</p>
+
+<p>
+  <b>Clientid:</b>
+  <%= @lab_ticket.clientID %>
+</p>
+
+<p>
+  <b>Requestedby:</b>
+  <%= @lab_ticket.requestedBy %>
+</p>
+
+<p>
+  <b>Receivingtech:</b>
+  <%= @lab_ticket.receivingTech %>
+</p>
+
+<p>
+  <b>Supervisorid:</b>
+  <%= @lab_ticket.supervisorID %>
+</p>
+
+<p>
+  <b>Technotes:</b>
+  <%= @lab_ticket.techNotes %>
+</p>
+
+<p>
+  <b>Urgency:</b>
+  <%= @lab_ticket.urgency %>
+</p>
+
+<p>
+  <b>Resolution:</b>
+  <%= @lab_ticket.resolution %>
+</p>
+
+
+<%= link_to 'Edit', edit_lab_ticket_path(@lab_ticket) %> |
+<%= link_to 'Back', lab_tickets_path %>
+
+<h1>THIS WILL BE HIDDEN UNESS AN "ADD TASK" BUTTON IS CLICKED.</h1>
+
+<select multiple="multiple" id="my-select" name="my-select[]">
+
+  <%= Equipment.all.each do |f|%>
+    <option value= <%=f.id%>>
+      <%=f.digest%>
+    </option>
+  <%end%>
+</select>
+
+<script src="application.js" type="text/javascript"></script>
+</body>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140224200345) do
+ActiveRecord::Schema.define(:version => 20140227212303) do
 
   create_table "action_items", :force => true do |t|
     t.integer  "createdByID"
@@ -247,6 +247,23 @@ ActiveRecord::Schema.define(:version => 20140224200345) do
     t.datetime "updated_at",                       :null => false
   end
 
+  create_table "lab_tickets", :force => true do |t|
+    t.integer  "locationID"
+    t.integer  "programID"
+    t.string   "problemDescription"
+    t.integer  "status"
+    t.datetime "dateScheduled"
+    t.integer  "clientID"
+    t.integer  "requestedBy"
+    t.integer  "receivingTech"
+    t.integer  "supervisorID"
+    t.string   "techNotes"
+    t.integer  "urgency"
+    t.string   "resolution"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+  end
+
   create_table "locations", :force => true do |t|
     t.string   "name"
     t.string   "notes"
@@ -323,6 +340,15 @@ ActiveRecord::Schema.define(:version => 20140224200345) do
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "tasks", :force => true do |t|
+    t.integer  "labTicketID"
+    t.string   "description"
+    t.integer  "assignedTech"
+    t.boolean  "completed"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
   create_table "trouble_tickets", :force => true do |t|
