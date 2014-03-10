@@ -1,5 +1,6 @@
 <head>
-   <link href="application.css" media="screen" rel="stylesheet" type="text/css">
+  <%=stylesheet_link_tag "lab_tickets"%>
+  <%= javascript_include_tag "lab_tickets" %>
 </head>
 
 <body>
@@ -66,13 +67,12 @@
   <%= @lab_ticket.resolution %>
 </p>
 
-
 <%= link_to 'Edit', edit_lab_ticket_path(@lab_ticket) %> |
 <%= link_to 'Back', lab_tickets_path %>
 
 <h1>THIS WILL BE HIDDEN UNESS AN "ADD TASK" BUTTON IS CLICKED.</h1>
 
-<select multiple="multiple" id="my-select" name="my-select[]">
+<select id="custom-headers"  multiple="multiple" name="my-select[]">
 
   <%= Equipment.all.each do |f|%>
     <option value= <%=f.id%>>

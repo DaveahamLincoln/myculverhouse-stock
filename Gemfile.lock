@@ -192,9 +192,6 @@ GEM
       execjs (>= 0.3.0)
       json (>= 1.8.0)
     watu_table_builder (0.3.0)
-    wicked_pdf (0.9.10)
-      rails
-    wkhtmltopdf-binary (0.9.9.1)
 
 PLATFORMS
   ruby
@@ -225,5 +222,3 @@ DEPENDENCIES
   uglifier (>= 1.0.3)
   vestal_versions!
   watu_table_builder
-  wicked_pdf
-  wkhtmltopdf-binary

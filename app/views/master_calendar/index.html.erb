@@ -1,3 +1,5 @@
+<%=stylesheet_link_tag "master_calendar"%>
+
 <h1 align="center">
 	<%=link_to "<", :month => (@date.beginning_of_month-1).strftime("%Y-%m")%>
 	<%=@date.strftime("%B %Y")%>
