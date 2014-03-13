@@ -12,6 +12,7 @@ class Equipment < ActiveRecord::Base
 	belongs_to :department
 	belongs_to :location
 	has_many :tickets
+  has_and_belongs_to_many :tasks
 	attr_accessible :status, :locationID, :departmentID, :serial, :description, :ip, :type
 	validates_presence_of :status, :locationID, :departmentID, :serial, :description, :type
 

@@ -1,0 +1,21 @@
+TroubleTicketMailer#trouble_ticket_notify_client_of_close
+
+<%= "Dear #{@client.formal_name}" %>
+
+Your support request has been closed.
+
+--------------------------------------------
+
+Lab Ticket #<%= @ticket.id %>
+
+Issue: 
+<%= @ticket.problemDescription %>
+
+Resolution:
+<%= @ticket.resolution%>
+
+--------------------------------------------
+
+Please take a moment to fill out the customer service survey below:
+
+<iframe src="https://docs.google.com/a/cba.ua.edu/forms/d/1Z0rBDtD1iVARtLev9M5kbUzJNKQewEDn8kHHO-5unUU/viewform?embedded=true" width="760" height="500" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>

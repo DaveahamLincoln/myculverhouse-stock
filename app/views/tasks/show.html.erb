@@ -1,0 +1,67 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Labticketid:</b>
+  <%= @task.labTicketID %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @task.description %>
+</p>
+
+<p>
+  <b>Assignedtech:</b>
+  <%= @task.assignedTech %>
+</p>
+
+<p>
+  <b>Completed:</b>
+  <%= @task.completed %>
+</p>
+
+<p>
+  <b>Equipment:</b>
+</p>
+
+<table border=1>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Serial Number</th>
+      <th>Status</th>
+      <th>Location</th>
+      <th>Department</th>
+    </tr>
+  </thead>
+
+  <tbody>
+
+
+<% @equipment.each do |equipment| %>
+    <tr>
+      <tr class="spriteButton" onclick="document.location='<%=equipment_path(equipment.id)%>'" style="cursor:pointer">
+      <td><%=equipment.type%></td>
+      <td><%=equipment.description%></td>
+      <td><%=equipment.serial%></td>
+      <td><%=equipment.statusAlias%></td>
+      <td><%=Location.find(equipment.locationID).name%></td>
+      <td><%=Department.find(equipment.departmentID).name%></td>
+    </tr>
+  </tbody>
+<% end %>
+</table>
+
+<div><p></p></div>
+
+<div>
+  <strong>Comments:</strong>
+  <%= comments_for @task %>
+</div>
+
+<div><p></p></div>
+
+<%= link_to '| Edit |', edit_task_path(@task) %> 
+<%= link_to '| Back |', tasks_path %>
+<%= link_to '| Close |', @task, :confirm => 'Are you sure?', :method => "close" %>

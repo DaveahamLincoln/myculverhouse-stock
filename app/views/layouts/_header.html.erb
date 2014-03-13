@@ -51,7 +51,7 @@
 	<%end%>
 
 	<%if current_user.isSuperUser or current_user.godBit or current_user.isTechUser or current_user.isSupervisorUser%>
-		<%= link_to '| Equipment |','/equipment/', method: :get %> <%= link_to '| Locations |', '/locations/', method: :get %> <%= link_to '| Computer Programs |','/computer_programs/', method: :get %> <%= link_to '| Trouble Tickets |','/trouble_tickets/', method: :get %> 
+		<%= link_to '| Equipment |','/equipment/', method: :get %> <%= link_to '| Locations |', '/locations/', method: :get %> <%= link_to '| Computer Programs |','/computer_programs/', method: :get %> <%= link_to '| Trouble Tickets |','/trouble_tickets/', method: :get %> <%= link_to '| Lab Tickets |','/lab_tickets/', method: :get %> 
 	<%end%>
 
 <%end%>

@@ -67,19 +67,77 @@
   <%= @lab_ticket.resolution %>
 </p>
 
-<%= link_to 'Edit', edit_lab_ticket_path(@lab_ticket) %> |
-<%= link_to 'Back', lab_tickets_path %>
+<%= link_to '| Edit |', edit_lab_ticket_path(@lab_ticket) %> 
 
-<h1>THIS WILL BE HIDDEN UNESS AN "ADD TASK" BUTTON IS CLICKED.</h1>
+<%if @tasks.count !=0%>
+  <table border=1>
+    <thead>
+      <tr>
+        <h5>Open Tasks</h5>
+      </tr>
 
-<select id="custom-headers"  multiple="multiple" name="my-select[]">
+      <tr>
+        <th>Task ID</th>
+        <th>Date Created</th>
+        <th>Description</th>
+        <th>Technician</th>
+      </tr>
+    </thead>
 
-  <%= Equipment.all.each do |f|%>
-    <option value= <%=f.id%>>
-      <%=f.digest%>
-    </option>
-  <%end%>
-</select>
+    <tbody>
+    <% @tasks.each do |t| %>
+      <% if !t.completed %>
+        <tr class="spriteButton" onclick="document.location='<%=task_path(t.id)%>'" style="cursor:pointer">
+          <td><%= t.id %></a></td>
+          <td><%= t.created_at.in_time_zone("Central Time (US & Canada)") %></td>
+          <td><%= t.description %></td>
+          <td><%= User.find(t.assignedTech).formal_name %></td>
+        </tr>   
+      <%end%>
+    <%end%>
+<%end%>
 
-<script src="application.js" type="text/javascript"></script>
-</body>
+<%if @tasks.count !=0%>
+  <table border=1>
+    <thead>
+      <tr>
+        <h5>Closed Tasks</h5>
+      </tr>
+
+      <tr>
+        <th>Task ID</th>
+        <th>Date Created</th>
+        <th>Description</th>
+        <th>Technician</th>
+      </tr>
+    </thead>
+
+    <tbody>
+    <% @tasks.each do |t| %>
+      <% if t.completed %>
+        <tr class="spriteButton" onclick="document.location='<%=task_path(t.id)%>'" style="cursor:pointer">
+          <td><%= t.id %></a></td>
+          <td><%= t.created_at.in_time_zone("Central Time (US & Canada)") %></td>
+          <td><%= t.description %></td>
+          <td><%= User.find(t.assignedTech).formal_name %></td>
+        </tr>   
+      <%end%>
+    </tbody>
+    <%end%>
+  </table>
+<%end%>
+
+<div><p></p></div>
+
+<%= link_to '| Add A Task |', "/lab_tickets/#{@lab_ticket.id}/new_task", method: :post %></td>
+
+<div><p></p></div>
+
+<div>
+  <strong>Comments:</strong>
+  <%= comments_for @lab_ticket %>
+</div>
+
+<div><p></p></div>
+
+<%= link_to '| Back |', lab_tickets_path %> <td>

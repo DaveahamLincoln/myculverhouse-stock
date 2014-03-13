@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140227212303) do
+ActiveRecord::Schema.define(:version => 20140313191542) do
 
   create_table "action_items", :force => true do |t|
     t.integer  "createdByID"
@@ -219,6 +219,13 @@ ActiveRecord::Schema.define(:version => 20140227212303) do
     t.string   "type"
   end
 
+  create_table "equipment_tasks", :id => false, :force => true do |t|
+    t.integer "equipment_id"
+    t.integer "task_id"
+  end
+
+  add_index "equipment_tasks", ["equipment_id", "task_id"], :name => "index_equipment_tasks_on_equipment_id_and_task_id"
+
   create_table "faculty_profiles", :force => true do |t|
     t.text     "currentResearch"
     t.text     "education"
@@ -262,6 +269,7 @@ ActiveRecord::Schema.define(:version => 20140227212303) do
     t.string   "resolution"
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
+    t.integer  "closingTech"
   end
 
   create_table "locations", :force => true do |t|

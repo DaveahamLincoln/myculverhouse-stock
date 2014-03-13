@@ -1,0 +1,37 @@
+<%=simple_form_for(@task) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form">
+    <div>
+      Description
+      <%= f.input :description, :as => :text, :input_html => {:style => "width:510px", :rows => 5}, label: false%>
+    </div>
+
+    <div><p></p></div>
+
+    <div>
+      <%= f.label "Assigned Tech" %>
+        <% if current_user.isTechUser %>
+          <%= f.collection_select(:assignedTech, User.where(:id => current_user.id), :id, :formal_name)%>
+        <%else%>
+          <%= f.collection_select(:assignedTech, User.where(:isTechUser => 1), :id, :formal_name, :include_blank => false)%>
+        <%end%>
+    </div>
+
+    <h3>Selected Equipment</h3>
+
+    <div>
+      <% @lab_equipment.each do |e| %>
+        <p>
+          <%= check_box_tag "task[equipment_ids][]", e.id, @task.equipment.include?(e) %>
+          <%= e.digest %>
+        </p>
+      <% end %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+
+  </div>
+<%end%>

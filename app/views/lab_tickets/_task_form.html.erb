@@ -1,0 +1,33 @@
+<%=form_for(@task) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form">
+
+    <div class="row">
+        <div class="span3">
+            <%= f.input :problemDescription, :as => :text, :input_html => {:style => "width:510px", :rows => 5}, :label => "Description" %>
+        </div>
+    </div>
+
+    <div class="row">
+      <div class="span3">
+          <%= f.label "Assigned Tech" %>
+              <% if current_user.isTechUser %>
+                  <%= f.collection_select(:assignedTech, User.where(:id => current_user.id), :id, :formal_name)%>
+              <%else%>
+                  <%= f.collection_select(:assignedTech, User.where(:isTechUser => 1), :id, :formal_name, :include_blank => false)%>
+              <%end%>
+          <%end%>
+      </div>
+    </div>
+
+    <div class="field">
+      <%= f.hidden_field :labTicketID, value: @lab_ticket.id%>
+    </div>
+
+  </div>
+
+  <div class="actions">
+    <%= f.button :submit %>
+  </div>
+  

@@ -1,8 +1,6 @@
 MyculverhouseStock::Application.routes.draw do
 
-  resources :lab_tickets
-
-
+  #Loads the opinio engine for comment handling
   opinio_model
 
   root to: 'index#index'
@@ -19,14 +17,11 @@ MyculverhouseStock::Application.routes.draw do
     post 'edit' => :update
   end
 
-  #CONSTANT VIGILANCE!  ROUTES LOAD IN ORDER.  I had a 'resources :departments' entry here, which was overriding the 
-  #:except direction below.  Took me two hours to fix.  Pay attention to the order.
-
-  resources :action_items
   post "/action_items/:id" => "action_items#approve"
+  resources :action_items
 
-  resources :locations
   get '/locations/labels/:id', to: "locations#label"
+  resources :locations
 
   resources :publications
 
@@ -39,6 +34,9 @@ MyculverhouseStock::Application.routes.draw do
   resources :users
 
   resources :programs, :except => [:show,:edit]
+
+  #CONSTANT VIGILANCE!  ROUTES LOAD IN ORDER.  I had a 'resources :departments' entry here, which was overriding the 
+  #:except direction below.  Took me two hours to fix.  Pay attention to the order.
 
   resources :departments, :except => [:show,:edit]
   get "/departments/shard/:id" => "departments#show"
@@ -59,8 +57,8 @@ MyculverhouseStock::Application.routes.draw do
   get "/faculty" => "faculty#index"
   post "/faculty" => "faculty#index"
 
-  resources :equipment
   get '/equipment/labels/:id', to: "equipment#label"
+  resources :equipment
 
   post '/computer_program_associations/:equipmentID', to: "computer_program_associations#new"
   post '/computer_program_associations/uninstall/:equipmentID', to: "computer_program_associations#uninstall"
@@ -81,6 +79,23 @@ MyculverhouseStock::Application.routes.draw do
   resources :trouble_tickets do
     member do
       post 'accept_ticket' => :accept_ticket
+      #Enables commenting for the associated route.
+      opinio
+    end
+  end
+
+  post '/lab_tickets/:id', to: 'lab_tickets#close'
+  post '/lab_tickets/:labTicketID/new_task', to: "tasks#new"
+  get "lab_tickets/closed_tickets" => "lab_tickets#closed_tickets"
+  resources :lab_tickets do
+    member do
+      opinio
+    end
+  end
+
+  post '/tasks/:id', to: 'tasks#close'
+  resources :tasks do
+    member do
       opinio
     end
   end
