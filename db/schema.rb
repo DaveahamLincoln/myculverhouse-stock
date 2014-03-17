@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140313191542) do
+ActiveRecord::Schema.define(:version => 20140317155808) do
 
   create_table "action_items", :force => true do |t|
     t.integer  "createdByID"
@@ -190,9 +190,11 @@ ActiveRecord::Schema.define(:version => 20140313191542) do
     t.string   "testingNotes"
     t.string   "accountNotes"
     t.integer  "userID"
-    t.integer  "status"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+    t.boolean  "classroomImage"
+    t.boolean  "econImage"
+    t.boolean  "labImage"
   end
 
   create_table "departments", :force => true do |t|

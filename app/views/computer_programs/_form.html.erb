@@ -1,4 +1,4 @@
-<%= form_for(@program) do |f| %>
+<%= simple_form_for(@program) do |f| %>
   <% if @program.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@program.errors.count, "error") %> prohibited this program from being saved:</h2>
@@ -12,62 +12,92 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :name %><br />
+    <%= f.label :name %>
     <%= f.text_field :name %>
   </div>
   <div class="field">
-    <%= f.label :description %><br />
+    <br />
+    <%= f.label :description %>
     <%= f.text_field :description %>
   </div>
   <div class="field">
-    <%= f.label :publisher %><br />
+    <br />
+    <%= f.label :publisher %>
     <%= f.text_field :publisher %>
   </div>
   <div class="field">
-    <%= f.label :vendor %><br />
+    <br />
+    <%= f.label :vendor %>
     <%= f.text_field :vendor %>
   </div>
   <div class="field">
-    <%= f.label :serial %><br />
+    <br />
+    <%= f.label :serial %>
     <%= f.text_field :serial %>
   </div>
   <div class="field">
-    <%= f.label :license %><br />
+    <br />
+    <%= f.label :license %>
     <%= f.text_field :license %>
   </div>
   <div class="field">
-    <%= f.label :licenseCount %><br />
+    <br />
+    License Count
     <%= f.number_field :licenseCount %>
   </div>
   <div class="field">
-    <%= f.label :expDate %><br />
+    <br />
+    Expiration Date
     <%= f.datetime_select :expDate %>
   </div>
   <div class="field">
-    <%= f.label :uaAccountNo %><br />
+    <br />
+    UA Account Number
     <%= f.text_field :uaAccountNo %>
   </div>
   <div class="field">
-    <%= f.label :installNotes %><br />
-    <%= f.text_field :installNotes %>
+    <br />
+    Install Notes
+    <%= f.input :installNotes, :as => :text, :input_html => {:style => "width:510px", :rows => 5}, label: false%>
   </div>
   <div class="field">
-    <%= f.label :testingNotes %><br />
-    <%= f.text_field :testingNotes %>
+    <br />
+    Testing Notes
+    <%= f.input :testingNotes, :as => :text, :input_html => {:style => "width:510px", :rows => 5}, label: false%>
   </div>
+
+  <div class="span3">
+    <br />
+    Account Notes
+    <%= f.input :accountNotes, :as => :text, :input_html => {:style => "width:510px", :rows => 5}, label: false%>
+  </div>
+
   <div class="field">
-    <%= f.label :accountNotes %><br />
-    <%= f.text_field :accountNotes %>
+    <br />
+    Registered User
+    <%= f.collection_select(:userID, User.all, :id, :formal_name, :include_blank => true) %>
   </div>
+
   <div class="field">
-    <%= f.label :userID %><br />
-    <%= f.number_field :userID %>
+    <br />
+    Classroom Image
+    <%= f.check_box :classroomImage%>
   </div>
+
   <div class="field">
-    <%= f.label :status %><br />
-    <%= f.number_field :status %>
+    Econ Image
+    <%= f.check_box :econImage%>
   </div>
+
+  <div class="field">
+    Lab Image
+    <%= f.check_box :labImage%>
+  </div>
+
+  <br />
+
   <div class="actions">
     <%= f.submit %>
   </div>
+  <br />
 <% end %>

@@ -7,6 +7,40 @@ class ComputerProgramsController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @programs }
+      format.csv { send_data @programs.to_csv}
+    end
+  end
+
+  def classroom
+    @programs = ComputerProgram.where(classroomImage: true) 
+
+    respond_to do |format|   
+      format.html
+      format.csv { send_data ComputerProgram.to_csv(@programs)}
+    end
+  end
+
+  def econ
+    @programs = ComputerProgram.where(econImage: true) 
+    respond_to do |format|   
+      format.html
+      format.csv { send_data ComputerProgram.to_csv(@programs)}
+    end
+  end
+
+  def lab
+    @programs = ComputerProgram.where(labImage: true)
+    respond_to do |format|   
+      format.html
+      format.csv { send_data ComputerProgram.to_csv(@programs)}
+    end
+  end
+
+  def archived
+    @programs = ComputerProgram.where(classroomImage: false, econImage:false, labImage: false)
+    respond_to do |format|   
+      format.html
+      format.csv { send_data ComputerProgram.to_csv(@programs)}
     end
   end
 
@@ -59,7 +93,7 @@ class ComputerProgramsController < ApplicationController
     @program = ComputerProgram.find(params[:id])
 
     respond_to do |format|
-      if @program.update_attributes(params[:program])
+      if @program.update_attributes(params[:computer_program])
         format.html { redirect_to @program, notice: 'Program was successfully updated.' }
         format.json { head :no_content }
       else
@@ -84,6 +118,8 @@ class ComputerProgramsController < ApplicationController
   private
 
   def computer_program_params
-      params.require(:computer_program).permit(:accountNotes, :description, :expDate, :installNotes, :license, :licenseCount, :name, :publisher, :serial, :status, :testingNotes, :uaAccountNo, :userID, :vendor)
+      params.require(:computer_program).permit(:accountNotes, :description, :expDate, :installNotes, 
+          :license, :licenseCount, :name, :publisher, :serial, :status, :testingNotes, :uaAccountNo, 
+          :userID, :vendor, :classroomImage, :econImage, :labImage)
   end
 end

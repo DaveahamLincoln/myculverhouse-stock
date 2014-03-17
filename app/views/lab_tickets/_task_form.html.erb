@@ -12,10 +12,10 @@
     <div class="row">
       <div class="span3">
           <%= f.label "Assigned Tech" %>
-              <% if current_user.isTechUser %>
-                  <%= f.collection_select(:assignedTech, User.where(:id => current_user.id), :id, :formal_name)%>
-              <%else%>
+              <% if current_user.godBit or current_user.isSuperUser or current_user.isSupervisorUser %>
                   <%= f.collection_select(:assignedTech, User.where(:isTechUser => 1), :id, :formal_name, :include_blank => false)%>
+              <%else%>
+                  <%= f.collection_select(:assignedTech, User.where(:id => current_user.id), :id, :formal_name)%>
               <%end%>
           <%end%>
       </div>

@@ -62,12 +62,17 @@ MyculverhouseStock::Application.routes.draw do
 
   post '/computer_program_associations/:equipmentID', to: "computer_program_associations#new"
   post '/computer_program_associations/uninstall/:equipmentID', to: "computer_program_associations#uninstall"
+
   resources :computer_program_associations, :only => [:index, :create, :update, :destroy, :show]
 
   post '/printer_associations/:equipmentID', to: "printer_associations#new"
   post '/printer_associations/uninstall/:equipmentID', to: "printer_associations#uninstall"
   resources :printer_associations, :only => [:index, :create, :update, :destroy, :show]
 
+  get '/computer_programs/classroom', to: "computer_programs#classroom"
+  get '/computer_programs/econ', to: "computer_programs#econ"
+  get '/computer_programs/lab', to: "computer_programs#lab"
+  get '/computer_programs/archived', to: "computer_programs#archived"
   resources :computer_programs
 
   post '/trouble_tickets/:id', to: "trouble_tickets#close"

@@ -31,45 +31,60 @@
 </p>
 
 <p>
-  <b>Licensecount:</b>
+  <b>License Count:</b>
   <%= @program.licenseCount %>
 </p>
 
 <p>
-  <b>Expdate:</b>
+  <b>Expiration Date:</b>
   <%= @program.expDate %>
 </p>
 
 <p>
-  <b>Uaaccountno:</b>
+  <b>UA Account Number:</b>
   <%= @program.uaAccountNo %>
 </p>
 
 <p>
-  <b>Installnotes:</b>
+  <b>Install Notes:</b>
   <%= @program.installNotes %>
 </p>
 
 <p>
-  <b>Testingnotes:</b>
+  <b>Testing Notes:</b>
   <%= @program.testingNotes %>
 </p>
 
 <p>
-  <b>Accountnotes:</b>
+  <b>Account Notes:</b>
   <%= @program.accountNotes %>
 </p>
 
 <p>
-  <b>Userid:</b>
-  <%= @program.userID %>
+  <b>Registered User:</b>
+  <%if @program.userID%>
+    <%= User.find(@program.userID).formal_name %>
+  <%end%>
 </p>
 
 <p>
-  <b>Status:</b>
-  <%= @program.status %>
+  <b>Active Images:</b>
+  <table border=1>
+    <tr>
+      <th>Classroom</th>
+      <th>Econ</th>
+      <th>Lab</th>
+    </tr>
+
+    <tr>
+      <td align="center"><%= "x" if @program.classroomImage %></td>
+      <td align="center"><%= "x" if @program.econImage %></td>
+      <td align="center"><%= "x" if @program.labImage %></td>
+    </tr>
+  </table>
 </p>
 
 
 <%= link_to 'Edit', edit_computer_program_path(@program) %> |
-<%= link_to 'Back', computer_programs_path %>
+<%= link_to 'Back', computer_programs_path %> |
+<%= link_to 'Destroy', @program, method: :delete, data: { confirm: 'Are you sure?' } %>
