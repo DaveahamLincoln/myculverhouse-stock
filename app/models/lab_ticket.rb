@@ -26,4 +26,8 @@ class LabTicket < ActiveRecord::Base
       "On Hold"
     end
   end
+
+  def digest
+    "ID##{self.id} - #{self.problemDescription}"
+  end
 end

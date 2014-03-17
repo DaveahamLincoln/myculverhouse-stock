@@ -1,23 +1,31 @@
+<h1><%="Viewing Job ##{@job.id}"%></h1>
+
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Ticketid:</b>
-  <%= @job.ticketID %>
+  <b>Ticket:</b>
+  <%= TroubleTicket.find(@job.ticketID).digest %>
 </p>
 
 <p>
-  <b>Description:</b>
+  <b>Job Description:</b>
   <%= @job.description %>
 </p>
 
 <p>
-  <b>Completed:</b>
-  <%= @job.completed %>
+  <b>Status:</b>
+  <%if @job.completed%>
+  	<%= "Complete" %>
+  <%else%>
+    <%= "Incomplete" %>
+   <%end%>
 </p>
 
-<p>
-  <b>Completedbyid:</b>
-  <%= @job.completedByID %>
-</p>
+<%if @job.completed%>
+	<p>
+	  <b>Completed By:</b>
+	  <%= User.find(@job.completedByID).formal_name %>
+	</p>
+<%end%>
 
 <%= link_to 'Back', "/trouble_tickets/#{@job.ticketID}" %>

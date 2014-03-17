@@ -17,14 +17,14 @@
 </p>
 
 <p>
-  <strong>Program?</strong>
+  <strong>Program:</strong>
   <%if @trouble_ticket.programID %>
     <%=ComputerProgram.find(@trouble_ticket.programID).digest %>
   <%end%>
 </p>
 
 <p>
-  <strong>Equipment?</strong>
+  <strong>Equipment:</strong>
   <%if @trouble_ticket.equipmentID %>
   <%= Equipment.find(@trouble_ticket.equipmentID).digest %>
   <%end%>
@@ -37,7 +37,11 @@
 
 <p>
   <strong>Resolution:</strong>
-  <%= @trouble_ticket.resolution %>
+  <%if @trouble_ticket.resolution !=""%> 
+    <%= @trouble_ticket.resolution %>
+  <%else%>
+    <%= "This ticket is not yet resolved." %>
+  <%end%>
 </p>
 
 <p>
@@ -71,12 +75,12 @@
   <%= User.find(@trouble_ticket.receivingTech).formal_name %>
 </p>
 
-<p>
-  <strong>Closing Tech:</strong>
-  <% if @trouble_ticket.closingTech %>
-  <%= User.find(@trouble_ticket.closingTech).formal_name %>
-  <%end%>
+<% if @trouble_ticket.closingTech %>
+  <p>
+    <strong>Closing Tech:</strong>
+    <%= User.find(@trouble_ticket.closingTech).formal_name %>
 </p>
+<%end%>
 
 <p>
   <strong>Assigned Tech:</strong>
@@ -96,10 +100,12 @@
   <%end%>
 </p>
 
+<%if @trouble_ticket.dateClosed%>
 <p>
   <strong>Date Closed:</strong>
   <%= @trouble_ticket.dateClosed %>
 </p>
+<%end%>
 
 <p>
   <strong>Urgency:</strong>
@@ -108,7 +114,11 @@
 
 <p>
   <strong>Date Scheduled:</strong>
-  <%= @trouble_ticket.dateScheduled %>
+  <%if @trouble_ticket.dateScheduled %> 
+    <%= @trouble_ticket.dateScheduled %>
+  <%else%>
+    <%= "This ticket has not been scheduled."%>
+  <%end%>
 </p>
 
 <%if @jobs.count !=0%>

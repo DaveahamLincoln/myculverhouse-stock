@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Labticketid:</b>
+  <b>Lab Ticket:</b>
   <%= @task.labTicketID %>
 </p>
 
@@ -12,12 +12,16 @@
 
 <p>
   <b>Assignedtech:</b>
-  <%= @task.assignedTech %>
+  <%= User.find(@task.assignedTech).formal_name %>
 </p>
 
 <p>
-  <b>Completed:</b>
-  <%= @task.completed %>
+  <b>Status:</b>
+  <% if @task.completed %>
+    <%= "Complete" %>
+  <% else %>
+    <%= "Incomplete" %>
+  <% end %>
 </p>
 
 <p>
@@ -63,5 +67,5 @@
 <div><p></p></div>
 
 <%= link_to '| Edit |', edit_task_path(@task) %> 
-<%= link_to '| Back |', tasks_path %>
+<%= link_to '| Back |', "/lab_tickets/#{@task.labTicketID}" %>
 <%= link_to '| Close |', @task, :confirm => 'Are you sure?', :method => "close" %>

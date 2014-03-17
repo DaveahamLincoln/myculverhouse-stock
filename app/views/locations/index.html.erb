@@ -1,21 +1,15 @@
 <h1>Listing locations</h1>
 
-<table>
+<table border=1>
   <tr>
     <th>Name</th>
     <th>Notes</th>
-    <th></th>
-    <th></th>
-    <th></th>
   </tr>
 
 <% @locations.each do |location| %>
-  <tr>
+  <tr class="spriteButton" onclick="document.location='<%=location_path(location.id)%>'" style="cursor:pointer">
     <td><%= location.name %></td>
     <td><%= location.notes %></td>
-    <td><%= link_to 'Show', location %></td>
-    <td><%= link_to 'Edit', edit_location_path(location) %></td>
-    <td><%= link_to 'Destroy', location, method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
 <% end %>
 </table>

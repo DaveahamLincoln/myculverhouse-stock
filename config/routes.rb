@@ -104,11 +104,12 @@ MyculverhouseStock::Application.routes.draw do
       opinio
     end
   end
+  resources :tasks, :only => [:create, :update, :destroy, :show]
 
   post '/jobs/:ticketID', to: "jobs#new"
   post '/jobs/:ticketID/complete/:id', to: "jobs#complete"
   post '/jobs/:ticketID/reopen/:id', to: "jobs#reopen"
-  resources :jobs, :only => [:index, :create, :update, :destroy, :show]
+  resources :jobs, :only => [:create, :update, :destroy, :show]
 
   # This line mounts Monologue's routes at the root of your application.
   # This means, any requests to URLs such as /my-post, will go to Monologue::PostsController.

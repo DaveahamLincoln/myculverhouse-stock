@@ -12,7 +12,7 @@ gem 'mysql2'
 # in production environments by default.
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
-  gem 'coffee-rails', '~> 3.2.1'
+  #gem 'coffee-rails', '~> 3.2.1'
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   gem 'therubyracer', :platforms => :ruby
@@ -76,7 +76,7 @@ gem 'opinio'
 
 gem 'simple-navigation'
 
-gem 'jquery-ui-rails'
+#gem 'jquery-ui-rails'
 
 #Forge
 #no idea why this doesn't work when the gem is at vendor/plugins/comfy

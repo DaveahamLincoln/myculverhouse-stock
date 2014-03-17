@@ -58,4 +58,8 @@ class TroubleTicket < ActiveRecord::Base
     end
   end
 
+  def digest
+    "ID##{self.id} - #{self.problemDescription}"
+  end
+
 end

@@ -1,59 +1,70 @@
-<head>
-  <%=stylesheet_link_tag "lab_tickets"%>
-  <%= javascript_include_tag "lab_tickets" %>
-</head>
-
 <body>
 
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Locationid:</b>
-  <%= @lab_ticket.locationID %>
+  <b>Location:</b>
+  <%= Location.find(@lab_ticket.locationID).name %>
 </p>
 
 <p>
-  <b>Programid:</b>
-  <%= @lab_ticket.programID %>
+  <b>Program:</b>
+  <%if @lab_ticket.programID %>
+    <%= Program.find(@lab_ticket.programID).name %>
+  <%else%>
+    <%="Not associated with a program."%>
+  <%end%>
 </p>
 
 <p>
-  <b>Problemdescription:</b>
+  <b>Problem Description:</b>
   <%= @lab_ticket.problemDescription %>
 </p>
 
 <p>
   <b>Status:</b>
-  <%= @lab_ticket.status %>
+  <%= @lab_ticket.status_alias %>
 </p>
 
 <p>
-  <b>Datescheduled:</b>
-  <%= @lab_ticket.dateScheduled %>
+  <b>Date Scheduled:</b>
+  <%if @lab_ticket.dateScheduled %>
+    <%= @lab_ticket.dateScheduled %>
+  <%else%>
+    <%= "Not scheduled." %>
+  <%end%>
 </p>
 
 <p>
-  <b>Clientid:</b>
-  <%= @lab_ticket.clientID %>
+  <b>Client:</b>
+  <%= User.find(@lab_ticket.clientID).formal_name %>
 </p>
 
 <p>
-  <b>Requestedby:</b>
-  <%= @lab_ticket.requestedBy %>
+  <b>Requested By:</b>
+  <%if @lab_ticket.requestedBy %>
+    <%= User.find(@lab_ticket.requestedBy).formal_name %>
+  <%else%>
+    <%= "This ticket was not requested by a user." %>
+  <%end%>
 </p>
 
 <p>
-  <b>Receivingtech:</b>
-  <%= @lab_ticket.receivingTech %>
+  <b>Receiving Tech:</b>
+  <%= User.find(@lab_ticket.receivingTech).formal_name %>
 </p>
 
 <p>
-  <b>Supervisorid:</b>
-  <%= @lab_ticket.supervisorID %>
+  <b>Supervisor:</b>
+  <%if @lab_ticket.dateScheduled %>
+    <%= User.find(@lab_ticket.supervisorID).formal_name %>
+  <%else%>
+    <%="No supervisor assigned."%>
+  <%end%>
 </p>
 
 <p>
-  <b>Technotes:</b>
+  <b>Tech Notes:</b>
   <%= @lab_ticket.techNotes %>
 </p>
 

@@ -198,10 +198,8 @@ PLATFORMS
 
 DEPENDENCIES
   bcrypt-ruby (~> 3.0.0)
-  coffee-rails (~> 3.2.1)
   comfortable_mexican_sofa (~> 1.8.0)
   jquery-rails
-  jquery-ui-rails
   kaminari
   mixable_engines
   monologue

@@ -1,39 +1,30 @@
 <h1>Departments Index</h1>
 
 <%if current_user.godBit or current_user.isSuperUser%>
-    <table>
+    <table border=1>
       <tr>
         <th>Name</th>
         <th></th>
         <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
+
       </tr>
 
     <% @departments.each do |department| %>
       <tr>
         <td><%= department.name %></td>
-        <td></td>
         <td><%= link_to("Homepage",Cms::Site.find(department.cms_site_id).path)%></td>
-        <%if current_user.godBit or current_user.isSuperUser%>
-          <td><%= link_to("Show","/departments/shard/#{department.id}")%></td>
-          <td><%= link_to("Edit","/departments/shard/#{department.id}/edit")%></td>
-          <td><%= link_to 'Destroy', department, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <%end%>
+        <td><%= link_to 'Destroy', department, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
     </table>
 
     <br />
 
-    <%if current_user.godBit or current_user.isSuperUser%>
       <%= link_to 'New department', new_department_path %>
-    <%end%>
 
 <%else%>
 
-  <table>
+  <table border=1>
     <tr>
       <th>Name</th>
       <th></th>

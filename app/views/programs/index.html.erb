@@ -1,10 +1,9 @@
 <h1>Programs Index</h1>
 
 <%if current_user.godBit or current_user.isSuperUser%>
-    <table>
+    <table border=1>
       <tr>
         <th>Name</th>
-        <th></th>
         <th></th>
         <th></th>
       </tr>
@@ -12,7 +11,6 @@
     <% @programs.each do |program| %>
       <tr>
         <td><%= program.name %></td>
-        <td></td>
         <td><%= link_to("Homepage",Cms::Site.find(program.cms_site_id).path)%></td>
         <td><%= link_to 'Destroy', program, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
@@ -25,7 +23,7 @@
 
 <%else%>
 
-  <table>
+  <table border=1>
     <tr>
       <th>Name</th>
       <th></th>
