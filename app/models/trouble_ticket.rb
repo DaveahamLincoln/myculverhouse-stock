@@ -3,6 +3,7 @@ class TroubleTicket < ActiveRecord::Base
   :equipmentID, :locationID, :problemDescription, :programID, :receivingTech, :requestedBy, :resolution, 
   :status, :supervisorID, :techNotes, :urgency, :closingTech
 
+  #Adds opinio comment functionality to the model.
   opinio_subjectum
 
   def send_trouble_ticket_create_burst
@@ -43,6 +44,8 @@ class TroubleTicket < ActiveRecord::Base
   end
 
   def status_alias
+    #Returns a string representation of a given status for rendering in a view.  You can add more status types
+    #by defining them here.
     if self.status==1 then
       "Open"
     elsif self.status==2 then

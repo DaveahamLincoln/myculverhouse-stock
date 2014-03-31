@@ -1,3 +1,5 @@
+#This is a fragment from the Devise gem.  Can probably be deleted, as I opted to build authentication from scratch.
+
 # Additional translations at https://github.com/plataformatec/devise/wiki/I18n
 
 en:

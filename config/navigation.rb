@@ -1,3 +1,6 @@
+#This is a fragment for tabbed navigation.  I can't seem to get it working properly.  Will tinker with it a 
+#bit.
+
 # -*- coding: utf-8 -*-
 # Configures your navigation
 SimpleNavigation::Configuration.run do |navigation|
