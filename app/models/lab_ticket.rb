@@ -5,14 +5,14 @@ class LabTicket < ActiveRecord::Base
   #This may not work as intended.
   has_many :tasks
 
-  attr_accessible :clientID, :dateScheduled, :locationID, :problemDescription, :programID, :receivingTech, :requestedBy, :resolution, :status, :supervisorID, :techNotes, :urgency
+  attr_accessible :clientID, :dateScheduled, :locationID, :problemDescription, :programID, :receivingTech, :requestedBy, :resolution, :status, :supervisorID, :techNotes, :urgency, :dateClosed, :closingTech
   
   #Adds opinio comment functionality to the model.
   opinio_subjectum
 
   def send_lab_ticket_close_burst
     #Mailer sends the client a notification that their ticket has been closed which includes a link to a google form with an exit survey.
-    TroubleTicketMailer.lab_ticket_notify_client_of_close(self).deliver
+    LabTicketMailer.lab_ticket_notify_client_of_close(self).deliver
     #Fires the unsubscribe_from_thread method.
     #unsubscribe_from_thread(self)
     #close_thread(self)

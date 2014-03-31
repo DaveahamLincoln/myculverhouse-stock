@@ -6,7 +6,7 @@ class LabTicketMailer < ActionMailer::Base
   #
   #   en.user_mailer.password_reset.subject
 
-  def trouble_ticket_notify_client_of_close(ticket)
+  def lab_ticket_notify_client_of_close(ticket)
     #Includes Google Form survey.  Need to configure power users who can view the form info pre-deployment and shift from danearing@cba.ua.edu to 
     #some_daemon_address@cba.ua.edu
     @ticket = ticket

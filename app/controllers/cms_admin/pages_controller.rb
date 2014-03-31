@@ -11,7 +11,8 @@ class CmsAdmin::PagesController < CmsAdmin::BaseController
 	      redirect_to(root_url)
 	    else
 	      if current_user.isFacultyUser
-	        #Blocks faculty users from accessing their site's pages index unless the cms_site_enabled bit has been set manually in the database.
+	        #Blocks faculty users from accessing their site's pages index unless the cms_site_enabled bit has 
+	        #been flipped manually in the database.
 	        unless FacultyUser.find_by_userID(current_user.id).cms_site_enabled
 	          redirect_to(root_url)
 	        end

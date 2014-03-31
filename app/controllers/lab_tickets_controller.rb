@@ -1,13 +1,21 @@
 class LabTicketsController < ApplicationController
+
+  before_filter :check_your_privilege
+  before_filter :set_lab_ticket, only: [:show,:edit,:update,:destroy,:closed_tickets]
+
   # GET /lab_tickets
   # GET /lab_tickets.json
   def index
-    @lab_tickets = LabTicket.all
+    @lab_tickets = LabTicket.order(:created_at)
 
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @lab_tickets }
     end
+  end
+
+  def closed_tickets
+    @lab_tickets = LabTicket.order(:dateClosed)
   end
 
   # GET /lab_tickets/1
@@ -49,7 +57,7 @@ class LabTicketsController < ApplicationController
   def close
     @lab_ticket = LabTicket.find(params[:id])
     respond_to do |format|
-      if @lab_ticket.complete
+      if @lab_ticket.status == 0
         format.html { redirect_to @lab_ticket, notice: 'Lab ticket is already closed.' }
         format.json { head :no_content }
       else
@@ -128,10 +136,30 @@ class LabTicketsController < ApplicationController
 
   private
 
-    # Use this method to whitelist the permissible parameters. Example:
-    # params.require(:person).permit(:name, :age)
-    # Also, you can specialize this method with per-user checking of permissible attributes.
-    def lab_ticket_params
-      params.require(:lab_ticket).permit(:clientID, :dateScheduled, :locationID, :problemDescription, :programID, :receivingTech, :requestedBy, :resolution, :status, :supervisorID, :techNotes, :urgency)
+  def check_your_privilege
+    if current_user.nil? 
+      redirect_to(root_url)
+    else
+      unless current_user.godBit or current_user.isSuperUser or current_user.isSupervisorUser or current_user.isTechUser
+        redirect_to(root_url)
+      end
     end
+  end
+
+  # Use this method to whitelist the permissible parameters. Example:
+  # params.require(:person).permit(:name, :age)
+  # Also, you can specialize this method with per-user checking of permissible attributes.
+  def lab_ticket_params
+    params.require(:lab_ticket).permit(:clientID, :dateScheduled, :locationID, :problemDescription, :programID, :receivingTech, :requestedBy, :resolution, :status, :supervisorID, :techNotes, :urgency)
+  end
+
+
+  def set_lab_ticket
+    #Basically a throw/catch to pass an empty ticket to the controller if no ticket is passed to the controller otherwise.
+    begin
+      @lab_ticket = LabTicket.find(params[:id])
+    rescue 
+      @lab_ticket = LabTicket.new
+    end
+  end
 end

@@ -152,3 +152,5 @@
 <div><p></p></div>
 
 <%= link_to '| Back |', lab_tickets_path %> <td>
+<%= link_to '| Close |', @trouble_ticket, :confirm => 'Are you sure?', :method => "close" %> 
+<%= link_to '| Delete |', @trouble_ticket, :confirm => 'Are you sure?', :method => :delete %>

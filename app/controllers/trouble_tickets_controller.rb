@@ -1,10 +1,11 @@
 class TroubleTicketsController < ApplicationController
+  before_filter :check_your_privilege
   before_filter :set_trouble_ticket, only: [:show,:edit,:update,:destroy,:closed_tickets]
 
   # GET /trouble_tickets
   # GET /trouble_tickets.json
   def index
-    @trouble_tickets = TroubleTicket.all
+    @trouble_tickets = TroubleTicket.order(:created_at)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -118,6 +119,7 @@ end
   end
 
   def closed_tickets
+    @trouble_tickets = TroubleTicket.order(:dateClosed)
   end
 
   def supervisor_tickets
@@ -171,7 +173,7 @@ end
   def accept_ticket
     respond_to do |format|
       @trouble_ticket=TroubleTicket.find(params[:id])
-      @trouble_ticket.update(:assignedTechConfirmed => 1)
+      @trouble_ticket.update_attributes(:assignedTechConfirmed => 1)
       format.html { redirect_to @trouble_ticket, notice: 'Trouble ticket has been accepted successfully.' }
       format.json { head :no_content }
     end
@@ -179,24 +181,34 @@ end
 
   private
 
-    # Use this method to whitelist the permissible parameters. Example:
-    # params.require(:person).permit(:name, :age)
-    # Also, you can specialize this method with per-user checking of permissible attributes.
-    def trouble_ticket_params
-      params.require(:trouble_ticket).permit(:assignedTech, :assignedTechConfirmed, :clientID, :dateClosed, :dateScheduled, :equipmentID, :locationID, :problemDescription, :programID, :receivingTech, :requestedBy, :resolution, :status, :supervisorID, :techNotes, :urgency, :closingTech)
-    end
-
-    def job_params
-      params.require(:job).permit(:completed, :completedByID, :description, :ticketID)
-    end
-
-    def set_trouble_ticket
-      #Basically a throw/catch to pass an empty ticket to the controller if no ticket is passed to the controller otherwise.
-      begin
-        @trouble_ticket = TroubleTicket.find(params[:id])
-      rescue 
-        @trouble_ticket = TroubleTicket.new
+  def check_your_privilege
+    if current_user.nil? 
+      redirect_to(root_url)
+    else
+      unless current_user.godBit or current_user.isSuperUser or current_user.isSupervisorUser or current_user.isTechUser
+        redirect_to(root_url)
       end
     end
+  end
+
+  # Use this method to whitelist the permissible parameters. Example:
+  # params.require(:person).permit(:name, :age)
+  # Also, you can specialize this method with per-user checking of permissible attributes.
+  def trouble_ticket_params
+    params.require(:trouble_ticket).permit(:assignedTech, :assignedTechConfirmed, :clientID, :dateClosed, :dateScheduled, :equipmentID, :locationID, :problemDescription, :programID, :receivingTech, :requestedBy, :resolution, :status, :supervisorID, :techNotes, :urgency, :closingTech)
+  end
+
+  def job_params
+    params.require(:job).permit(:completed, :completedByID, :description, :ticketID)
+  end
+
+  def set_trouble_ticket
+    #Basically a throw/catch to pass an empty ticket to the controller if no ticket is passed to the controller otherwise.
+    begin
+      @trouble_ticket = TroubleTicket.find(params[:id])
+    rescue 
+      @trouble_ticket = TroubleTicket.new
+    end
+  end
 
 end
