@@ -1,5 +1,7 @@
 class ComputerProgram < ActiveRecord::Base
-  attr_accessible :accountNotes, :description, :expDate, :installNotes, :license, :licenseCount, :name, :publisher, :serial, :status, :testingNotes, :uaAccountNo, :userID, :vendor, :classroomImage, :econImage, :labImage
+  attr_accessible :accountNotes, :description, :expDate, :installNotes, :license, :licenseCount, :name, :publisher, :serial, :status, :testingNotes, :uaAccountNo, :userID, :vendor, :classroomImage, :econImage, :labImage, :attachments_attributes
+  has_many :attachments, :as => :attachable
+  accepts_nested_attributes_for :attachments, :allow_destroy=>true
   validates_presence_of :description, :name, :publisher, :serial
 
   def digest

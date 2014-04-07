@@ -1,4 +1,4 @@
-#Strips all of the asset pipeline logging from the server output.
+#Silences the asset pipeline logging.
 if Rails.env.development?
   Rails.application.assets.logger = Logger.new('/dev/null')
   Rails::Rack::Logger.class_eval do

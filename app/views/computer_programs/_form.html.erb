@@ -1,4 +1,4 @@
-<%= simple_form_for(@program) do |f| %>
+<%= nested_form_for @program, :html=>{:multipart =>true} do |f| %>
   <% if @program.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@program.errors.count, "error") %> prohibited this program from being saved:</h2>
@@ -12,17 +12,17 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :name %>
+    *<%= f.label :name %>
     <%= f.text_field :name %>
   </div>
   <div class="field">
     <br />
-    <%= f.label :description %>
+    *<%= f.label :description %>
     <%= f.text_field :description %>
   </div>
   <div class="field">
     <br />
-    <%= f.label :publisher %>
+    *<%= f.label :publisher %>
     <%= f.text_field :publisher %>
   </div>
   <div class="field">
@@ -32,7 +32,7 @@
   </div>
   <div class="field">
     <br />
-    <%= f.label :serial %>
+    *<%= f.label :serial %>
     <%= f.text_field :serial %>
   </div>
   <div class="field">
@@ -45,32 +45,6 @@
     License Count
     <%= f.number_field :licenseCount %>
   </div>
-  <div class="field">
-    <br />
-    Expiration Date
-    <%= f.datetime_select :expDate %>
-  </div>
-  <div class="field">
-    <br />
-    UA Account Number
-    <%= f.text_field :uaAccountNo %>
-  </div>
-  <div class="field">
-    <br />
-    Install Notes
-    <%= f.input :installNotes, :as => :text, :input_html => {:style => "width:510px", :rows => 5}, label: false%>
-  </div>
-  <div class="field">
-    <br />
-    Testing Notes
-    <%= f.input :testingNotes, :as => :text, :input_html => {:style => "width:510px", :rows => 5}, label: false%>
-  </div>
-
-  <div class="span3">
-    <br />
-    Account Notes
-    <%= f.input :accountNotes, :as => :text, :input_html => {:style => "width:510px", :rows => 5}, label: false%>
-  </div>
 
   <div class="field">
     <br />
@@ -80,6 +54,37 @@
 
   <div class="field">
     <br />
+    UA Account Number
+    <%= f.text_field :uaAccountNo %>
+  </div>
+
+  <div class="field">
+    <br />
+    Expiration Date
+    <%= f.datetime_select :expDate %>
+  </div>
+
+  <h3>Notes:</h3>
+
+  <div class="field">
+    Install Notes<br />
+    <%= f.text_area :installNotes, :as => :text, :input_html => {:style => "width:510px", :rows => 5}, label: false%>
+  </div>
+  <div class="field">
+    <br />
+    Testing Notes<br />
+    <%= f.text_area :testingNotes, :as => :text, :input_html => {:style => "width:510px", :rows => 5}, label: false%>
+  </div>
+
+  <div class="span3">
+    <br />
+    Account Notes<br />
+    <%= f.text_area :accountNotes, :as => :text, :input_html => {:style => "width:510px", :rows => 5}, label: false%>
+  </div>
+
+  <h3>Image Selection:</h3>
+
+  <div class="field">
     Classroom Image
     <%= f.check_box :classroomImage%>
   </div>
@@ -94,7 +99,23 @@
     <%= f.check_box :labImage%>
   </div>
 
+   <%= f.fields_for :attachments do |attachment_form|  %>
+    <p>
+    <h3>Add Files:</h3> 
+    <%= attachment_form.label :description %><br />
+    <%= attachment_form.text_field :description %>
+    </p>
+    <p>
+    <%= attachment_form.label :file %><br />
+    <%= attachment_form.file_field :file %>
+    </p>
+    <%= attachment_form.link_to_remove "Remove this attachment" %>
+  <% end %>
+
   <br />
+  <%= f.link_to_add "Add attachment", :attachments %>
+
+  <div><p></p></div>
 
   <div class="actions">
     <%= f.submit %>

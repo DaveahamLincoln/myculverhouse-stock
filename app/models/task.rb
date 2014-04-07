@@ -3,7 +3,7 @@ class Task < ActiveRecord::Base
   #check out
   #http://railscasts.com/episodes/17-habtm-checkboxes
   has_and_belongs_to_many :equipment
-  attr_accessible :assignedTech, :completed, :description, :labTicketID, :completed
+  attr_accessible :assignedTech, :completed, :description, :labTicketID, :completed, :dateClosed, :closingTech
   
   #Adds opinio comment functionality to the model.
   opinio_subjectum

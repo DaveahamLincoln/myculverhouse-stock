@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.13'
+gem 'thin'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -74,7 +75,12 @@ gem 'vestal_versions', :git => 'git://github.com/laserlemon/vestal_versions'
 #Simple commenting engine.
 gem 'opinio'
 
-gem 'simple-navigation'
+#gem 'simple-navigation'
+
+#Handles file uploads
+gem 'carrierwave'
+gem 'nested_form'
+
 
 #gem 'jquery-ui-rails'
 

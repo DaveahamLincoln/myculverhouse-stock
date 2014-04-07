@@ -71,6 +71,26 @@ class TasksController < ApplicationController
     end
   end
 
+  def reopen
+    @task= Task.find(params[:id])
+    respond_to do |format|
+      if !@task.completed
+        format.html { redirect_to @task, notice: 'Task is already open.' }
+        format.json { head :no_content }
+      else
+        if current_user.godBit or current_user.isSupervisor or current_user.isTech
+          @task.update_attributes(completed: false)
+          format.html { redirect_to @task, notice: 'Task has been reopened successfully.' }
+          format.json { head :no_content }
+          #@task.send_task_close_burst
+        else
+          format.html { redirect_to @task, notice: 'You do not have sufficient permissions to reopen tickets.' }
+          format.json { head :no_content }
+        end
+      end
+    end
+  end
+
   # POST /tasks
   # POST /tasks.json
   def create
@@ -78,7 +98,7 @@ class TasksController < ApplicationController
 
     respond_to do |format|
       if @task.save
-        format.html { redirect_to @task, notice: 'Task was successfully created.' }
+        format.html { redirect_to "/lab_tickets/#{@task.labTicketID}", notice: 'Task was successfully created.' }
         format.json { render json: @task, status: :created, location: @task }
       else
         format.html { render action: "new" }
@@ -90,13 +110,16 @@ class TasksController < ApplicationController
   # PATCH/PUT /tasks/1
   # PATCH/PUT /tasks/1.json
   def update
+    #If the task is sending an equipment_ids hash, it reads it, otherwise it ensures the update action receives an empty equipment_ids hash.
+    #Required for HABTM checkbox functionality.
     params[:task][:equipment_ids] ||= []
     @task = Task.find(params[:id])
     @task.equipment_ids = params[:task][:equipment_ids]
 
     respond_to do |format|
       if @task.update_attributes(task_params)
-        format.html { redirect_to @task, notice: 'Task was successfully updated.' }
+        #OK, yeah, I know this is lazy, but for some reason Create uses the Update action, and this is the best way to do this right now.
+        format.html { redirect_to "/lab_tickets/#{@task.labTicketID}", notice: 'Task was successfully added/updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -134,6 +157,6 @@ class TasksController < ApplicationController
     # params.require(:person).permit(:name, :age)
     # Also, you can specialize this method with per-user checking of permissible attributes.
     def task_params
-      params.require(:task).permit(:assignedTech, :completed, :description, :labTicketID, :completed)
+      params.require(:task).permit(:assignedTech, :completed, :description, :labTicketID, :completed, :dateClosed, :closingTech)
     end
 end

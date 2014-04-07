@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140331202259) do
+ActiveRecord::Schema.define(:version => 20140407191712) do
 
   create_table "action_items", :force => true do |t|
     t.integer  "createdByID"
@@ -20,6 +20,17 @@ ActiveRecord::Schema.define(:version => 20140331202259) do
     t.datetime "updated_at",  :null => false
     t.string   "itemType"
   end
+
+  create_table "attachments", :force => true do |t|
+    t.text     "description"
+    t.string   "file"
+    t.integer  "attachable_id"
+    t.string   "attachable_type"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  add_index "attachments", ["attachable_id"], :name => "index_attachments_on_attachable_id"
 
   create_table "calendar_items", :force => true do |t|
     t.integer  "actionItemID"
@@ -360,6 +371,8 @@ ActiveRecord::Schema.define(:version => 20140331202259) do
     t.boolean  "completed"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
+    t.datetime "dateClosed"
+    t.integer  "closingTech"
   end
 
   create_table "trouble_tickets", :force => true do |t|

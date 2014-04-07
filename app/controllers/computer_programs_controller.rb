@@ -76,14 +76,10 @@ class ComputerProgramsController < ApplicationController
   def create
     @program = ComputerProgram.new(params[:computer_program])
 
-    respond_to do |format|
-      if @program.save
-        format.html { redirect_to @program, notice: 'Program was successfully created.' }
-        format.json { render json: @program, status: :created, location: @program }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @program.errors, status: :unprocessable_entity }
-      end
+    if @program.save
+        redirect_to @program, notice: 'Program was successfully created.'
+    else
+      render action: "new"
     end
   end
 
@@ -121,5 +117,7 @@ class ComputerProgramsController < ApplicationController
       params.require(:computer_program).permit(:accountNotes, :description, :expDate, :installNotes, 
           :license, :licenseCount, :name, :publisher, :serial, :status, :testingNotes, :uaAccountNo, 
           :userID, :vendor, :classroomImage, :econImage, :labImage)
+      params.require(:attachments_attributes).permit(:description,:file)
+
   end
 end

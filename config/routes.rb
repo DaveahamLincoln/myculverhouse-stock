@@ -91,6 +91,7 @@ MyculverhouseStock::Application.routes.draw do
 
   post '/lab_tickets/:id', to: 'lab_tickets#close'
   post '/lab_tickets/:labTicketID/new_task', to: "tasks#new"
+  get '/lab_tickets/id', to: 'lab_tickets#show'
   get "lab_tickets/closed_tickets" => "lab_tickets#closed_tickets"
   resources :lab_tickets do
     member do
@@ -99,6 +100,7 @@ MyculverhouseStock::Application.routes.draw do
   end
 
   post '/tasks/:id', to: 'tasks#close'
+  post '/tasks/:id/reopen', to: 'tasks#reopen'
   resources :tasks do
     member do
       opinio
