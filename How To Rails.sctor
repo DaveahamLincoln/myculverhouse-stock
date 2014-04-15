@@ -1,0 +1,69 @@
+Some quick and easy tips for starting in on Rails.
+
+1.  Let's say you need to add a new module to the site, say a schedule, a good place to start is with a scaffold.  A scaffold is basically an automatically generated template for an MVC mechanism.
+
+Model View Controller Relationship:
+
+Model updates View.
+User sees View.
+User uses controller.
+Controller manipulates Model.
+
+To create a scaffold, run 
+>rails g scaffold <name> <args>
+
+For example,
+>rails g scaffold schedule schedule_name:string user_id:integer start_date:datetime end_date:datetime active:boolean
+
+This will result in an output like this:
+invoke  active_record                                                                                                                                                             
+      create    db/migrate/20140415184231_create_schedules.rb
+      #Creates a database migration file, which contains the attributes for the Schedule model.  When you run rake:db migrate, it will translate this file into syntax appropriate for 
+      the kind of database you're using and create/update all of the appropriate tables.
+
+      create    app/models/schedule.rb                                               
+      #Creates the Schedule model.  This file is where all of the model-specific methods go.  For instance, if you wanted to add a daterange method to the Schedule model which returned
+      	a string of the format start_date - end_date, you'd put it here like so:
+
+      		def daterange
+      			"#{self.start_date} - #{self.end_date}"
+      		end
+
+      	From this point on, you can call .datetime on any instance of a Schedule, and it will return the datetime string.
+
+      	Here is also where you'll define things like 
+      		attr_accessible <accessible attributes>, which defines what parameters can be assigned/modified by controller actions.
+      		validates_presence_of <attributes>, which defines required attributes.
+      		relations (such as has_many, belongs_to, has_and_belongs_to_many, etc.), which make join tables less necessary.
+      		gem hooks (like acts_as_commentable, or acts_as_voter)
+
+      invoke    test_unit                                                                                                                                                               
+      create      test/models/schedule_test.rb                                                                                                                                          
+      create      test/fixtures/schedules.yml   
+      #Creates tests to verify that your controller actions work as intended- I haven't done much with test-driven development, but it might be worth looking into.
+
+      invoke  resource_route                                                                                                                                                            
+       route    resources :schedules                                                                                                                                                    
+      invoke  scaffold_controller                                                                                                                                                       
+      create    app/controllers/schedules_controller.rb                                                                                                                                 
+      invoke    erb                                                                                                                                                                     
+      create      app/views/schedules                                                                                                                                                   
+      create      app/views/schedules/index.html.erb                                                                                                                                    
+      create      app/views/schedules/edit.html.erb                                                                                                                                     
+      create      app/views/schedules/show.html.erb                                                                                                                                     
+      create      app/views/schedules/new.html.erb                                                                                                                                      
+      create      app/views/schedules/_form.html.erb                                                                                                                                    
+      invoke    test_unit                                                                                                                                                               
+      create      test/controllers/schedules_controller_test.rb                                                                                                                         
+      invoke    helper                                                                                                                                                                  
+      create      app/helpers/schedules_helper.rb                                                                                                                                       
+      invoke      test_unit                                                                                                                                                             
+      create        test/helpers/schedules_helper_test.rb                                                                                                                               
+      invoke    jbuilder                                                                                                                                                                
+      create      app/views/schedules/index.json.jbuilder                                                                                                                               
+      create      app/views/schedules/show.json.jbuilder                                                                                                                                
+      invoke  assets                                                                                                                                                                    
+      invoke    coffee                                                                                                                                                                  
+      create      app/assets/javascripts/schedules.js.coffee                                                                                                                            
+      invoke    scss                                                                                                                                                                    
+      create      app/assets/stylesheets/schedules.css.scss            
