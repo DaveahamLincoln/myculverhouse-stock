@@ -1,5 +1,20 @@
 class CalendarItemsController < ApplicationController
+  ##
+  #Handles the CalendarItems submission process.  Approved users can submit CalendarItems, which are then sent to the ActionItems queue
+  #to be approved by Admin/Communications users.
+  #
+  #    Use case:
+  #    
+  #    USER => CalendarItem.new => ActionItem.new 
+  #    ADMIN => ActionItem.approve => CalendarItem shows up on MasterCalendar.index
+  #
+  ##
+
+  #Loads the appropriate CalendarItem record for each page, based on the id passed in the params hash.
   before_filter :set_calendar_item, only: [:show, :edit, :update, :destroy]
+
+  #Ensures that only authorized users will be able to access infacing CalendarItems controller methods.
+  #Show is considered outfacing in this case because master_calendar redirects to the associated CalendarItem record when events are clicked.
   before_filter :check_your_privilege, only: [:index, :new, :edit, :create, :update, :destroy]
 
   # GET /calendar_items
@@ -24,8 +39,12 @@ class CalendarItemsController < ApplicationController
   # POST /calendar_items
   def create
     @calendar_item = CalendarItem.new(calendar_item_params)
+
+    #Creates an ActionItem in the ActionItems queue for the CalendarItem.
     @action_item = ActionItem.new
     @action_item.update_attributes(createdByID: current_user.id, isApproved: false, itemType: "calendar")
+
+    #Associates the CalendarItem with the newly created ActionItem.
     @calendar_item.update_attributes(actionItemID: @action_item.id)
 
     if @calendar_item.save
@@ -46,8 +65,10 @@ class CalendarItemsController < ApplicationController
 
   # DELETE /calendar_items/1
   def destroy
+    #Retrieves and destroys the associated ActionItem.
     @calendarItemActionItem = ActionItem.where(id: @calendar_item.actionItemID).first
     @calendarItemActionItem.destroy
+    
     @calendar_item.destroy
     redirect_to calendar_items_url, notice: 'Calendar item was successfully destroyed.'
   end

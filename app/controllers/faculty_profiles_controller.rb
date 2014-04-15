@@ -1,4 +1,10 @@
 class FacultyProfilesController < ApplicationController
+  ##
+  #This is the controller for the managed CMS.  Since we're using Comfy to handle our
+  #CMS needs, this controller isn't exposed to the outside.  If we decide to build
+  #our own CMS, we should mount it here, and uncomment the /faculty_profiles route in config/routes.rb
+  #
+  ##
   before_filter :set_faculty_profile, only: [:edit, :update, :destroy]
   before_filter :check_your_privilege
 

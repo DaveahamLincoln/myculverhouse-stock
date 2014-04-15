@@ -1,7 +1,17 @@
 class DepartmentsController < ApplicationController
+  ##
+  #Handles the Departments creation process.  First, Departments are created and loaded into the Departments index, then a CMS site is
+  #automatically generated to be edited at a later date.
+  #
+  #    Use case:
+  #    
+  #    USER => Department.new => Cms::Site.new
+  #    USER => /cms_admin => Edit Department site.
+  #
+  ##
 
-  #Comment to access the /departments/new page as an anonymous user
-  before_filter :check_your_privilege, only: [:new, :create, :update, :destroy, :edit]
+  #Ensures that only authorized users will be able to access the infacing Departments controller methods.
+  before_filter :check_your_privilege, only: [:new, :create, :destroy, :edit]
 
   # GET /departments
   # GET /departments.json
@@ -12,22 +22,6 @@ class DepartmentsController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @Departments }
-    end
-  end
-
-  #This is odd because of the way I have the mnemonic routing set up.
-  #    Essentially, if you leave this alone, it catches the /Departments/foo call and tries to route it to the show action of 
-  #    a Department with id 'foo.'  Now it catches the call differently, so GET /departments/foo will go to the CMS page for foo
-  #    and GET /departments/shard/:id will route to the department record for foo.
-
-  # GET /departments/shard/1
-  # GET /departments/shard/1.json
-  def show
-    @department = Department.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @Department }
     end
   end
 
@@ -42,13 +36,13 @@ class DepartmentsController < ApplicationController
     end
   end
 
-  # GET /departments/shard/1/edit
-  #Note: Changing the name of a department will not change their site slug, this has to be done manually right now,
-  #    I'm not sure if there's a way to avoid having to do this.
+=begin
+  This is disabled because centers are immutable- to change one you must delete it, delete its CMS site, and then create it afresh. 
+  #GET /departments/shard/1/edit
   def edit
     @department = Department.find(params[:id])
   end
-
+=end
 
   # POST /departments
   # POST /departments.json
@@ -57,18 +51,25 @@ class DepartmentsController < ApplicationController
 
     respond_to do |format|
       if @department.save
+
+          #Creates a new CMS site linked to the newly created Department record.
           @departmentSite = Cms::Site.new
+        
           #Removes all url-unfriendly characters from the name to create an identifier Comfy can use.
           @ident = @department.name.gsub(/[^a-zA-Z 0-9]/, "")
+        
+          #Replaces spaces in the Department name with underscores.
           @ident = @ident.gsub(/\s/,'_')
+        
           @departmentSite.update_attributes(
-            #binds Department sites to easy-to-remember mnemonics.
+            #Binds Department sites to easy-to-remember mnemonics.
             identifier: "#{@ident.downcase}",
 
-            #pulls the hostname for the parent site
+            #Pulls the hostname for the parent site
+            #TODO PREDEPLOY: Change this hostname to the deployment hostname.
             hostname: '0.0.0.0:3000',
 
-            #sets the root path for the new site to /Departments.  There is no actual /Departments route handled by Comfy, but it provides an easy mnemonic
+            #Sets the root path for the new site to /Departments.  There is no actual /Departments route handled by Comfy, but it provides an easy mnemonic
             #GET "/departments" should be mapped to a static page that links to all sites created in this manner.
             path: "departments/#{@ident.downcase}"
             )
@@ -82,6 +83,9 @@ class DepartmentsController < ApplicationController
       end
     end
   end
+
+=begin
+  Disabled for the same reason as edit.
 
   # PATCH/PUT /departments/1
   # PATCH/PUT /departments/1.json
@@ -98,16 +102,17 @@ class DepartmentsController < ApplicationController
       end
     end
   end
+=end
 
   # DELETE /departments/1
   # DELETE /departments/1.json
   def destroy
     @department = Department.find(params[:id])
-    #Bad logic below.
     @departmentSite = Cms::Site.find(@department.id)
+    @department.destroy
+    
     #Uncomment to activate linked deletion functionality.  Per Freddie, we want to force users to go into the CMS and delete sites manually,
     #rather than binding the destroy to the control panel destroy action, but I figured I'd include this in case this changed.
-    @department.destroy
     #@departmentSite.destroy
 
     respond_to do |format|

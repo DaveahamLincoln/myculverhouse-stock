@@ -38,11 +38,9 @@ MyculverhouseStock::Application.routes.draw do
   #CONSTANT VIGILANCE!  ROUTES LOAD IN ORDER.  I had a 'resources :departments' entry here, which was overriding the 
   #:except direction below.  Took me two hours to fix.  Pay attention to the order.
 
-  resources :departments, :except => [:show,:edit]
-  get "/departments/shard/:id" => "departments#show"
-  get "/departments/shard/:id/edit" => "departments#edit"
+  resources :departments, :except => [:show,:edit,:update]
 
-  resources :centers, :except => [:show,:edit]
+  resources :centers, :except => [:show,:edit,:update]
 
   #Managed CMS hook.  Uncomment to reenable.
   #resources :faculty_profiles
