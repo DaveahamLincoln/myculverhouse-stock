@@ -6,6 +6,7 @@ ComfortableMexicanSofa.configure do |config|
   
   # Module responsible for authentication. You can replace it with your own.
   # It simply needs to have #authenticate method. See http_auth.rb for reference.
+    #See below for this method.
     config.admin_auth = 'CmsScratchAuth'
   
   # Module responsible for public authentication. Similar to the above. You also
@@ -87,6 +88,7 @@ ComfortableMexicanSofa.configure do |config|
 
   module CmsScratchAuth
     #this isn't very good. at all. whatsoever.
+    #It's actually not that bad, might need to refactor to make it flow better for FacultyUser use cases.
     def authenticate
       if current_user.blank?
         #change to correct route when deployed

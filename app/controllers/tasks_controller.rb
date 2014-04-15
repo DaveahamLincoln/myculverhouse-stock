@@ -1,4 +1,7 @@
 class TasksController < ApplicationController
+
+  before_filter :check_your_privilege
+
   # GET /tasks
   # GET /tasks.json
   def index
@@ -115,6 +118,17 @@ class TasksController < ApplicationController
   end
 
   private
+
+  def check_your_privilege
+    if current_user.nil? 
+      redirect_to(root_url)
+    else
+      unless current_user.godBit or current_user.isSuperUser or current_user.isSupervisorUser or current_user.isTechUser
+        redirect_to(root_url)
+      end
+    end
+  end
+
 
     # Use this method to whitelist the permissible parameters. Example:
     # params.require(:person).permit(:name, :age)

@@ -1,8 +1,21 @@
 class ActionItemsController < ApplicationController
-  # GET /action_items
-  # GET /action_items.json
+  ##
+  #Handles the ActionItems queue, which allows approved users to screen events and news submitted by other users before it is
+  #posted to outfacing pages.
+  #
+  #    Use case:
+  #    
+  #    ADMIN => ActionItem.approve => CalendarItem shows up on MasterCalendar.index
+  #    ADMIN => ActionItem.approve => NewsItem shows up on News.index
+  #
+  ##
+
+
+  #Ensures that only authorized users will be able to access the ActionItems controller methods.
   before_filter :check_your_privilege
 
+  # GET /action_items
+  # GET /action_items.json
   def index
     @action_items = ActionItem.all
 
@@ -11,39 +24,6 @@ class ActionItemsController < ApplicationController
       format.json { render json: @action_items }
     end
   end
-
-=begin
-  # GET /action_items/1
-  # GET /action_items/1.json
-  def show
-    @action_item = ActionItem.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @action_item }
-    end
-  end
-=end
-
-=begin
-  # GET /action_items/new
-  # GET /action_items/new.json
-  def new
-    @action_item = ActionItem.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @action_item }
-    end
-  end
-=end
-
-=begin
-  # GET /action_items/1/edit
-  def edit
-    @action_item = ActionItem.find(params[:id])
-  end
-=end
 
   # POST /action_items
   # POST /action_items.json
@@ -82,6 +62,7 @@ class ActionItemsController < ApplicationController
   def destroy
     @action_item = ActionItem.find(params[:id])
     
+    #Determines the type of action item and enables it on the appropriate page.
     if @action_item.itemType == "news"
       @action_item_proper = NewsItem.where(actionItemID: @action_item.id).first
     elsif @action_item.itemType == "calendar"
@@ -97,6 +78,9 @@ class ActionItemsController < ApplicationController
     end
   end
 
+  #Approval method.
+  #Admins and communications users can approve action items.  Once approved, an action item will show up on the proper outfacing page.
+  #Example- an approved CalendarItem will become visible on the Master_Calendar page.
   def approve
     respond_to do |format|
       @action_item=ActionItem.find(params[:id])

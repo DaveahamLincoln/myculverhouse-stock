@@ -1,3 +1,4 @@
+#Not used as far as I know, fragment of an override sceme I ended up scrapping.  Can probably be deleted.
 require 'comfortable_mexican_sofa'
 
 module ComfortableMexicanSofa

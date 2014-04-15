@@ -1,51 +1,74 @@
 class ComputerProgramsController < ApplicationController
-  # GET /programs
-  # GET /programs.json
+  ##
+  #Provides access to the ComputerPrograms model.
+  #
+  ##
+
+  # GET /computer_programs
+  # GET /computer_programs.json
+  # GET /computer_programs.csv
   def index
     @programs = ComputerProgram.all
 
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @programs }
+      #Exports the list of all ComputerPrograms to a .csv file.
       format.csv { send_data @programs.to_csv}
     end
   end
 
+  #GET /computer_programs/classroom
+  #GET /computer_programs/classroom.csv
   def classroom
+    #Lists the ComputerPrograms currently installed on the Classrom Image.
     @programs = ComputerProgram.where(classroomImage: true) 
 
     respond_to do |format|   
       format.html
+      #Exports the image listing to a .csv file.
       format.csv { send_data ComputerProgram.to_csv(@programs)}
     end
   end
 
+  #GET /computer_programs/econ
+  #GET /computer_programs/econ.csv
   def econ
+    #Lists the ComputerPrograms currently installed on the Econ Image.
     @programs = ComputerProgram.where(econImage: true) 
     respond_to do |format|   
       format.html
+      #Exports the image listing to a .csv file.
       format.csv { send_data ComputerProgram.to_csv(@programs)}
     end
   end
 
+  #GET /computer_programs/lab
+  #GET /computer_programs/lab.csv
   def lab
+    #Lists the ComputerPrograms currently installed on the Lab Image.
     @programs = ComputerProgram.where(labImage: true)
     respond_to do |format|   
       format.html
+      #Exports the image listing to a .csv file.
       format.csv { send_data ComputerProgram.to_csv(@programs)}
     end
   end
 
+  #GET /computer_programs/archived
+  #GET /computer_programs/archived.csv
   def archived
+    #Lists the ComputerPrograms not currently installed on an image.
     @programs = ComputerProgram.where(classroomImage: false, econImage:false, labImage: false)
     respond_to do |format|   
       format.html
+      #Exports the image listing to a .csv file.
       format.csv { send_data ComputerProgram.to_csv(@programs)}
     end
   end
 
-  # GET /programs/1
-  # GET /programs/1.json
+  # GET /computer_programs/1
+  # GET /computer_programs/1.json
   def show
     @program = ComputerProgram.find(params[:id])
 
@@ -55,8 +78,8 @@ class ComputerProgramsController < ApplicationController
     end
   end
 
-  # GET /programs/new
-  # GET /programs/new.json
+  # GET /computer_programs/new
+  # GET /computer_programs/new.json
   def new
     @program = ComputerProgram.new
 
@@ -66,13 +89,13 @@ class ComputerProgramsController < ApplicationController
     end
   end
 
-  # GET /programs/1/edit
+  # GET /computer_programs/1/edit
   def edit
     @program = ComputerProgram.find(params[:id])
   end
 
-  # POST /programs
-  # POST /programs.json
+  # POST /computer_programs
+  # POST /computer_programs.json
   def create
     @program = ComputerProgram.new(params[:computer_program])
 
@@ -87,8 +110,8 @@ class ComputerProgramsController < ApplicationController
     end
   end
 
-  # PUT /programs/1
-  # PUT /programs/1.json
+  # PUT /computer_programs/1
+  # PUT /computer_programs/1.json
   def update
     @program = ComputerProgram.find(params[:id])
 
@@ -103,8 +126,8 @@ class ComputerProgramsController < ApplicationController
     end
   end
 
-  # DELETE /programs/1
-  # DELETE /programs/1.json
+  # DELETE /computer_programs/1
+  # DELETE /computer_programs/1.json
   def destroy
     @program = ComputerProgram.find(params[:id])
     @program.destroy

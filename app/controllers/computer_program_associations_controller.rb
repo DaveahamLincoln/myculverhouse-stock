@@ -1,4 +1,15 @@
 class ComputerProgramAssociationsController < ApplicationController
+  ##
+  #Handles the ComputerProgramsAssociations creation process.  
+  #ComputerProgramsAssociations track the ComputerPrograms installed on a given
+  #computer.
+  #
+  #    Use case:
+  #    
+  #    USER => Equipment.show => computer_program_association_path(@equipment.id), method: :post => ComputerProgramAssociation.new
+  #
+  ##
+
   # GET /computer_program_associations
   # GET /computer_program_associations.json
   def index
@@ -82,6 +93,7 @@ class ComputerProgramAssociationsController < ApplicationController
   end
 
   #POST /computer_program_associations/uninstall/1
+  #Removes the association between a given piece of Equipment and a ComputerProgram.
   def uninstall
     @equipment = Equipment.find(params[:equipmentID])
   end
