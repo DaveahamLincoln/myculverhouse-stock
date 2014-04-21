@@ -1,6 +1,6 @@
 Some quick and easy tips for starting in on Rails.
 
-1.  Let's say you need to add a new module to the site, say a schedule, a good place to start is with a scaffold.  A scaffold is basically an automatically generated template for an MVC mechanism.
+1. Let's say you need to add a new module to the site, say a schedule, a good place to start is with a scaffold.  A scaffold is basically an automatically generated template for an MVC mechanism.
 
 Model View Controller Relationship:
 
@@ -18,12 +18,11 @@ For example,
 This will result in an output like this:
 invoke  active_record                                                                                                                                                             
       create    db/migrate/20140415184231_create_schedules.rb
-      #Creates a database migration file, which contains the attributes for the Schedule model.  When you run rake:db migrate, it will translate this file into syntax appropriate for 
-      the kind of database you're using and create/update all of the appropriate tables.
+      #Creates a database migration file, which contains the attributes for the Schedule model.  When you run rake:db migrate, it will translate this file into syntax appropriate for  the kind of database you're using and create/update all of the appropriate tables.
 
       create    app/models/schedule.rb                                               
       #Creates the Schedule model.  This file is where all of the model-specific methods go.  For instance, if you wanted to add a daterange method to the Schedule model which returned
-      	a string of the format start_date - end_date, you'd put it here like so:
+      	a string of the format :start_date - :end_date, you'd put it here like so:
 
       		def daterange
       			"#{self.start_date} - #{self.end_date}"
@@ -37,33 +36,131 @@ invoke  active_record
       		relations (such as has_many, belongs_to, has_and_belongs_to_many, etc.), which make join tables less necessary.
       		gem hooks (like acts_as_commentable, or acts_as_voter)
 
-      invoke    test_unit                                                                                                                                                               
-      create      test/models/schedule_test.rb                                                                                                                                          
+      invoke      test_unit                                                                                                                create      test/models/schedule_test.rb                                                                                    
       create      test/fixtures/schedules.yml   
-      #Creates tests to verify that your controller actions work as intended- I haven't done much with test-driven development, but it might be worth looking into.
+      #Creates tests to verify that your model actions work as intended- I haven't done much with test-driven development, but it might be worth looking into, since you'll likely be doing this on your own, without a beta-tester.
 
-      invoke  resource_route                                                                                                                                                            
-       route    resources :schedules                                                                                                                                                    
-      invoke  scaffold_controller                                                                                                                                                       
-      create    app/controllers/schedules_controller.rb                                                                                                                                 
-      invoke    erb                                                                                                                                                                     
-      create      app/views/schedules                                                                                                                                                   
-      create      app/views/schedules/index.html.erb                                                                                                                                    
-      create      app/views/schedules/edit.html.erb                                                                                                                                     
-      create      app/views/schedules/show.html.erb                                                                                                                                     
-      create      app/views/schedules/new.html.erb                                                                                                                                      
-      create      app/views/schedules/_form.html.erb                                                                                                                                    
+      invoke  resource_route                                                                                                                
+      route    resources :schedules                                                                                                         
+      #Creates the default routes for your controller in config/routes.rb.
+      #The default routes are index, show, new, edit, create, update, and destroy.
+      #You can exclude routes from this list by changing 
+            resources :schedules
+
+            to
+
+            resources :schedules, :except => [:show,:edit,:update]
+
+            or
+
+            resources :schedules, :only => [:index]
+
+      #You can add routes to this list by adding them as part of a member block
+            resources :schedules
+                  member do
+                        post 'accept_ticket' => :accept_ticket
+                  end
+            end
+
+      #You can also add routes to a given controller by stacking them on top of the resources call in legacy fashion
+            post '/schedules/reopen/:id', to: "schedules#reopen"
+            resources :schedules, :only => [:create, :update, :destroy, :show]
+
+      #When you have a parameter in a route, like ':id' in 
+            post '/schedules/reopen/:id', to: "schedules#reopen"
+      #This is a slot for information you want to pass to the action.  In this case, you want to pass the :id of the @schedule you're #working on on the page that's posting to the :reopen action.  If you've defined the route inside of a member block, you should be 
+      #able to link_to schedule_reopen_path, and it should fill in the :id for you.  
+
+      #I personally like to build my own URLs in my link_to, which in this case would look like
+            <%= link_to "Reopen", "/schedules/#{@schedule.id}/reopen/", :confirm => 'Are you sure?', method: :post %>
+
+      #A more in-depth guide to rails routing:
+            http://guides.rubyonrails.org/routing.html
+
+      invoke  scaffold_controller                                                                                                           
+      create    app/controllers/schedules_controller.rb                                                                           
+      #Creates app/controllers/schedules_controller.rb, which is where all of the actions that allow you to manipulate the Schedule model #go.  Use the actions created by default to get a feel for how controller actions work, then move to looking at how some of the more 
+      #complicated actions work (most of the actions in myculverhouse are fairly simple by design, to leave room for polishing and 
+      #customization, but something like programs_controller.rb's :create action or the overrides in cms_content_controller.rb will give 
+      #you a good idea).
+
+      invoke    erb                                                                                                                         
+
+      create      app/views/schedules                                                                                              create      app/views/schedules/index.html.erb                                                                      
+      create      app/views/schedules/edit.html.erb                                                                              
+      create      app/views/schedules/show.html.erb                                                                                
+      create      app/views/schedules/new.html.erb                                                                                 
+      create      app/views/schedules/_form.html.erb
+      #Creates the views that go with your controller actions.  Best way to get a feel for these is just to look at the views already in the
+      #app.  Basically they're a hybrid of html and Ruby code.  The Ruby is contained inside <%= ... %> tags.
+
       invoke    test_unit                                                                                                                                                               
-      create      test/controllers/schedules_controller_test.rb                                                                                                                         
+      create      test/controllers/schedules_controller_test.rb  
+      #Creates tests for the controller.
+
       invoke    helper                                                                                                                                                                  
-      create      app/helpers/schedules_helper.rb                                                                                                                                       
+      create      app/helpers/schedules_helper.rb                                                                                           
+      #Creates a helper for the MVC group.  Read this for more info about helpers and why I tend to avoid them: 
+      #http://nicksda.apotomo.de/2011/10/rails-misapprehensions-helpers-are-shit/ 
+
       invoke      test_unit                                                                                                                                                             
-      create        test/helpers/schedules_helper_test.rb                                                                                                                               
+      create        test/helpers/schedules_helper_test.rb                                                                        
+      #Creates a test for the helper.
+
       invoke    jbuilder                                                                                                                                                                
-      create      app/views/schedules/index.json.jbuilder                                                                                                                               
-      create      app/views/schedules/show.json.jbuilder                                                                                                                                
+      create      app/views/schedules/index.json.jbuilder                                                                         
+      create      app/views/schedules/show.json.jbuilder                                                                                    #Allows you to customize the JSON responses of pages- I've never touched this.                                            
+
       invoke  assets                                                                                                                                                                    
       invoke    coffee                                                                                                                                                                  
-      create      app/assets/javascripts/schedules.js.coffee                                                                                                                            
+      create      app/assets/javascripts/schedules.js.coffee                    
+      #Creates the javascript file for the MVC group you just created.  Put all the relevant js here.
+
       invoke    scss                                                                                                                                                                    
       create      app/assets/stylesheets/schedules.css.scss            
+      #Creates the SCSS file for the MVC group you just created.  Put all the relevant CSS/SCSS here. 
+
+After all this goes through, run rake db:migrate to link what you've created to the database, and you're all set to start editing.     
+
+
+2. If you ever need to change something in the database, run rails g migration describe_whatever_you_are_doing.  Then navigate to /db/
+migrate/############_describe_whatever_you_are_doing.rb
+
+      Here's a guide to editing migrations in Rails 3:
+            http://guides.rubyonrails.org/v3.2.17/migrations.html
+
+
+3. Gems.
+
+Basically gems are Ruby libraries.  You can find them at https://rubygems.org/ or hosted on github.
+
+If you want to add a gem to the app, open up the Gemfile in the application root, and add the line 
+
+      gem 'whatever-the-gem-is-called'
+
+Then run 
+      >sudo bundle install
+
+Which will download the required files and integrate them with your app.  From this point, just follow the instructions for the gem 
+provided on the gem's homepage/in its documentation.
+
+
+4. Inevetably, you're going to run across some problems.  Google and Stack Overflow are your friends.  If everything explodes and fire 
+starts raining from the sky, you can get in touch with me at danearing@gmail.com.  I might take a while to respond, but I will.
+
+5. Other resources: 
+      http://mislav.uniqpath.com/poignant-guide/
+            Will get you from "Huhwhat?" to "Ohhhhhh...that's easy" (at least for Ruby, if not Rails) extremely fast.
+
+      http://betterexplained.com/articles/starting-ruby-on-rails-what-i-wish-i-knew/
+            Basically this file with a little more depth.
+
+      http://guides.rubyonrails.org/v3.2.17/
+            If you need to know it and it's not info about how to use a 3rd party gem, it's in here.  It might take some searching to find, 
+            but it's there.
+
+      http://ruby.learncodethehardway.org/book/
+            A great course for learning the ropes.
+
+
+
